@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Indico.RPAActivities", "Indico.RPAActivities", "{48DE06B4-1D5A-4D7B-837C-56EBDB9FDC80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Indico.RPAActivities", "Indico.RPAActivities\Indico.RPAActivities\Indico.RPAActivities.csproj", "{3F204ABB-AAEB-4540-8707-A45B3E7961DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Indico.RPAActivities.Activities", "Indico.RPAActivities\Indico.RPAActivities.Activities\Indico.RPAActivities.Activities.csproj", "{51F8B27E-A131-47D6-A8DC-2E57F29172B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Indico.RPAActivities.Activities.Design", "Indico.RPAActivities\Indico.RPAActivities.Activities.Design\Indico.RPAActivities.Activities.Design.csproj", "{86F25D09-FAC6-4472-B6C9-11511CFB6D4F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{B1C368CB-01F3-4BC4-B81D-9B382D2567EA}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UiPath.Shared.Activities", "Shared\UiPath.Shared.Activities\UiPath.Shared.Activities.shproj", "{4546856D-EA50-45C6-9419-EEEACB5A80AA}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UiPath.Shared.Activities.Design", "Shared\UiPath.Shared.Activities.Design\UiPath.Shared.Activities.Design.shproj", "{DF9C43F0-ADD3-4FBF-995E-84B92F9CBF25}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Shared\UiPath.Shared.Activities\UiPath.Shared.Activities.projitems*{4546856d-ea50-45c6-9419-eeeacb5a80aa}*SharedItemsImports = 13
+		Shared\UiPath.Shared.Activities.Design\UiPath.Shared.Activities.Design.projitems*{df9c43f0-add3-4fbf-995e-84b92f9cbf25}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F204ABB-AAEB-4540-8707-A45B3E7961DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F204ABB-AAEB-4540-8707-A45B3E7961DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F204ABB-AAEB-4540-8707-A45B3E7961DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F204ABB-AAEB-4540-8707-A45B3E7961DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51F8B27E-A131-47D6-A8DC-2E57F29172B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51F8B27E-A131-47D6-A8DC-2E57F29172B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51F8B27E-A131-47D6-A8DC-2E57F29172B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51F8B27E-A131-47D6-A8DC-2E57F29172B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86F25D09-FAC6-4472-B6C9-11511CFB6D4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86F25D09-FAC6-4472-B6C9-11511CFB6D4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86F25D09-FAC6-4472-B6C9-11511CFB6D4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86F25D09-FAC6-4472-B6C9-11511CFB6D4F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3F204ABB-AAEB-4540-8707-A45B3E7961DE} = {48DE06B4-1D5A-4D7B-837C-56EBDB9FDC80}
+		{51F8B27E-A131-47D6-A8DC-2E57F29172B8} = {48DE06B4-1D5A-4D7B-837C-56EBDB9FDC80}
+		{86F25D09-FAC6-4472-B6C9-11511CFB6D4F} = {48DE06B4-1D5A-4D7B-837C-56EBDB9FDC80}
+		{4546856D-EA50-45C6-9419-EEEACB5A80AA} = {B1C368CB-01F3-4BC4-B81D-9B382D2567EA}
+		{DF9C43F0-ADD3-4FBF-995E-84B92F9CBF25} = {B1C368CB-01F3-4BC4-B81D-9B382D2567EA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AB6B0D92-AB63-4156-A537-B946B44D2A53}
+	EndGlobalSection
+EndGlobal
