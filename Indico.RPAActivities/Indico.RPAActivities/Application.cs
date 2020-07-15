@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Indico;
 using Indico.Request;
-using Indico.Entity;
 using Newtonsoft.Json.Linq;
 using Indico.RPAActivities.Models;
 using Newtonsoft.Json;
+using AutoMapper;
 
 namespace Indico.RPAActivities
 {
@@ -20,15 +20,23 @@ namespace Indico.RPAActivities
 
         #region Constructors
         public Application() { }
+        private Mapper mapper;
 
         public Application(string token, string host)
         {
             IndicoConfig config = new IndicoConfig(host: host, apiToken: token);
             Client = new IndicoClient(config);
+
+            var mapperConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Entity.ModelGroup, Models.ModelGroup>();
+                cfg.CreateMap<Entity.Model, Models.Model>();
+            });
+            mapper = new Mapper(mapperConfig);
         }
         #endregion
 
-        public List<Dataset> ListDatasets()
+        public async Task<List<Dataset>> ListDatasets()
         {
             string query = @"
               query GetDatasets {
@@ -48,9 +56,9 @@ namespace Indico.RPAActivities
             try
             {
                 GraphQLRequest request = Client.GraphQLRequest(query, "GetDatasets");
-                JObject response = request.Call();
-                return response.ToObject<List<Dataset>>();
-
+                JObject result = await request.Call();
+                JArray datasets = (JArray)result.GetValue("datasets");
+                return datasets.ToObject<List<Dataset>>();
             } catch(AggregateException sae)
             {
                 Console.WriteLine("Call failed " + sae.ToString());
@@ -59,13 +67,40 @@ namespace Indico.RPAActivities
         }
 
 
-        public Indico.Entity.ModelGroup GetModelGroup(int mgId)
+        public async Task<Models.ModelGroup> GetModelGroup(int mgId)
         {
             try
             {
-                //TODO: Map this to a local model so it's easier to deal with in UIPath
-                Indico.Entity.ModelGroup mg = Client.ModelGroupQuery(mgId).Exec();
-                return mg;
+                Entity.ModelGroup mg = await Client.ModelGroupQuery(mgId).Exec();
+                return mapper.Map<Models.ModelGroup>(mg);
+            }
+            catch(AggregateException sae)
+            {
+                Console.WriteLine("Call failed " + sae.ToString());
+                throw new IndicoActivityException();
+            }
+        }
+
+        public async Task<Document> ExtractDocument(string document, string configType = "standard")
+        {
+            try
+            {
+                JObject extractConfig = new JObject()
+                {
+                    { "preset_config", configType }
+                };
+
+                Mutation.DocumentExtraction ocr = Client.DocumentExtraction(extractConfig);
+                Jobs.Job job = await ocr.Exec(document);
+                JObject result = await job.Result();
+                string resUrl = (string)result.GetValue("url");
+                Storage.Blob blob = await Client.RetrieveBlob(resUrl).Exec();
+                JObject obj = blob.AsJSONObject();
+
+                var doc = new Document();
+                doc.Text = (string)obj.GetValue("text");
+
+                return doc;
             }
             catch(AggregateException sae)
             {

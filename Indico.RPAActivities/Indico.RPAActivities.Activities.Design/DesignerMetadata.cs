@@ -27,6 +27,10 @@ namespace Indico.RPAActivities.Activities.Design
             builder.AddCustomAttributes(typeof(GetModelGroup), new DesignerAttribute(typeof(GetModelGroupDesigner)));
             builder.AddCustomAttributes(typeof(GetModelGroup), new HelpKeywordAttribute(""));
 
+            builder.AddCustomAttributes(typeof(DocumentExtraction), categoryAttribute);
+            builder.AddCustomAttributes(typeof(DocumentExtraction), new DesignerAttribute(typeof(DocumentExtractionDesigner)));
+            builder.AddCustomAttributes(typeof(DocumentExtraction), new HelpKeywordAttribute(""));
+
 
             MetadataStore.AddAttributeTable(builder.CreateTable());
         }

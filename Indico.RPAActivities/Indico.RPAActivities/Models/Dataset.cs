@@ -14,5 +14,9 @@ namespace Indico.RPAActivities.Models
         public int rowCount;
         public string status;
         public ModelGroup[] modelGroups;
+
+        public Dataset()
+        {
+        }
     }
 }

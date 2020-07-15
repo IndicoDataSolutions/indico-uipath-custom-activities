@@ -242,11 +242,11 @@
     <comment>property description</comment>
   </data>
   <data name="GetModelGroup_DisplayName" xml:space="preserve">
-    <value>Get Model Group</value>
+    <value>GetModelGroup</value>
     <comment>activity name</comment>
   </data>
   <data name="GetModelGroup_Description" xml:space="preserve">
-    <value>Gets a model group</value>
+    <value>GetsModelGroupData</value>
     <comment>activity description</comment>
   </data>
   <data name="GetModelGroup_ModelGroupID_DisplayName" xml:space="preserve">
@@ -254,6 +254,14 @@
     <comment>property name</comment>
   </data>
   <data name="GetModelGroup_ModelGroupID_Description" xml:space="preserve">
+    <value />
+    <comment>property description</comment>
+  </data>
+  <data name="GetModelGroup_ModelGroupData_DisplayName" xml:space="preserve">
+    <value>Model Group Data</value>
+    <comment>property name</comment>
+  </data>
+  <data name="GetModelGroup_ModelGroupData_Description" xml:space="preserve">
     <value />
     <comment>property description</comment>
   </data>
@@ -293,32 +301,44 @@
     <value>Please provide values for both {0} and {1}.</value>
     <comment>error message; {0} &amp; {1} are complementary properties</comment>
   </data>
-  <data name="GetModelGroup_DisplayName" xml:space="preserve">
-    <value>GetModelGroup</value>
+  <data name="DocumentExtraction_DisplayName" xml:space="preserve">
+    <value>Document Extraction</value>
     <comment>activity name</comment>
   </data>
-  <data name="GetModelGroup_Description" xml:space="preserve">
-    <value>GetsModelGroupData</value>
+  <data name="DocumentExtraction_Description" xml:space="preserve">
+    <value>Extracts Contents from Documents</value>
     <comment>activity description</comment>
   </data>
-  <data name="GetModelGroup_ModelGroupID_DisplayName" xml:space="preserve">
-    <value>Model Group ID</value>
+  <data name="DocumentExtraction_ConfigType_DisplayName" xml:space="preserve">
+    <value>configType</value>
     <comment>property name</comment>
   </data>
-  <data name="GetModelGroup_ModelGroupID_Description" xml:space="preserve">
-    <value />
+  <data name="DocumentExtraction_ConfigType_Description" xml:space="preserve">
+    <value>Extraction config</value>
     <comment>property description</comment>
   </data>
   <data name="Input_Category" xml:space="preserve">
     <value>Input</value>
     <comment>category</comment>
   </data>
-  <data name="GetModelGroup_ModelGroupData_DisplayName" xml:space="preserve">
-    <value>Model Group Data</value>
+  <data name="DocumentExtraction_Document_DisplayName" xml:space="preserve">
+    <value>document</value>
     <comment>property name</comment>
   </data>
-  <data name="GetModelGroup_ModelGroupData_Description" xml:space="preserve">
-    <value />
+  <data name="DocumentExtraction_Document_Description" xml:space="preserve">
+    <value>Document for extraction</value>
+    <comment>property description</comment>
+  </data>
+  <data name="Input_Category" xml:space="preserve">
+    <value>Input</value>
+    <comment>category</comment>
+  </data>
+  <data name="DocumentExtraction_Results_DisplayName" xml:space="preserve">
+    <value>results</value>
+    <comment>property name</comment>
+  </data>
+  <data name="DocumentExtraction_Results_Description" xml:space="preserve">
+    <value>Extracted Contents</value>
     <comment>property description</comment>
   </data>
   <data name="Output_Category" xml:space="preserve">

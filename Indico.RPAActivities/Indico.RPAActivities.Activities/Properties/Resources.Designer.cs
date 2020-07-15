@@ -106,6 +106,78 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Extraction config.
+        /// </summary>
+        public static string DocumentExtraction_ConfigType_Description {
+            get {
+                return ResourceManager.GetString("DocumentExtraction_ConfigType_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to configType.
+        /// </summary>
+        public static string DocumentExtraction_ConfigType_DisplayName {
+            get {
+                return ResourceManager.GetString("DocumentExtraction_ConfigType_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extracts Contents from Documents.
+        /// </summary>
+        public static string DocumentExtraction_Description {
+            get {
+                return ResourceManager.GetString("DocumentExtraction_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document Extraction.
+        /// </summary>
+        public static string DocumentExtraction_DisplayName {
+            get {
+                return ResourceManager.GetString("DocumentExtraction_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document for extraction.
+        /// </summary>
+        public static string DocumentExtraction_Document_Description {
+            get {
+                return ResourceManager.GetString("DocumentExtraction_Document_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to document.
+        /// </summary>
+        public static string DocumentExtraction_Document_DisplayName {
+            get {
+                return ResourceManager.GetString("DocumentExtraction_Document_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extracted Contents.
+        /// </summary>
+        public static string DocumentExtraction_Results_Description {
+            get {
+                return ResourceManager.GetString("DocumentExtraction_Results_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to results.
+        /// </summary>
+        public static string DocumentExtraction_Results_DisplayName {
+            get {
+                return ResourceManager.GetString("DocumentExtraction_Results_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to GetsModelGroupData.
         /// </summary>
         public static string GetModelGroup_Description {

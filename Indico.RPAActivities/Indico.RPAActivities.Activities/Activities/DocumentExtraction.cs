@@ -2,6 +2,7 @@ using System;
 using System.Activities;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using Indico.RPAActivities.Activities.Properties;
 using Indico.RPAActivities.Models;
 using UiPath.Shared.Activities;
@@ -10,9 +11,9 @@ using UiPath.Shared.Activities.Utilities;
 
 namespace Indico.RPAActivities.Activities
 {
-    [LocalizedDisplayName(nameof(Resources.GetModelGroup_DisplayName))]
-    [LocalizedDescription(nameof(Resources.GetModelGroup_Description))]
-    public class GetModelGroup : ContinuableAsyncCodeActivity
+    [LocalizedDisplayName(nameof(Resources.DocumentExtraction_DisplayName))]
+    [LocalizedDescription(nameof(Resources.DocumentExtraction_Description))]
+    public class DocumentExtraction : ContinuableAsyncCodeActivity
     {
         #region Properties
 
@@ -29,24 +30,29 @@ namespace Indico.RPAActivities.Activities
         [LocalizedDescription(nameof(Resources.Timeout_Description))]
         public InArgument<int> TimeoutMS { get; set; } = 60000;
 
-        [LocalizedDisplayName(nameof(Resources.GetModelGroup_ModelGroupID_DisplayName))]
-        [LocalizedDescription(nameof(Resources.GetModelGroup_ModelGroupID_Description))]
+        [LocalizedDisplayName(nameof(Resources.DocumentExtraction_ConfigType_DisplayName))]
+        [LocalizedDescription(nameof(Resources.DocumentExtraction_ConfigType_Description))]
         [LocalizedCategory(nameof(Resources.Input_Category))]
-        public InArgument<int> ModelGroupID { get; set; }
+        public InArgument<string> ConfigType { get; set; }
 
-        [LocalizedDisplayName(nameof(Resources.GetModelGroup_ModelGroupData_DisplayName))]
-        [LocalizedDescription(nameof(Resources.GetModelGroup_ModelGroupData_Description))]
+        [LocalizedDisplayName(nameof(Resources.DocumentExtraction_Document_DisplayName))]
+        [LocalizedDescription(nameof(Resources.DocumentExtraction_Document_Description))]
+        [LocalizedCategory(nameof(Resources.Input_Category))]
+        public InArgument<string> Document { get; set; }
+
+        [LocalizedDisplayName(nameof(Resources.DocumentExtraction_Results_DisplayName))]
+        [LocalizedDescription(nameof(Resources.DocumentExtraction_Results_Description))]
         [LocalizedCategory(nameof(Resources.Output_Category))]
-        public OutArgument<ModelGroup> ModelGroupData { get; set; }
+        public OutArgument<Document> Results { get; set; }
 
         #endregion
 
 
         #region Constructors
 
-        public GetModelGroup()
+        public DocumentExtraction()
         {
-            Constraints.Add(ActivityConstraints.HasParentType<GetModelGroup, IndicoScope>(string.Format(Resources.ValidationScope_Error, Resources.IndicoScope_DisplayName)));
+            Constraints.Add(ActivityConstraints.HasParentType<DocumentExtraction, IndicoScope>(string.Format(Resources.ValidationScope_Error, Resources.IndicoScope_DisplayName)));
         }
 
         #endregion
@@ -56,7 +62,8 @@ namespace Indico.RPAActivities.Activities
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
-            if (ModelGroupID == null) metadata.AddValidationError(string.Format(Resources.ValidationValue_Error, nameof(ModelGroupID)));
+            if (ConfigType == null) metadata.AddValidationError(string.Format(Resources.ValidationValue_Error, nameof(ConfigType)));
+            if (Document == null) metadata.AddValidationError(string.Format(Resources.ValidationValue_Error, nameof(Document)));
 
             base.CacheMetadata(metadata);
         }
@@ -72,17 +79,20 @@ namespace Indico.RPAActivities.Activities
 
             // Outputs
             return (ctx) => {
-                ModelGroupData.Set(ctx, task.Result);
+                Results.Set(ctx, task.Result);
             };
         }
 
-        private async Task<ModelGroup> ExecuteWithTimeout(AsyncCodeActivityContext context, CancellationToken cancellationToken = default)
+        private async Task<Document> ExecuteWithTimeout(AsyncCodeActivityContext context, CancellationToken cancellationToken = default)
         {
-            var modelGroupID = ModelGroupID.Get(context);
+
             var objectContainer = context.GetFromContext<IObjectContainer>(IndicoScope.ParentContainerPropertyTag);
             var application = objectContainer.Get<Application>();
 
-            return await application.GetModelGroup(modelGroupID);
+            var document = Document.Get(context);
+            var config = ConfigType.Get(context);
+            var extractedDocument = await application.ExtractDocument(document, config);
+            return extractedDocument;
         }
 
         #endregion

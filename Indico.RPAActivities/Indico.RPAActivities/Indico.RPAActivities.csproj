@@ -46,6 +46,7 @@
     <Folder Include="Enums\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="IndicoClient" Version="0.7.5" />
+    <PackageReference Include="AutoMapper" Version="10.0.0" />
+    <PackageReference Include="IndicoClient" Version="0.8.0" />
   </ItemGroup>
 </Project>

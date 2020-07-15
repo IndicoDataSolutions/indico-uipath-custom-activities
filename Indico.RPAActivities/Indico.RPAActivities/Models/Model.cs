@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Indico.RPAActivities.Models
 {
-    public class ModelGroup
+    public class Model
     {
-        public string id;
-        public string Name;
+        public int Id;
         public string Status;
-        public Model SelectedModel;
+        public string TrainingProgress;
     }
 }
