@@ -31,6 +31,14 @@ namespace Indico.RPAActivities.Activities.Design
             builder.AddCustomAttributes(typeof(DocumentExtraction), new DesignerAttribute(typeof(DocumentExtractionDesigner)));
             builder.AddCustomAttributes(typeof(DocumentExtraction), new HelpKeywordAttribute(""));
 
+            builder.AddCustomAttributes(typeof(Classify), categoryAttribute);
+            builder.AddCustomAttributes(typeof(Classify), new DesignerAttribute(typeof(ClassifyDesigner)));
+            builder.AddCustomAttributes(typeof(Classify), new HelpKeywordAttribute(""));
+
+            builder.AddCustomAttributes(typeof(ExtractValues), categoryAttribute);
+            builder.AddCustomAttributes(typeof(ExtractValues), new DesignerAttribute(typeof(ExtractValuesDesigner)));
+            builder.AddCustomAttributes(typeof(ExtractValues), new HelpKeywordAttribute(""));
+
 
             MetadataStore.AddAttributeTable(builder.CreateTable());
         }

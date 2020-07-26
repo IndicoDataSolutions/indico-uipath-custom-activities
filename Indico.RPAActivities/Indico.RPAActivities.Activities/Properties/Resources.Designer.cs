@@ -70,6 +70,96 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Classify text using a model.
+        /// </summary>
+        public static string Classify_Description {
+            get {
+                return ResourceManager.GetString("Classify_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Classify.
+        /// </summary>
+        public static string Classify_DisplayName {
+            get {
+                return ResourceManager.GetString("Classify_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to id of model group.
+        /// </summary>
+        public static string Classify_ModelGroup_Description {
+            get {
+                return ResourceManager.GetString("Classify_ModelGroup_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Model Group.
+        /// </summary>
+        public static string Classify_ModelGroup_DisplayName {
+            get {
+                return ResourceManager.GetString("Classify_ModelGroup_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to classifications.
+        /// </summary>
+        public static string Classify_Results_Description {
+            get {
+                return ResourceManager.GetString("Classify_Results_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to results.
+        /// </summary>
+        public static string Classify_Results_DisplayName {
+            get {
+                return ResourceManager.GetString("Classify_Results_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to text to be classified.
+        /// </summary>
+        public static string Classify_Text_Description {
+            get {
+                return ResourceManager.GetString("Classify_Text_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text.
+        /// </summary>
+        public static string Classify_Text_DisplayName {
+            get {
+                return ResourceManager.GetString("Classify_Text_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Top class for each prediction.
+        /// </summary>
+        public static string Classify_TopResults_Description {
+            get {
+                return ResourceManager.GetString("Classify_TopResults_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Top Results.
+        /// </summary>
+        public static string Classify_TopResults_DisplayName {
+            get {
+                return ResourceManager.GetString("Classify_TopResults_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Common.
         /// </summary>
         public static string Common_Category {
@@ -174,6 +264,78 @@ namespace Indico.RPAActivities.Activities.Properties {
         public static string DocumentExtraction_Results_DisplayName {
             get {
                 return ResourceManager.GetString("DocumentExtraction_Results_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extract values from text with a model.
+        /// </summary>
+        public static string ExtractValues_Description {
+            get {
+                return ResourceManager.GetString("ExtractValues_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extract Values.
+        /// </summary>
+        public static string ExtractValues_DisplayName {
+            get {
+                return ResourceManager.GetString("ExtractValues_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to model group to use.
+        /// </summary>
+        public static string ExtractValues_ModelGroup_Description {
+            get {
+                return ResourceManager.GetString("ExtractValues_ModelGroup_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Model Group.
+        /// </summary>
+        public static string ExtractValues_ModelGroup_DisplayName {
+            get {
+                return ResourceManager.GetString("ExtractValues_ModelGroup_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to extraction results.
+        /// </summary>
+        public static string ExtractValues_Results_Description {
+            get {
+                return ResourceManager.GetString("ExtractValues_Results_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to results.
+        /// </summary>
+        public static string ExtractValues_Results_DisplayName {
+            get {
+                return ResourceManager.GetString("ExtractValues_Results_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to text to get extractions from.
+        /// </summary>
+        public static string ExtractValues_Text_Description {
+            get {
+                return ResourceManager.GetString("ExtractValues_Text_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text.
+        /// </summary>
+        public static string ExtractValues_Text_DisplayName {
+            get {
+                return ResourceManager.GetString("ExtractValues_Text_DisplayName", resourceCulture);
             }
         }
         

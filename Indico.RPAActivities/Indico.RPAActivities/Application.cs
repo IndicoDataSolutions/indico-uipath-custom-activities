@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using Indico.RPAActivities.Models;
 using Newtonsoft.Json;
 using AutoMapper;
+using Indico.Jobs;
 
 namespace Indico.RPAActivities
 {
@@ -103,6 +104,44 @@ namespace Indico.RPAActivities
                 return doc;
             }
             catch(AggregateException sae)
+            {
+                Console.WriteLine("Call failed " + sae.ToString());
+                throw new IndicoActivityException();
+            }
+        }
+
+
+        public async Task<List<Dictionary<string, double>>> Classify(List<string> values, int modelGroup)
+        {
+            try
+            {
+                Entity.ModelGroup mg = await Client.ModelGroupQuery(modelGroup).Exec();
+                var status = await Client.ModelGroupLoad(mg).Exec();
+                Job job = await Client.ModelGroupPredict(mg).Data(values).Exec();
+                JArray jobResult = await job.Results();
+                return jobResult.ToObject<List<Dictionary<string, double>>>();
+
+            }
+            catch (AggregateException sae)
+            {
+                Console.WriteLine("Call failed " + sae.ToString());
+                throw new IndicoActivityException();
+            }
+        }
+
+        public async Task<List<List<Extraction>>> Extract(List<string> values, int modelGroup)
+        {
+            try
+            {
+                Entity.ModelGroup mg = await Client.ModelGroupQuery(modelGroup).Exec();
+                var status = await Client.ModelGroupLoad(mg).Exec();
+                Job job = await Client.ModelGroupPredict(mg).Data(values).Exec();
+                JArray jobResult = await job.Results();
+                return jobResult.ToObject<List<List<Extraction>>>();
+
+
+            }
+            catch (AggregateException sae)
             {
                 Console.WriteLine("Call failed " + sae.ToString());
                 throw new IndicoActivityException();
