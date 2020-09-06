@@ -39,6 +39,10 @@ namespace Indico.RPAActivities.Activities.Design
             builder.AddCustomAttributes(typeof(ExtractValues), new DesignerAttribute(typeof(ExtractValuesDesigner)));
             builder.AddCustomAttributes(typeof(ExtractValues), new HelpKeywordAttribute(""));
 
+            builder.AddCustomAttributes(typeof(ListWorkflows), categoryAttribute);
+            builder.AddCustomAttributes(typeof(ListWorkflows), new DesignerAttribute(typeof(ListWorkflowsDesigner)));
+            builder.AddCustomAttributes(typeof(ListWorkflows), new HelpKeywordAttribute(""));
+
 
             MetadataStore.AddAttributeTable(builder.CreateTable());
         }

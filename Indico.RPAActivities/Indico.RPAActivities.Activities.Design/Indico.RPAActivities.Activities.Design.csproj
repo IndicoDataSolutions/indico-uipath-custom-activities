@@ -37,6 +37,7 @@
     <None Remove="Designers\IndicoIPADesigner.xaml" />
     <None Remove="Designers\IndicoScopeDesigner.xaml" />
     <None Remove="Designers\ListDatasetsDesigner.xaml" />
+    <None Remove="Designers\ListWorkflowsDesigner.xaml" />
   </ItemGroup>
   <!-- Package Icon -->
   <ItemGroup>
@@ -109,6 +110,9 @@
     <Page Include="Designers\ListDatasetsDesigner.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Designers\ListWorkflowsDesigner.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </Page>
     <Page Include="Themes\Icons.xaml">
       <Generator>XamlIntelliSenseFileGenerator</Generator>

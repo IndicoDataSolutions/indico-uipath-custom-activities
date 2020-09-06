@@ -547,6 +547,60 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ID of dataset to query.
+        /// </summary>
+        public static string ListWorkflows_DatasetID_Description {
+            get {
+                return ResourceManager.GetString("ListWorkflows_DatasetID_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DatasetID.
+        /// </summary>
+        public static string ListWorkflows_DatasetID_DisplayName {
+            get {
+                return ResourceManager.GetString("ListWorkflows_DatasetID_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List workflows for a dataset.
+        /// </summary>
+        public static string ListWorkflows_Description {
+            get {
+                return ResourceManager.GetString("ListWorkflows_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ListWorkflows.
+        /// </summary>
+        public static string ListWorkflows_DisplayName {
+            get {
+                return ResourceManager.GetString("ListWorkflows_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List of workflows.
+        /// </summary>
+        public static string ListWorkflows_Workflows_Description {
+            get {
+                return ResourceManager.GetString("ListWorkflows_Workflows_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Workflows.
+        /// </summary>
+        public static string ListWorkflows_Workflows_DisplayName {
+            get {
+                return ResourceManager.GetString("ListWorkflows_Workflows_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Options.
         /// </summary>
         public static string Options_Category {

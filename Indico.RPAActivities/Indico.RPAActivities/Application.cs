@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Indico;
 using Indico.Request;
 using Newtonsoft.Json.Linq;
 using Indico.RPAActivities.Models;
-using Newtonsoft.Json;
 using AutoMapper;
 using Indico.Jobs;
+using Indico.Query;
 
 namespace Indico.RPAActivities
 {
@@ -32,6 +29,7 @@ namespace Indico.RPAActivities
             {
                 cfg.CreateMap<Entity.ModelGroup, Models.ModelGroup>();
                 cfg.CreateMap<Entity.Model, Models.Model>();
+                cfg.CreateMap<Entity.Workflow, Models.Workflow>();
             });
             mapper = new Mapper(mapperConfig);
         }
@@ -60,13 +58,32 @@ namespace Indico.RPAActivities
                 JObject result = await request.Call();
                 JArray datasets = (JArray)result.GetValue("datasets");
                 return datasets.ToObject<List<Dataset>>();
-            } catch(AggregateException sae)
+            }
+            catch (AggregateException sae)
             {
                 Console.WriteLine("Call failed " + sae.ToString());
                 throw new IndicoActivityException();
             }
         }
 
+        public async Task<List<Workflow>> ListWorkflows(int datasetId)
+        {
+            try
+            {
+                ListWorkflowsForDatasetQuery listWorkflows = new ListWorkflowsForDatasetQuery(Client)
+                {
+                    Id = datasetId
+                };
+                List<Entity.Workflow> workflows = await listWorkflows.Exec();
+                List<Workflow> wfs = mapper.Map<List<Workflow>>(workflows);
+                return wfs;
+            }
+            catch (AggregateException sae)
+            {
+                Console.WriteLine("Call failed " + sae.ToString());
+                throw new IndicoActivityException();
+            }
+        }
 
         public async Task<Models.ModelGroup> GetModelGroup(int mgId)
         {
@@ -75,7 +92,7 @@ namespace Indico.RPAActivities
                 Entity.ModelGroup mg = await Client.ModelGroupQuery(mgId).Exec();
                 return mapper.Map<Models.ModelGroup>(mg);
             }
-            catch(AggregateException sae)
+            catch (AggregateException sae)
             {
                 Console.WriteLine("Call failed " + sae.ToString());
                 throw new IndicoActivityException();
@@ -103,7 +120,7 @@ namespace Indico.RPAActivities
 
                 return doc;
             }
-            catch(AggregateException sae)
+            catch (AggregateException sae)
             {
                 Console.WriteLine("Call failed " + sae.ToString());
                 throw new IndicoActivityException();
@@ -147,5 +164,6 @@ namespace Indico.RPAActivities
                 throw new IndicoActivityException();
             }
         }
+
     }
 }
