@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net461</TargetFrameworks>
 		<RootNamespace>Indico.RPAActivities</RootNamespace>
@@ -47,6 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.0.0" />
-    <PackageReference Include="IndicoClient" Version="0.8.0" />
+    <PackageReference Include="GraphQL.Client" Version="2.0.0-alpha.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\indico-client-csharp\Indico\Indico.csproj" />
   </ItemGroup>
 </Project>

@@ -62,7 +62,8 @@
     <DocumentationFile>bin\$(Configuration)\Indico.RPAActivities.Activities.Design.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="IndicoClient" Version="0.8.0" />
+    <PackageReference Include="GraphQL.Client" Version="2.0.0-alpha.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 	<ItemGroup>
 		<Reference Include="System" />
