@@ -2,18 +2,17 @@ using System;
 using System.Activities;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
+using Indico.Entity;
 using Indico.RPAActivities.Activities.Properties;
-using Indico.RPAActivities.Models;
 using UiPath.Shared.Activities;
 using UiPath.Shared.Activities.Localization;
 using UiPath.Shared.Activities.Utilities;
 
 namespace Indico.RPAActivities.Activities
 {
-    [LocalizedDisplayName(nameof(Resources.ListDatasets_DisplayName))]
-    [LocalizedDescription(nameof(Resources.ListDatasets_Description))]
-    public class ListDatasets : ContinuableAsyncCodeActivity
+    [LocalizedDisplayName(nameof(Resources.GetModelGroup_DisplayName))]
+    [LocalizedDescription(nameof(Resources.GetModelGroup_Description))]
+    public class GetModelGroup : ContinuableAsyncCodeActivity
     {
         #region Properties
 
@@ -30,19 +29,24 @@ namespace Indico.RPAActivities.Activities
         [LocalizedDescription(nameof(Resources.Timeout_Description))]
         public InArgument<int> TimeoutMS { get; set; } = 60000;
 
-        [LocalizedDisplayName(nameof(Resources.ListDatasets_Datasets_DisplayName))]
-        [LocalizedDescription(nameof(Resources.ListDatasets_Datasets_Description))]
+        [LocalizedDisplayName(nameof(Resources.GetModelGroup_ModelGroupID_DisplayName))]
+        [LocalizedDescription(nameof(Resources.GetModelGroup_ModelGroupID_Description))]
+        [LocalizedCategory(nameof(Resources.Input_Category))]
+        public InArgument<int> ModelGroupID { get; set; }
+
+        [LocalizedDisplayName(nameof(Resources.GetModelGroup_ModelGroupData_DisplayName))]
+        [LocalizedDescription(nameof(Resources.GetModelGroup_ModelGroupData_Description))]
         [LocalizedCategory(nameof(Resources.Output_Category))]
-        public OutArgument<List<Dataset>> Datasets { get; set; }
+        public OutArgument<ModelGroup> ModelGroupData { get; set; }
 
         #endregion
 
 
         #region Constructors
 
-        public ListDatasets()
+        public GetModelGroup()
         {
-            Constraints.Add(ActivityConstraints.HasParentType<ListDatasets, IndicoScope>(string.Format(Resources.ValidationScope_Error, Resources.IndicoScope_DisplayName)));
+            Constraints.Add(ActivityConstraints.HasParentType<GetModelGroup, IndicoScope>(string.Format(Resources.ValidationScope_Error, Resources.IndicoScope_DisplayName)));
         }
 
         #endregion
@@ -52,6 +56,7 @@ namespace Indico.RPAActivities.Activities
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
+            if (ModelGroupID == null) metadata.AddValidationError(string.Format(Resources.ValidationValue_Error, nameof(ModelGroupID)));
 
             base.CacheMetadata(metadata);
         }
@@ -67,17 +72,17 @@ namespace Indico.RPAActivities.Activities
 
             // Outputs
             return (ctx) => {
-                Datasets.Set(ctx, task.Result);
+                ModelGroupData.Set(ctx, task.Result);
             };
         }
 
-        private async Task<List<Dataset>> ExecuteWithTimeout(AsyncCodeActivityContext context, CancellationToken cancellationToken = default)
+        private async Task<ModelGroup> ExecuteWithTimeout(AsyncCodeActivityContext context, CancellationToken cancellationToken = default)
         {
-
+            var modelGroupID = ModelGroupID.Get(context);
             var objectContainer = context.GetFromContext<IObjectContainer>(IndicoScope.ParentContainerPropertyTag);
             var application = objectContainer.Get<Application>();
-            List<Dataset> dsets = await application.ListDatasets();
-            return dsets;
+
+            return await application.GetModelGroup(modelGroupID);
         }
 
         #endregion

@@ -1,19 +1,19 @@
 using System;
 using System.Activities;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using Indico.RPAActivities.Activities.Properties;
-using Indico.RPAActivities.Models;
+using Indico.RPAActivities.Entity;
 using UiPath.Shared.Activities;
 using UiPath.Shared.Activities.Localization;
 using UiPath.Shared.Activities.Utilities;
 
 namespace Indico.RPAActivities.Activities
 {
-    [LocalizedDisplayName(nameof(Resources.ListWorkflows_DisplayName))]
-    [LocalizedDescription(nameof(Resources.ListWorkflows_Description))]
-    public class ListWorkflows : ContinuableAsyncCodeActivity
+    [LocalizedDisplayName(nameof(Resources.ListDatasets_DisplayName))]
+    [LocalizedDescription(nameof(Resources.ListDatasets_Description))]
+    public class ListDatasets : ContinuableAsyncCodeActivity
     {
         #region Properties
 
@@ -30,24 +30,19 @@ namespace Indico.RPAActivities.Activities
         [LocalizedDescription(nameof(Resources.Timeout_Description))]
         public InArgument<int> TimeoutMS { get; set; } = 60000;
 
-        [LocalizedDisplayName(nameof(Resources.ListWorkflows_DatasetID_DisplayName))]
-        [LocalizedDescription(nameof(Resources.ListWorkflows_DatasetID_Description))]
-        [LocalizedCategory(nameof(Resources.Input_Category))]
-        public InArgument<int> DatasetID { get; set; }
-
-        [LocalizedDisplayName(nameof(Resources.ListWorkflows_Workflows_DisplayName))]
-        [LocalizedDescription(nameof(Resources.ListWorkflows_Workflows_Description))]
+        [LocalizedDisplayName(nameof(Resources.ListDatasets_Datasets_DisplayName))]
+        [LocalizedDescription(nameof(Resources.ListDatasets_Datasets_Description))]
         [LocalizedCategory(nameof(Resources.Output_Category))]
-        public OutArgument<object> Workflows { get; set; }
+        public OutArgument<List<Dataset>> Datasets { get; set; }
 
         #endregion
 
 
         #region Constructors
 
-        public ListWorkflows()
+        public ListDatasets()
         {
-            Constraints.Add(ActivityConstraints.HasParentType<ListWorkflows, IndicoScope>(string.Format(Resources.ValidationScope_Error, Resources.IndicoScope_DisplayName)));
+            Constraints.Add(ActivityConstraints.HasParentType<ListDatasets, IndicoScope>(string.Format(Resources.ValidationScope_Error, Resources.IndicoScope_DisplayName)));
         }
 
         #endregion
@@ -57,7 +52,6 @@ namespace Indico.RPAActivities.Activities
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
-            if (DatasetID == null) metadata.AddValidationError(string.Format(Resources.ValidationValue_Error, nameof(DatasetID)));
 
             base.CacheMetadata(metadata);
         }
@@ -66,7 +60,6 @@ namespace Indico.RPAActivities.Activities
         {
             // Inputs
             var timeout = TimeoutMS.Get(context);
-            var datasetid = DatasetID.Get(context);
 
             // Set a timeout on the execution
             var task = ExecuteWithTimeout(context, cancellationToken);
@@ -74,17 +67,17 @@ namespace Indico.RPAActivities.Activities
 
             // Outputs
             return (ctx) => {
-                Workflows.Set(ctx, task.Result);
+                Datasets.Set(ctx, task.Result);
             };
         }
 
-        private async Task ExecuteWithTimeout(AsyncCodeActivityContext context, CancellationToken cancellationToken = default)
+        private async Task<List<Dataset>> ExecuteWithTimeout(AsyncCodeActivityContext context, CancellationToken cancellationToken = default)
         {
-            var datasetId = DatasetID.Get(context);
+
             var objectContainer = context.GetFromContext<IObjectContainer>(IndicoScope.ParentContainerPropertyTag);
             var application = objectContainer.Get<Application>();
-
-            return await application.ListWorkflows(datasetId);
+            List<Dataset> dsets = await application.ListDatasets();
+            return dsets;
         }
 
         #endregion
