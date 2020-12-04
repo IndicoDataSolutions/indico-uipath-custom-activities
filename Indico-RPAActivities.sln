@@ -8,22 +8,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Indico.RPAActivities", "Indico.RPAActivities\Indico.RPAActivities\Indico.RPAActivities.csproj", "{3F204ABB-AAEB-4540-8707-A45B3E7961DE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Indico.RPAActivities.Activities", "Indico.RPAActivities\Indico.RPAActivities.Activities\Indico.RPAActivities.Activities.csproj", "{51F8B27E-A131-47D6-A8DC-2E57F29172B8}"
-	ProjectSection(ProjectDependencies) = postProject
-		{EB89737E-D4DE-44AD-9D46-E772F84D013E} = {EB89737E-D4DE-44AD-9D46-E772F84D013E}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Indico.RPAActivities.Activities.Design", "Indico.RPAActivities\Indico.RPAActivities.Activities.Design\Indico.RPAActivities.Activities.Design.csproj", "{86F25D09-FAC6-4472-B6C9-11511CFB6D4F}"
-	ProjectSection(ProjectDependencies) = postProject
-		{EB89737E-D4DE-44AD-9D46-E772F84D013E} = {EB89737E-D4DE-44AD-9D46-E772F84D013E}
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{B1C368CB-01F3-4BC4-B81D-9B382D2567EA}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UiPath.Shared.Activities", "Shared\UiPath.Shared.Activities\UiPath.Shared.Activities.shproj", "{4546856D-EA50-45C6-9419-EEEACB5A80AA}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UiPath.Shared.Activities.Design", "Shared\UiPath.Shared.Activities.Design\UiPath.Shared.Activities.Design.shproj", "{DF9C43F0-ADD3-4FBF-995E-84B92F9CBF25}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Indico", "..\indico-client-csharp\Indico\Indico.csproj", "{EB89737E-D4DE-44AD-9D46-E772F84D013E}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -49,10 +41,6 @@ Global
 		{86F25D09-FAC6-4472-B6C9-11511CFB6D4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86F25D09-FAC6-4472-B6C9-11511CFB6D4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86F25D09-FAC6-4472-B6C9-11511CFB6D4F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EB89737E-D4DE-44AD-9D46-E772F84D013E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EB89737E-D4DE-44AD-9D46-E772F84D013E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EB89737E-D4DE-44AD-9D46-E772F84D013E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EB89737E-D4DE-44AD-9D46-E772F84D013E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,7 +51,6 @@ Global
 		{86F25D09-FAC6-4472-B6C9-11511CFB6D4F} = {48DE06B4-1D5A-4D7B-837C-56EBDB9FDC80}
 		{4546856D-EA50-45C6-9419-EEEACB5A80AA} = {B1C368CB-01F3-4BC4-B81D-9B382D2567EA}
 		{DF9C43F0-ADD3-4FBF-995E-84B92F9CBF25} = {B1C368CB-01F3-4BC4-B81D-9B382D2567EA}
-		{EB89737E-D4DE-44AD-9D46-E772F84D013E} = {48DE06B4-1D5A-4D7B-837C-56EBDB9FDC80}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AB6B0D92-AB63-4156-A537-B946B44D2A53}
