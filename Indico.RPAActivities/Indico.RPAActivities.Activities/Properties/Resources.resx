@@ -393,4 +393,96 @@
     <value>List of workflows</value>
     <comment>property description</comment>
   </data>
+  <data name="Authentication_Category" xml:space="preserve">
+    <value>Authentication</value>
+    <comment>category</comment>
+  </data>
+  <data name="Common_Category" xml:space="preserve">
+    <value>Common</value>
+    <comment>category</comment>
+  </data>
+  <data name="Input_Category" xml:space="preserve">
+    <value>Input</value>
+    <comment>category</comment>
+  </data>
+  <data name="Output_Category" xml:space="preserve">
+    <value>Output</value>
+    <comment>category</comment>
+  </data>
+  <data name="Options_Category" xml:space="preserve">
+    <value>Options</value>
+    <comment>category</comment>
+  </data>
+  <data name="ValidationScope_Error" xml:space="preserve">
+    <value>Cannot be used outside of a {0}.</value>
+    <comment>error message; {0} is a container activity (e.g. a scope)</comment>
+  </data>
+  <data name="ValidationValue_Error" xml:space="preserve">
+    <value>Please provide a value for {0}.</value>
+    <comment>error message; {0} is the name of a missing property</comment>
+  </data>
+  <data name="ValidationExclusiveProperties_Error" xml:space="preserve">
+    <value>Please provide a value either for {0} or {1}, but not both.</value>
+    <comment>error message; {0} &amp; {1} are mutually exclusive activities</comment>
+  </data>
+  <data name="ValidationOverloadGroup_Error" xml:space="preserve">
+    <value>Please provide values for both {0} and {1}.</value>
+    <comment>error message; {0} &amp; {1} are complementary properties</comment>
+  </data>
+  <data name="WorkflowSubmission_DisplayName" xml:space="preserve">
+    <value>WorkflowSubmission</value>
+    <comment>activity name</comment>
+  </data>
+  <data name="WorkflowSubmission_Description" xml:space="preserve">
+    <value>Submit files or urls to workflow</value>
+    <comment>activity description</comment>
+  </data>
+  <data name="WorkflowSubmission_WorkflowID_DisplayName" xml:space="preserve">
+    <value>WorkflowID</value>
+    <comment>property name</comment>
+  </data>
+  <data name="WorkflowSubmission_WorkflowID_Description" xml:space="preserve">
+    <value>Id of workflow for submission</value>
+    <comment>property description</comment>
+  </data>
+  <data name="Input_Category" xml:space="preserve">
+    <value>Input</value>
+    <comment>category</comment>
+  </data>
+  <data name="WorkflowSubmission_FilePaths_DisplayName" xml:space="preserve">
+    <value>FilePaths</value>
+    <comment>property name</comment>
+  </data>
+  <data name="WorkflowSubmission_FilePaths_Description" xml:space="preserve">
+    <value>Paths of files to submit</value>
+    <comment>property description</comment>
+  </data>
+  <data name="Input_Category" xml:space="preserve">
+    <value>Input</value>
+    <comment>category</comment>
+  </data>
+  <data name="WorkflowSubmission_Urls_DisplayName" xml:space="preserve">
+    <value>Urls</value>
+    <comment>property name</comment>
+  </data>
+  <data name="WorkflowSubmission_Urls_Description" xml:space="preserve">
+    <value>Urls to submit</value>
+    <comment>property description</comment>
+  </data>
+  <data name="Input_Category" xml:space="preserve">
+    <value>Input</value>
+    <comment>category</comment>
+  </data>
+  <data name="WorkflowSubmission_SubmissionIDs_DisplayName" xml:space="preserve">
+    <value>SubmissionIDs</value>
+    <comment>property name</comment>
+  </data>
+  <data name="WorkflowSubmission_SubmissionIDs_Description" xml:space="preserve">
+    <value>List of submission ids</value>
+    <comment>property description</comment>
+  </data>
+  <data name="Output_Category" xml:space="preserve">
+    <value>Output</value>
+    <comment>category</comment>
+  </data>
 </root>

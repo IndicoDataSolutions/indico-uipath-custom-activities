@@ -43,6 +43,10 @@ namespace Indico.RPAActivities.Activities.Design
             builder.AddCustomAttributes(typeof(ListWorkflows), new DesignerAttribute(typeof(ListWorkflowsDesigner)));
             builder.AddCustomAttributes(typeof(ListWorkflows), new HelpKeywordAttribute(""));
 
+            builder.AddCustomAttributes(typeof(WorkflowSubmission), categoryAttribute);
+            builder.AddCustomAttributes(typeof(WorkflowSubmission), new DesignerAttribute(typeof(WorkflowSubmissionDesigner)));
+            builder.AddCustomAttributes(typeof(WorkflowSubmission), new HelpKeywordAttribute(""));
+
 
             MetadataStore.AddAttributeTable(builder.CreateTable());
         }

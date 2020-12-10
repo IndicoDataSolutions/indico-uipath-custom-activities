@@ -19,7 +19,7 @@ namespace Indico.RPAActivities.Activities.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -678,6 +678,96 @@ namespace Indico.RPAActivities.Activities.Properties {
         public static string ValidationValue_Error {
             get {
                 return ResourceManager.GetString("ValidationValue_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submit files or urls to workflow.
+        /// </summary>
+        public static string WorkflowSubmission_Description {
+            get {
+                return ResourceManager.GetString("WorkflowSubmission_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WorkflowSubmission.
+        /// </summary>
+        public static string WorkflowSubmission_DisplayName {
+            get {
+                return ResourceManager.GetString("WorkflowSubmission_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paths of files to submit.
+        /// </summary>
+        public static string WorkflowSubmission_FilePaths_Description {
+            get {
+                return ResourceManager.GetString("WorkflowSubmission_FilePaths_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FilePaths.
+        /// </summary>
+        public static string WorkflowSubmission_FilePaths_DisplayName {
+            get {
+                return ResourceManager.GetString("WorkflowSubmission_FilePaths_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List of submission ids.
+        /// </summary>
+        public static string WorkflowSubmission_SubmissionIDs_Description {
+            get {
+                return ResourceManager.GetString("WorkflowSubmission_SubmissionIDs_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SubmissionIDs.
+        /// </summary>
+        public static string WorkflowSubmission_SubmissionIDs_DisplayName {
+            get {
+                return ResourceManager.GetString("WorkflowSubmission_SubmissionIDs_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Urls to submit.
+        /// </summary>
+        public static string WorkflowSubmission_Urls_Description {
+            get {
+                return ResourceManager.GetString("WorkflowSubmission_Urls_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Urls.
+        /// </summary>
+        public static string WorkflowSubmission_Urls_DisplayName {
+            get {
+                return ResourceManager.GetString("WorkflowSubmission_Urls_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Id of workflow for submission.
+        /// </summary>
+        public static string WorkflowSubmission_WorkflowID_Description {
+            get {
+                return ResourceManager.GetString("WorkflowSubmission_WorkflowID_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WorkflowID.
+        /// </summary>
+        public static string WorkflowSubmission_WorkflowID_DisplayName {
+            get {
+                return ResourceManager.GetString("WorkflowSubmission_WorkflowID_DisplayName", resourceCulture);
             }
         }
     }

@@ -30,31 +30,32 @@
         <PackageVersion>2.1.0</PackageVersion>
     </PropertyGroup>
     <ItemGroup>
-        <None Remove="Designers\ClassifyDesigner.xaml"/>
-        <None Remove="Designers\DocumentExtractionDesigner.xaml"/>
-        <None Remove="Designers\ExtractValuesDesigner.xaml"/>
-        <None Remove="Designers\GetModelGroupDesigner.xaml"/>
-        <None Remove="Designers\IndicoIPADesigner.xaml"/>
-        <None Remove="Designers\IndicoScopeDesigner.xaml"/>
-        <None Remove="Designers\ListDatasetsDesigner.xaml"/>
-        <None Remove="Designers\ListWorkflowsDesigner.xaml"/>
+        <None Remove="Designers\ClassifyDesigner.xaml" />
+        <None Remove="Designers\DocumentExtractionDesigner.xaml" />
+        <None Remove="Designers\ExtractValuesDesigner.xaml" />
+        <None Remove="Designers\GetModelGroupDesigner.xaml" />
+        <None Remove="Designers\IndicoIPADesigner.xaml" />
+        <None Remove="Designers\IndicoScopeDesigner.xaml" />
+        <None Remove="Designers\ListDatasetsDesigner.xaml" />
+        <None Remove="Designers\ListWorkflowsDesigner.xaml" />
+        <None Remove="Designers\WorkflowSubmissionDesigner.xaml" />
     </ItemGroup>
     <!-- Package Icon -->
     <ItemGroup>
-        <None Include="packageIcon.png" Visible="false"/>
+        <None Include="packageIcon.png" Visible="false" />
     </ItemGroup>
     <Target Name="CopyProjectReferencesToPackage" DependsOnTargets="BuildOnlySettings;ResolveReferences">
         <ItemGroup>
             <!--Filter out unnecessary files-->
-            <_ReferenceCopyLocalPaths Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference')-&gt;WithMetadataValue('PrivateAssets', 'All'))"/>
+            <_ReferenceCopyLocalPaths Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference')-&gt;WithMetadataValue('PrivateAssets', 'All'))" />
         </ItemGroup>
 
         <!--Print batches for debug purposes-->
-        <Message Text="Batch for .nupkg: ReferenceCopyLocalPaths = @(_ReferenceCopyLocalPaths), ReferenceCopyLocalPaths.DestinationSubDirectory = %(_ReferenceCopyLocalPaths.DestinationSubDirectory) Filename = %(_ReferenceCopyLocalPaths.Filename) Extension = %(_ReferenceCopyLocalPaths.Extension)" Importance="High" Condition="'@(_ReferenceCopyLocalPaths)' != ''"/>
+        <Message Text="Batch for .nupkg: ReferenceCopyLocalPaths = @(_ReferenceCopyLocalPaths), ReferenceCopyLocalPaths.DestinationSubDirectory = %(_ReferenceCopyLocalPaths.DestinationSubDirectory) Filename = %(_ReferenceCopyLocalPaths.Filename) Extension = %(_ReferenceCopyLocalPaths.Extension)" Importance="High" Condition="'@(_ReferenceCopyLocalPaths)' != ''" />
 
         <ItemGroup>
             <!--Add file to package with consideration of sub folder. If empty, the root folder is chosen.-->
-            <BuildOutputInPackage Include="@(_ReferenceCopyLocalPaths)" TargetPath="%(_ReferenceCopyLocalPaths.DestinationSubDirectory)"/>
+            <BuildOutputInPackage Include="@(_ReferenceCopyLocalPaths)" TargetPath="%(_ReferenceCopyLocalPaths.DestinationSubDirectory)" />
         </ItemGroup>
     </Target>
     <PropertyGroup>
@@ -62,20 +63,20 @@
         <DocumentationFile>bin\$(Configuration)\Indico.RPAActivities.Activities.Design.xml</DocumentationFile>
     </PropertyGroup>
     <ItemGroup>
-        <Reference Include="System"/>
-        <Reference Include="System.Core"/>
-        <Reference Include="System.Xml.Linq"/>
-        <Reference Include="System.Data.DataSetExtensions"/>
-        <Reference Include="Microsoft.CSharp"/>
-        <Reference Include="PresentationCore"/>
-        <Reference Include="PresentationFramework"/>
-        <Reference Include="System.Data"/>
-        <Reference Include="System.Xml"/>
-        <Reference Include="System.Activities"/>
-        <Reference Include="System.Activities.Presentation"/>
-        <Reference Include="System.Xaml"/>
-        <Reference Include="WindowsBase"/>
-        <Reference Include="System.Activities.Core.Presentation"/>
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Xml.Linq" />
+        <Reference Include="System.Data.DataSetExtensions" />
+        <Reference Include="Microsoft.CSharp" />
+        <Reference Include="PresentationCore" />
+        <Reference Include="PresentationFramework" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Xml" />
+        <Reference Include="System.Activities" />
+        <Reference Include="System.Activities.Presentation" />
+        <Reference Include="System.Xaml" />
+        <Reference Include="WindowsBase" />
+        <Reference Include="System.Activities.Core.Presentation" />
     </ItemGroup>
     <ItemGroup>
         <Page Include="..\..\Shared\Themes\Generic.xaml">
@@ -111,6 +112,9 @@
         <Page Include="Designers\ListWorkflowsDesigner.xaml">
             <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
         </Page>
+        <Page Include="Designers\WorkflowSubmissionDesigner.xaml">
+          <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+        </Page>
         <Page Include="Themes\Icons.xaml">
             <Generator>XamlIntelliSenseFileGenerator</Generator>
             <SubType>Designer</SubType>
@@ -118,7 +122,7 @@
         </Page>
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\Indico.RPAActivities.Activities\Indico.RPAActivities.Activities.csproj" PrivateAssets="All"/>
+        <ProjectReference Include="..\Indico.RPAActivities.Activities\Indico.RPAActivities.Activities.csproj" PrivateAssets="All" />
     </ItemGroup>
     <ItemGroup>
         <Compile Update="Properties\Resources.Designer.cs">
@@ -136,5 +140,5 @@
             <DependentUpon>Resources.resx</DependentUpon>
         </EmbeddedResource>
     </ItemGroup>
-    <Import Project="..\..\Shared\UiPath.Shared.Activities.Design\UiPath.Shared.Activities.Design.projitems" Label="Shared"/>
+    <Import Project="..\..\Shared\UiPath.Shared.Activities.Design\UiPath.Shared.Activities.Design.projitems" Label="Shared" />
 </Project>

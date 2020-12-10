@@ -7,6 +7,7 @@ using Indico.Jobs;
 using Indico.Mutation;
 using Indico.Query;
 using Indico.RPAActivities.Entity;
+using System.Linq;
 
 namespace Indico.RPAActivities
 {
@@ -55,7 +56,7 @@ namespace Indico.RPAActivities
         {
             ListWorkflows listWorkflows = new ListWorkflows(_client)
             {
-                DatasetIds = {datasetId}
+                DatasetIds = new List<int> { datasetId }
             };
             List<Workflow> workflows = await listWorkflows.Exec();
             return workflows;
@@ -85,6 +86,18 @@ namespace Indico.RPAActivities
             doc.Text = (string) obj.GetValue("text");
 
             return doc;
+        }
+
+        public async Task<List<int>> WorkflowSubmission(int workflowId, List<string> files, List<string> urls)
+        {
+            var workflowSubmission = new WorkflowSubmission(_client)
+            {
+                WorkflowId = workflowId,
+                Files = files,
+                Urls = urls
+            };
+
+            return await workflowSubmission.Exec();
         }
 
 
