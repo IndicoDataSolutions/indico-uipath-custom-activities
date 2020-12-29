@@ -38,6 +38,7 @@
         <None Remove="Designers\IndicoScopeDesigner.xaml" />
         <None Remove="Designers\ListDatasetsDesigner.xaml" />
         <None Remove="Designers\ListWorkflowsDesigner.xaml" />
+        <None Remove="Designers\SubmissionResultDesigner.xaml" />
         <None Remove="Designers\WorkflowSubmissionDesigner.xaml" />
     </ItemGroup>
     <!-- Package Icon -->
@@ -111,6 +112,9 @@
         </Page>
         <Page Include="Designers\ListWorkflowsDesigner.xaml">
             <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+        </Page>
+        <Page Include="Designers\SubmissionResultDesigner.xaml">
+          <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
         </Page>
         <Page Include="Designers\WorkflowSubmissionDesigner.xaml">
           <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

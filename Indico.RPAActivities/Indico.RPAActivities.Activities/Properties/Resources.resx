@@ -393,6 +393,46 @@
     <value>List of workflows</value>
     <comment>property description</comment>
   </data>
+  <data name="WorkflowSubmission_DisplayName" xml:space="preserve">
+    <value>WorkflowSubmission</value>
+    <comment>activity name</comment>
+  </data>
+  <data name="WorkflowSubmission_Description" xml:space="preserve">
+    <value>Submit files or urls to workflow</value>
+    <comment>activity description</comment>
+  </data>
+  <data name="WorkflowSubmission_WorkflowID_DisplayName" xml:space="preserve">
+    <value>WorkflowID</value>
+    <comment>property name</comment>
+  </data>
+  <data name="WorkflowSubmission_WorkflowID_Description" xml:space="preserve">
+    <value>Id of workflow for submission</value>
+    <comment>property description</comment>
+  </data>
+  <data name="WorkflowSubmission_FilePaths_DisplayName" xml:space="preserve">
+    <value>FilePaths</value>
+    <comment>property name</comment>
+  </data>
+  <data name="WorkflowSubmission_FilePaths_Description" xml:space="preserve">
+    <value>Paths of files to submit</value>
+    <comment>property description</comment>
+  </data>
+  <data name="WorkflowSubmission_Urls_DisplayName" xml:space="preserve">
+    <value>Urls</value>
+    <comment>property name</comment>
+  </data>
+  <data name="WorkflowSubmission_Urls_Description" xml:space="preserve">
+    <value>Urls to submit</value>
+    <comment>property description</comment>
+  </data>
+  <data name="WorkflowSubmission_SubmissionIDs_DisplayName" xml:space="preserve">
+    <value>SubmissionIDs</value>
+    <comment>property name</comment>
+  </data>
+  <data name="WorkflowSubmission_SubmissionIDs_Description" xml:space="preserve">
+    <value>List of submission ids</value>
+    <comment>property description</comment>
+  </data>
   <data name="Authentication_Category" xml:space="preserve">
     <value>Authentication</value>
     <comment>category</comment>
@@ -429,56 +469,44 @@
     <value>Please provide values for both {0} and {1}.</value>
     <comment>error message; {0} &amp; {1} are complementary properties</comment>
   </data>
-  <data name="WorkflowSubmission_DisplayName" xml:space="preserve">
-    <value>WorkflowSubmission</value>
+  <data name="SubmissionResult_DisplayName" xml:space="preserve">
+    <value>SubmissionResult</value>
     <comment>activity name</comment>
   </data>
-  <data name="WorkflowSubmission_Description" xml:space="preserve">
-    <value>Submit files or urls to workflow</value>
+  <data name="SubmissionResult_Description" xml:space="preserve">
+    <value>fetches json result for a submission</value>
     <comment>activity description</comment>
   </data>
-  <data name="WorkflowSubmission_WorkflowID_DisplayName" xml:space="preserve">
-    <value>WorkflowID</value>
+  <data name="SubmissionResult_SubmissionID_DisplayName" xml:space="preserve">
+    <value>SubmissionID</value>
     <comment>property name</comment>
   </data>
-  <data name="WorkflowSubmission_WorkflowID_Description" xml:space="preserve">
-    <value>Id of workflow for submission</value>
+  <data name="SubmissionResult_SubmissionID_Description" xml:space="preserve">
+    <value>id of the submission</value>
     <comment>property description</comment>
   </data>
   <data name="Input_Category" xml:space="preserve">
     <value>Input</value>
     <comment>category</comment>
   </data>
-  <data name="WorkflowSubmission_FilePaths_DisplayName" xml:space="preserve">
-    <value>FilePaths</value>
+  <data name="SubmissionResult_CheckStatus_DisplayName" xml:space="preserve">
+    <value>CheckStatus</value>
     <comment>property name</comment>
   </data>
-  <data name="WorkflowSubmission_FilePaths_Description" xml:space="preserve">
-    <value>Paths of files to submit</value>
+  <data name="SubmissionResult_CheckStatus_Description" xml:space="preserve">
+    <value>checks the particular submission status for submission</value>
     <comment>property description</comment>
   </data>
   <data name="Input_Category" xml:space="preserve">
     <value>Input</value>
     <comment>category</comment>
   </data>
-  <data name="WorkflowSubmission_Urls_DisplayName" xml:space="preserve">
-    <value>Urls</value>
+  <data name="SubmissionResult_Result_DisplayName" xml:space="preserve">
+    <value>Result</value>
     <comment>property name</comment>
   </data>
-  <data name="WorkflowSubmission_Urls_Description" xml:space="preserve">
-    <value>Urls to submit</value>
-    <comment>property description</comment>
-  </data>
-  <data name="Input_Category" xml:space="preserve">
-    <value>Input</value>
-    <comment>category</comment>
-  </data>
-  <data name="WorkflowSubmission_SubmissionIDs_DisplayName" xml:space="preserve">
-    <value>SubmissionIDs</value>
-    <comment>property name</comment>
-  </data>
-  <data name="WorkflowSubmission_SubmissionIDs_Description" xml:space="preserve">
-    <value>List of submission ids</value>
+  <data name="SubmissionResult_Result_Description" xml:space="preserve">
+    <value>result of the submission</value>
     <comment>property description</comment>
   </data>
   <data name="Output_Category" xml:space="preserve">

@@ -8,6 +8,8 @@ using Indico.Mutation;
 using Indico.Query;
 using Indico.RPAActivities.Entity;
 using System.Linq;
+using Indico.Types;
+using Indico.Storage;
 
 namespace Indico.RPAActivities
 {
@@ -98,6 +100,27 @@ namespace Indico.RPAActivities
             };
 
             return await workflowSubmission.Exec();
+        }
+
+        public async Task<JObject> SubmissionResult(int submissionId, SubmissionStatus? checkStatus)
+        {
+            var submissionResult = new SubmissionResult(_client)
+            {
+                SubmissionId = submissionId,
+                CheckStatus = checkStatus
+            };
+
+            Job job = await submissionResult.Exec();
+            JObject result = await job.Result();
+            string resUrl = (string)result.GetValue("url");
+
+            var retrieveBlob = new RetrieveBlob(_client) 
+            {
+                Url = resUrl
+            };
+
+            Blob blob = await retrieveBlob.Exec();
+            return blob.AsJSONObject();
         }
 
 

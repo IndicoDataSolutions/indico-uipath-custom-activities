@@ -619,6 +619,78 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to checks the particular submission status for submission.
+        /// </summary>
+        public static string SubmissionResult_CheckStatus_Description {
+            get {
+                return ResourceManager.GetString("SubmissionResult_CheckStatus_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CheckStatus.
+        /// </summary>
+        public static string SubmissionResult_CheckStatus_DisplayName {
+            get {
+                return ResourceManager.GetString("SubmissionResult_CheckStatus_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to fetches json result for a submission.
+        /// </summary>
+        public static string SubmissionResult_Description {
+            get {
+                return ResourceManager.GetString("SubmissionResult_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SubmissionResult.
+        /// </summary>
+        public static string SubmissionResult_DisplayName {
+            get {
+                return ResourceManager.GetString("SubmissionResult_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to result of the submission.
+        /// </summary>
+        public static string SubmissionResult_Result_Description {
+            get {
+                return ResourceManager.GetString("SubmissionResult_Result_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Result.
+        /// </summary>
+        public static string SubmissionResult_Result_DisplayName {
+            get {
+                return ResourceManager.GetString("SubmissionResult_Result_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to id of the submission.
+        /// </summary>
+        public static string SubmissionResult_SubmissionID_Description {
+            get {
+                return ResourceManager.GetString("SubmissionResult_SubmissionID_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SubmissionID.
+        /// </summary>
+        public static string SubmissionResult_SubmissionID_DisplayName {
+            get {
+                return ResourceManager.GetString("SubmissionResult_SubmissionID_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Specifies the amount of time (in milliseconds) to wait for the activity to run before an error is thrown. The default value is 60000 (1 minute)..
         /// </summary>
         public static string Timeout_Description {
