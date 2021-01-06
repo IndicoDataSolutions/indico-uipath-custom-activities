@@ -547,6 +547,114 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Returns a list of submission ids.
+        /// </summary>
+        public static string ListSubmissions_Description {
+            get {
+                return ResourceManager.GetString("ListSubmissions_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ListSubmissions.
+        /// </summary>
+        public static string ListSubmissions_DisplayName {
+            get {
+                return ResourceManager.GetString("ListSubmissions_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Instance of SubmissionFilter to filter output.
+        /// </summary>
+        public static string ListSubmissions_Filters_Description {
+            get {
+                return ResourceManager.GetString("ListSubmissions_Filters_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filters.
+        /// </summary>
+        public static string ListSubmissions_Filters_DisplayName {
+            get {
+                return ResourceManager.GetString("ListSubmissions_Filters_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to limits the number of submission ids returned.
+        /// </summary>
+        public static string ListSubmissions_Limit_Description {
+            get {
+                return ResourceManager.GetString("ListSubmissions_Limit_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Limit.
+        /// </summary>
+        public static string ListSubmissions_Limit_DisplayName {
+            get {
+                return ResourceManager.GetString("ListSubmissions_Limit_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List of submission ids.
+        /// </summary>
+        public static string ListSubmissions_SubmissionIDs_Description {
+            get {
+                return ResourceManager.GetString("ListSubmissions_SubmissionIDs_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SubmissionIDs.
+        /// </summary>
+        public static string ListSubmissions_SubmissionIDs_DisplayName {
+            get {
+                return ResourceManager.GetString("ListSubmissions_SubmissionIDs_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Returns the list of submission ids.
+        /// </summary>
+        public static string ListSubmissions_Submissions_Description {
+            get {
+                return ResourceManager.GetString("ListSubmissions_Submissions_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submissions.
+        /// </summary>
+        public static string ListSubmissions_Submissions_DisplayName {
+            get {
+                return ResourceManager.GetString("ListSubmissions_Submissions_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List of workflow ids to filter output.
+        /// </summary>
+        public static string ListSubmissions_WorkflowIDs_Description {
+            get {
+                return ResourceManager.GetString("ListSubmissions_WorkflowIDs_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WorkflowIDs.
+        /// </summary>
+        public static string ListSubmissions_WorkflowIDs_DisplayName {
+            get {
+                return ResourceManager.GetString("ListSubmissions_WorkflowIDs_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ID of dataset to query.
         /// </summary>
         public static string ListWorkflows_DatasetID_Description {

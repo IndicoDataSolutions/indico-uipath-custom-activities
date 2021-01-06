@@ -123,6 +123,22 @@ namespace Indico.RPAActivities
             return blob.AsJSONObject();
         }
 
+        public async Task<List<int>> ListSubmissions(List<int> submissionIds, List<int> workflowIds, SubmissionFilter filters, int limit)
+        {
+            var listSubmissions = new ListSubmissions(_client)
+            {
+                SubmissionIds = submissionIds,
+                WorkflowIds = workflowIds,
+            };
+
+            if (filters != null)
+                listSubmissions.Filters = filters;
+            if (limit > 0)
+                listSubmissions.Limit = limit;
+
+            var submissions = await listSubmissions.Exec();
+            return submissions.Any() ? submissions.Select(s => s.Id).ToList() : new List<int>();
+        }
 
         public async Task<List<Dictionary<string, double>>> Classify(List<string> values, int modelGroup)
         {

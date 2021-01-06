@@ -51,6 +51,10 @@ namespace Indico.RPAActivities.Activities.Design
             builder.AddCustomAttributes(typeof(SubmissionResult), new DesignerAttribute(typeof(SubmissionResultDesigner)));
             builder.AddCustomAttributes(typeof(SubmissionResult), new HelpKeywordAttribute(""));
 
+            builder.AddCustomAttributes(typeof(ListSubmissions), categoryAttribute);
+            builder.AddCustomAttributes(typeof(ListSubmissions), new DesignerAttribute(typeof(ListSubmissionsDesigner)));
+            builder.AddCustomAttributes(typeof(ListSubmissions), new HelpKeywordAttribute(""));
+
 
             MetadataStore.AddAttributeTable(builder.CreateTable());
         }

@@ -37,6 +37,7 @@
         <None Remove="Designers\IndicoIPADesigner.xaml" />
         <None Remove="Designers\IndicoScopeDesigner.xaml" />
         <None Remove="Designers\ListDatasetsDesigner.xaml" />
+        <None Remove="Designers\ListSubmissionsDesigner.xaml" />
         <None Remove="Designers\ListWorkflowsDesigner.xaml" />
         <None Remove="Designers\SubmissionResultDesigner.xaml" />
         <None Remove="Designers\WorkflowSubmissionDesigner.xaml" />
@@ -109,6 +110,10 @@
         <Page Include="Designers\ListDatasetsDesigner.xaml">
             <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
             <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+        </Page>
+        <Page Include="Designers\ListSubmissionsDesigner.xaml">
+          <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+          <CopyToOutputDirectory>Never</CopyToOutputDirectory>
         </Page>
         <Page Include="Designers\ListWorkflowsDesigner.xaml">
             <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
