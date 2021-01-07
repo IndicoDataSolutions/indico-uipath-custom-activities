@@ -4,6 +4,8 @@
         <RootNamespace>Indico.RPAActivities.Activities.Design</RootNamespace>
         <AssemblyName>Indico.RPAActivities.Activities.Design</AssemblyName>
         <PackageId>Indico.RPAActivities.Activities</PackageId>
+		<DependsOnNETStandard>true</DependsOnNETStandard>
+		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     </PropertyGroup>
     <!-- Package Metadata -->
     <PropertyGroup>
