@@ -84,7 +84,7 @@ namespace Indico.RPAActivities
             return mg;
         }
 
-        public async Task<Document> ExtractDocument(string document, string configType = "standard", CancellationToken cancellationToken)
+        public async Task<Document> ExtractDocument(string document, string configType, CancellationToken cancellationToken)
         {
             JObject extractConfig = new JObject()
             {

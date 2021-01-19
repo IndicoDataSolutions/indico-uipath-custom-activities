@@ -32,7 +32,7 @@ namespace Indico.RPAActivities.Activities
         [LocalizedDisplayName(nameof(Resources.DocumentExtraction_ConfigType_DisplayName))]
         [LocalizedDescription(nameof(Resources.DocumentExtraction_ConfigType_Description))]
         [LocalizedCategory(nameof(Resources.Input_Category))]
-        public InArgument<string> ConfigType { get; set; }
+        public InArgument<string> ConfigType { get; set; } = "standard";
 
         [LocalizedDisplayName(nameof(Resources.DocumentExtraction_Document_DisplayName))]
         [LocalizedDescription(nameof(Resources.DocumentExtraction_Document_Description))]
