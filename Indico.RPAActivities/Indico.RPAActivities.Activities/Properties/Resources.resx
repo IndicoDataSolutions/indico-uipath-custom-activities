@@ -465,6 +465,54 @@
     <value>result of the submission</value>
     <comment>property description</comment>
   </data>
+  <data name="ListSubmissions_DisplayName" xml:space="preserve">
+    <value>ListSubmissions</value>
+    <comment>activity name</comment>
+  </data>
+  <data name="ListSubmissions_Description" xml:space="preserve">
+    <value>Returns a list of submission ids</value>
+    <comment>activity description</comment>
+  </data>
+  <data name="ListSubmissions_SubmissionIDs_DisplayName" xml:space="preserve">
+    <value>SubmissionIDs</value>
+    <comment>property name</comment>
+  </data>
+  <data name="ListSubmissions_SubmissionIDs_Description" xml:space="preserve">
+    <value>List of submission ids</value>
+    <comment>property description</comment>
+  </data>
+  <data name="ListSubmissions_WorkflowIDs_DisplayName" xml:space="preserve">
+    <value>WorkflowIDs</value>
+    <comment>property name</comment>
+  </data>
+  <data name="ListSubmissions_WorkflowIDs_Description" xml:space="preserve">
+    <value>List of workflow ids to filter output</value>
+    <comment>property description</comment>
+  </data>
+  <data name="ListSubmissions_Filters_DisplayName" xml:space="preserve">
+    <value>Filters</value>
+    <comment>property name</comment>
+  </data>
+  <data name="ListSubmissions_Filters_Description" xml:space="preserve">
+    <value>Instance of SubmissionFilter to filter output</value>
+    <comment>property description</comment>
+  </data>
+  <data name="ListSubmissions_Limit_DisplayName" xml:space="preserve">
+    <value>Limit</value>
+    <comment>property name</comment>
+  </data>
+  <data name="ListSubmissions_Limit_Description" xml:space="preserve">
+    <value>limits the number of submission ids returned</value>
+    <comment>property description</comment>
+  </data>
+  <data name="ListSubmissions_Submissions_DisplayName" xml:space="preserve">
+    <value>Submissions</value>
+    <comment>property name</comment>
+  </data>
+  <data name="ListSubmissions_Submissions_Description" xml:space="preserve">
+    <value>Returns the list of submission ids</value>
+    <comment>property description</comment>
+  </data>
   <data name="Authentication_Category" xml:space="preserve">
     <value>Authentication</value>
     <comment>category</comment>
@@ -501,68 +549,68 @@
     <value>Please provide values for both {0} and {1}.</value>
     <comment>error message; {0} &amp; {1} are complementary properties</comment>
   </data>
-  <data name="ListSubmissions_DisplayName" xml:space="preserve">
-    <value>ListSubmissions</value>
+  <data name="SubmitReview_DisplayName" xml:space="preserve">
+    <value>SubmitReview</value>
     <comment>activity name</comment>
   </data>
-  <data name="ListSubmissions_Description" xml:space="preserve">
-    <value>Returns a list of submission ids</value>
+  <data name="SubmitReview_Description" xml:space="preserve">
+    <value>Submit an "Auto" Review for a submission. Requires that the submission be in PENDING_AUTO_REVIEW status.</value>
     <comment>activity description</comment>
   </data>
-  <data name="ListSubmissions_SubmissionIDs_DisplayName" xml:space="preserve">
-    <value>SubmissionIDs</value>
+  <data name="SubmitReview_SubmissionID_DisplayName" xml:space="preserve">
+    <value>SubmissionID</value>
     <comment>property name</comment>
   </data>
-  <data name="ListSubmissions_SubmissionIDs_Description" xml:space="preserve">
-    <value>List of submission ids</value>
+  <data name="SubmitReview_SubmissionID_Description" xml:space="preserve">
+    <value>Id of submission to submit reviewEnabled for</value>
     <comment>property description</comment>
   </data>
   <data name="Input_Category" xml:space="preserve">
     <value>Input</value>
     <comment>category</comment>
   </data>
-  <data name="ListSubmissions_WorkflowIDs_DisplayName" xml:space="preserve">
-    <value>WorkflowIDs</value>
+  <data name="SubmitReview_Changes_DisplayName" xml:space="preserve">
+    <value>Changes</value>
     <comment>property name</comment>
   </data>
-  <data name="ListSubmissions_WorkflowIDs_Description" xml:space="preserve">
-    <value>List of workflow ids to filter output</value>
+  <data name="SubmitReview_Changes_Description" xml:space="preserve">
+    <value>changes to make to raw predictions</value>
     <comment>property description</comment>
   </data>
   <data name="Input_Category" xml:space="preserve">
     <value>Input</value>
     <comment>category</comment>
   </data>
-  <data name="ListSubmissions_Filters_DisplayName" xml:space="preserve">
-    <value>Filters</value>
+  <data name="SubmitReview_Rejected_DisplayName" xml:space="preserve">
+    <value>Rejected</value>
     <comment>property name</comment>
   </data>
-  <data name="ListSubmissions_Filters_Description" xml:space="preserve">
-    <value>Instance of SubmissionFilter to filter output</value>
+  <data name="SubmitReview_Rejected_Description" xml:space="preserve">
+    <value>reject the predictions and place the submissionin the review queue. Must be true if Changes not provided</value>
     <comment>property description</comment>
   </data>
   <data name="Input_Category" xml:space="preserve">
     <value>Input</value>
     <comment>category</comment>
   </data>
-  <data name="ListSubmissions_Limit_DisplayName" xml:space="preserve">
-    <value>Limit</value>
+  <data name="SubmitReview_ForceComplete_DisplayName" xml:space="preserve">
+    <value>ForceComplete</value>
     <comment>property name</comment>
   </data>
-  <data name="ListSubmissions_Limit_Description" xml:space="preserve">
-    <value>limits the number of submission ids returned</value>
+  <data name="SubmitReview_ForceComplete_Description" xml:space="preserve">
+    <value>have this submission bypass the Review queue(or exceptions queue if &lt;Rejected&gt; is True) and mark as Complete. *NOT RECOMMENDED*</value>
     <comment>property description</comment>
   </data>
   <data name="Input_Category" xml:space="preserve">
     <value>Input</value>
     <comment>category</comment>
   </data>
-  <data name="ListSubmissions_Submissions_DisplayName" xml:space="preserve">
-    <value>Submissions</value>
+  <data name="SubmitReview_Result_DisplayName" xml:space="preserve">
+    <value>Result</value>
     <comment>property name</comment>
   </data>
-  <data name="ListSubmissions_Submissions_Description" xml:space="preserve">
-    <value>Returns the list of submission ids</value>
+  <data name="SubmitReview_Result_Description" xml:space="preserve">
+    <value>JSON response</value>
     <comment>property description</comment>
   </data>
   <data name="Output_Category" xml:space="preserve">

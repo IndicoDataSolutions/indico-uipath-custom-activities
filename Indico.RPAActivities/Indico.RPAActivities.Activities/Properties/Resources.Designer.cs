@@ -799,6 +799,114 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to changes to make to raw predictions.
+        /// </summary>
+        public static string SubmitReview_Changes_Description {
+            get {
+                return ResourceManager.GetString("SubmitReview_Changes_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Changes.
+        /// </summary>
+        public static string SubmitReview_Changes_DisplayName {
+            get {
+                return ResourceManager.GetString("SubmitReview_Changes_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submit an &quot;Auto&quot; Review for a submission. Requires that the submission be in PENDING_AUTO_REVIEW status..
+        /// </summary>
+        public static string SubmitReview_Description {
+            get {
+                return ResourceManager.GetString("SubmitReview_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SubmitReview.
+        /// </summary>
+        public static string SubmitReview_DisplayName {
+            get {
+                return ResourceManager.GetString("SubmitReview_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to have this submission bypass the Review queue(or exceptions queue if &lt;Rejected&gt; is True) and mark as Complete. *NOT RECOMMENDED*.
+        /// </summary>
+        public static string SubmitReview_ForceComplete_Description {
+            get {
+                return ResourceManager.GetString("SubmitReview_ForceComplete_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ForceComplete.
+        /// </summary>
+        public static string SubmitReview_ForceComplete_DisplayName {
+            get {
+                return ResourceManager.GetString("SubmitReview_ForceComplete_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to reject the predictions and place the submissionin the review queue. Must be true if Changes not provided.
+        /// </summary>
+        public static string SubmitReview_Rejected_Description {
+            get {
+                return ResourceManager.GetString("SubmitReview_Rejected_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rejected.
+        /// </summary>
+        public static string SubmitReview_Rejected_DisplayName {
+            get {
+                return ResourceManager.GetString("SubmitReview_Rejected_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to JSON response.
+        /// </summary>
+        public static string SubmitReview_Result_Description {
+            get {
+                return ResourceManager.GetString("SubmitReview_Result_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Result.
+        /// </summary>
+        public static string SubmitReview_Result_DisplayName {
+            get {
+                return ResourceManager.GetString("SubmitReview_Result_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Id of submission to submit reviewEnabled for.
+        /// </summary>
+        public static string SubmitReview_SubmissionID_Description {
+            get {
+                return ResourceManager.GetString("SubmitReview_SubmissionID_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SubmissionID.
+        /// </summary>
+        public static string SubmitReview_SubmissionID_DisplayName {
+            get {
+                return ResourceManager.GetString("SubmitReview_SubmissionID_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Specifies the amount of time (in milliseconds) to wait for the activity to run before an error is thrown. The default value is 60000 (1 minute)..
         /// </summary>
         public static string Timeout_Description {

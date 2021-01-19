@@ -64,6 +64,19 @@ namespace Indico.RPAActivities
             return workflows;
         }
 
+        public async Task<JObject> SubmitReview(int submissionId, JObject changes, bool rejected, bool? forceComplete)
+        {
+            var submitReview = new SubmitReview(_client)
+            {
+                SubmissionId = submissionId,
+                Changes = changes,
+                Rejected = rejected,
+                ForceComplete = forceComplete
+            };
+            var job = await submitReview.Exec();
+            return await job.Result();
+        }
+
         public async Task<ModelGroup> GetModelGroup(int mgId)
         {
             ModelGroup mg = await _client.ModelGroupQuery(mgId).Exec();
