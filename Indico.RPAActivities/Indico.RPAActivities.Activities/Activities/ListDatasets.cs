@@ -76,7 +76,7 @@ namespace Indico.RPAActivities.Activities
 
             var objectContainer = context.GetFromContext<IObjectContainer>(IndicoScope.ParentContainerPropertyTag);
             var application = objectContainer.Get<Application>();
-            List<Dataset> dsets = await application.ListDatasets();
+            List<Dataset> dsets = await application.ListDatasets(cancellationToken);
             return dsets;
         }
 

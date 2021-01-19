@@ -110,7 +110,7 @@ namespace Indico.RPAActivities.Activities
 
             var objectContainer = context.GetFromContext<IObjectContainer>(IndicoScope.ParentContainerPropertyTag);
             var application = objectContainer.Get<Application>();
-            var result = await application.Classify(text, modelgroup);
+            var result = await application.Classify(text, modelgroup, cancellationToken);
             return result;
         }
 

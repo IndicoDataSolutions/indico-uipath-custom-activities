@@ -84,7 +84,7 @@ namespace Indico.RPAActivities.Activities
             var objectContainer = context.GetFromContext<IObjectContainer>(IndicoScope.ParentContainerPropertyTag);
             var application = objectContainer.Get<Application>();
 
-            return await application.ListWorkflows(datasetId);
+            return await application.ListWorkflows(datasetId, cancellationToken);
         }
 
         #endregion

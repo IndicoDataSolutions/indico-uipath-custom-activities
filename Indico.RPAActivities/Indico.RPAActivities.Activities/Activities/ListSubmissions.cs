@@ -71,7 +71,6 @@ namespace Indico.RPAActivities.Activities
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
-
             base.CacheMetadata(metadata);
         }
 
@@ -100,7 +99,7 @@ namespace Indico.RPAActivities.Activities
             var objectContainer = context.GetFromContext<IObjectContainer>(IndicoScope.ParentContainerPropertyTag);
             var application = objectContainer.Get<Application>();
 
-            return await application.ListSubmissions(submissionids, workflowids, filters, limit);
+            return await application.ListSubmissions(submissionids, workflowids, filters, limit, cancellationToken);
         }
 
         #endregion

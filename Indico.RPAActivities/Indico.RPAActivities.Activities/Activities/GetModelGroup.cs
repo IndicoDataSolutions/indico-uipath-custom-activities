@@ -78,11 +78,11 @@ namespace Indico.RPAActivities.Activities
 
         private async Task<ModelGroup> ExecuteWithTimeout(AsyncCodeActivityContext context, CancellationToken cancellationToken = default)
         {
-            var modelGroupID = ModelGroupID.Get(context);
+            var modelGroupId = ModelGroupID.Get(context);
             var objectContainer = context.GetFromContext<IObjectContainer>(IndicoScope.ParentContainerPropertyTag);
             var application = objectContainer.Get<Application>();
 
-            return await application.GetModelGroup(modelGroupID);
+            return await application.GetModelGroup(modelGroupId, cancellationToken);
         }
 
         #endregion

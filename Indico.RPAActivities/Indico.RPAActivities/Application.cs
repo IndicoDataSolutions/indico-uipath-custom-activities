@@ -10,6 +10,7 @@ using Indico.RPAActivities.Entity;
 using System.Linq;
 using Indico.Types;
 using Indico.Storage;
+using System.Threading;
 
 namespace Indico.RPAActivities
 {
@@ -31,7 +32,7 @@ namespace Indico.RPAActivities
 
         #endregion
 
-        public async Task<List<Dataset>> ListDatasets()
+        public async Task<List<Dataset>> ListDatasets(CancellationToken cancellationToken)
         {
             string query = @"
               query GetDatasets {
@@ -54,7 +55,7 @@ namespace Indico.RPAActivities
             return datasets.ToObject<List<Dataset>>();
         }
 
-        public async Task<List<Workflow>> ListWorkflows(int datasetId)
+        public async Task<List<Workflow>> ListWorkflows(int datasetId, CancellationToken cancellationToken)
         {
             ListWorkflows listWorkflows = new ListWorkflows(_client)
             {
@@ -64,7 +65,7 @@ namespace Indico.RPAActivities
             return workflows;
         }
 
-        public async Task<JObject> SubmitReview(int submissionId, JObject changes, bool rejected, bool? forceComplete)
+        public async Task<JObject> SubmitReview(int submissionId, JObject changes, bool rejected, bool? forceComplete, CancellationToken cancellationToken)
         {
             var submitReview = new SubmitReview(_client)
             {
@@ -77,13 +78,13 @@ namespace Indico.RPAActivities
             return await job.Result();
         }
 
-        public async Task<ModelGroup> GetModelGroup(int mgId)
+        public async Task<ModelGroup> GetModelGroup(int mgId, CancellationToken cancellationToken)
         {
             ModelGroup mg = await _client.ModelGroupQuery(mgId).Exec();
             return mg;
         }
 
-        public async Task<Document> ExtractDocument(string document, string configType = "standard")
+        public async Task<Document> ExtractDocument(string document, string configType = "standard", CancellationToken cancellationToken)
         {
             JObject extractConfig = new JObject()
             {
@@ -103,7 +104,7 @@ namespace Indico.RPAActivities
             return doc;
         }
 
-        public async Task<List<int>> WorkflowSubmission(int workflowId, List<string> files, List<string> urls)
+        public async Task<List<int>> WorkflowSubmission(int workflowId, List<string> files, List<string> urls, CancellationToken cancellationToken)
         {
             var workflowSubmission = new WorkflowSubmission(_client)
             {
@@ -115,7 +116,7 @@ namespace Indico.RPAActivities
             return await workflowSubmission.Exec();
         }
 
-        public async Task<JObject> SubmissionResult(int submissionId, SubmissionStatus? checkStatus)
+        public async Task<JObject> SubmissionResult(int submissionId, SubmissionStatus? checkStatus, CancellationToken cancellationToken)
         {
             var submissionResult = new SubmissionResult(_client)
             {
@@ -136,7 +137,7 @@ namespace Indico.RPAActivities
             return blob.AsJSONObject();
         }
 
-        public async Task<List<int>> ListSubmissions(List<int> submissionIds, List<int> workflowIds, SubmissionFilter filters, int limit)
+        public async Task<List<int>> ListSubmissions(List<int> submissionIds, List<int> workflowIds, SubmissionFilter filters, int limit, CancellationToken cancellationToken)
         {
             var listSubmissions = new ListSubmissions(_client)
             {
@@ -153,7 +154,7 @@ namespace Indico.RPAActivities
             return submissions.Any() ? submissions.Select(s => s.Id).ToList() : new List<int>();
         }
 
-        public async Task<List<Dictionary<string, double>>> Classify(List<string> values, int modelGroup)
+        public async Task<List<Dictionary<string, double>>> Classify(List<string> values, int modelGroup, CancellationToken cancellationToken)
         {
             ModelGroup mg = await _client.ModelGroupQuery(modelGroup).Exec();
             var status = await _client.ModelGroupLoad(mg).Exec();
@@ -162,7 +163,7 @@ namespace Indico.RPAActivities
             return jobResult.ToObject<List<Dictionary<string, double>>>();
         }
 
-        public async Task<List<List<Extraction>>> Extract(List<string> values, int modelGroup)
+        public async Task<List<List<Extraction>>> Extract(List<string> values, int modelGroup, CancellationToken cancellationToken)
         {
             ModelGroup mg = await _client.ModelGroupQuery(modelGroup).Exec();
             string status = await _client.ModelGroupLoad(mg).Exec();

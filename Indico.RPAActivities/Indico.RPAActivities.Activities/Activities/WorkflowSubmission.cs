@@ -97,7 +97,7 @@ namespace Indico.RPAActivities.Activities
             var objectContainer = context.GetFromContext<IObjectContainer>(IndicoScope.ParentContainerPropertyTag);
             var application = objectContainer.Get<Application>();
 
-            return await application.WorkflowSubmission(workflowId, files, urls);
+            return await application.WorkflowSubmission(workflowId, files, urls, cancellationToken);
         }
 
         #endregion

@@ -90,7 +90,7 @@ namespace Indico.RPAActivities.Activities
 
             var objectContainer = context.GetFromContext<IObjectContainer>(IndicoScope.ParentContainerPropertyTag);
             var application = objectContainer.Get<Application>();
-            var result = await application.Extract(text, modelgroup);
+            var result = await application.Extract(text, modelgroup, cancellationToken);
             return result;
         }
 

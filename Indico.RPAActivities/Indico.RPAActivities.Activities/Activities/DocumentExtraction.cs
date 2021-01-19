@@ -90,7 +90,7 @@ namespace Indico.RPAActivities.Activities
 
             var document = Document.Get(context);
             var config = ConfigType.Get(context);
-            var extractedDocument = await application.ExtractDocument(document, config);
+            var extractedDocument = await application.ExtractDocument(document, config, cancellationToken);
             return extractedDocument;
         }
 
