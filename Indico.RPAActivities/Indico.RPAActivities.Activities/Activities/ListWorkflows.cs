@@ -73,8 +73,8 @@ namespace Indico.RPAActivities.Activities
             if (await Task.WhenAny(task, Task.Delay(timeout, cancellationToken)) != task) throw new TimeoutException(Resources.Timeout_Error);
 
             // Outputs
-            return (ctx) => {
-                Workflows.Set(ctx, task.Result);
+            return async (ctx) => {
+                Workflows.Set(ctx, await task);
             };
         }
 

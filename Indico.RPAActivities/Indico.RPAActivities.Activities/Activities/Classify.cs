@@ -88,7 +88,7 @@ namespace Indico.RPAActivities.Activities
                 KeyValuePair<String, Double> topClass = new KeyValuePair<String, Double>();
                 foreach (KeyValuePair<String, Double> result in resultSet)
                 {
-                    if(result.Value > topClass.Value)
+                    if (result.Value > topClass.Value)
                     {
                         topClass = result;
                     }
@@ -97,9 +97,10 @@ namespace Indico.RPAActivities.Activities
             }
 
             // Outputs
-            return (ctx) => {
+            return async (ctx) =>
+            {
                 TopResults.Set(ctx, topResults);
-                Results.Set(ctx, task.Result);
+                Results.Set(ctx, await task);
             };
         }
 

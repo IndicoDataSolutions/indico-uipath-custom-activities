@@ -71,8 +71,8 @@ namespace Indico.RPAActivities.Activities
             if (await Task.WhenAny(task, Task.Delay(timeout, cancellationToken)) != task) throw new TimeoutException(Resources.Timeout_Error);
 
             // Outputs
-            return (ctx) => {
-                ModelGroupData.Set(ctx, task.Result);
+            return async (ctx) => {
+                ModelGroupData.Set(ctx, await task);
             };
         }
 
