@@ -619,7 +619,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Returns the list of submission ids.
+        ///   Looks up a localized string similar to Returns submission list.
         /// </summary>
         public static string ListSubmissions_Submissions_Description {
             get {

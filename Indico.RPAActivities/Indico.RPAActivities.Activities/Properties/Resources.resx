@@ -510,44 +510,8 @@
     <comment>property name</comment>
   </data>
   <data name="ListSubmissions_Submissions_Description" xml:space="preserve">
-    <value>Returns the list of submission ids</value>
+    <value>Returns submission list</value>
     <comment>property description</comment>
-  </data>
-  <data name="Authentication_Category" xml:space="preserve">
-    <value>Authentication</value>
-    <comment>category</comment>
-  </data>
-  <data name="Common_Category" xml:space="preserve">
-    <value>Common</value>
-    <comment>category</comment>
-  </data>
-  <data name="Input_Category" xml:space="preserve">
-    <value>Input</value>
-    <comment>category</comment>
-  </data>
-  <data name="Output_Category" xml:space="preserve">
-    <value>Output</value>
-    <comment>category</comment>
-  </data>
-  <data name="Options_Category" xml:space="preserve">
-    <value>Options</value>
-    <comment>category</comment>
-  </data>
-  <data name="ValidationScope_Error" xml:space="preserve">
-    <value>Cannot be used outside of a {0}.</value>
-    <comment>error message; {0} is a container activity (e.g. a scope)</comment>
-  </data>
-  <data name="ValidationValue_Error" xml:space="preserve">
-    <value>Please provide a value for {0}.</value>
-    <comment>error message; {0} is the name of a missing property</comment>
-  </data>
-  <data name="ValidationExclusiveProperties_Error" xml:space="preserve">
-    <value>Please provide a value either for {0} or {1}, but not both.</value>
-    <comment>error message; {0} &amp; {1} are mutually exclusive activities</comment>
-  </data>
-  <data name="ValidationOverloadGroup_Error" xml:space="preserve">
-    <value>Please provide values for both {0} and {1}.</value>
-    <comment>error message; {0} &amp; {1} are complementary properties</comment>
   </data>
   <data name="SubmitReview_DisplayName" xml:space="preserve">
     <value>SubmitReview</value>
@@ -565,10 +529,6 @@
     <value>Id of submission to submit reviewEnabled for</value>
     <comment>property description</comment>
   </data>
-  <data name="Input_Category" xml:space="preserve">
-    <value>Input</value>
-    <comment>category</comment>
-  </data>
   <data name="SubmitReview_Changes_DisplayName" xml:space="preserve">
     <value>Changes</value>
     <comment>property name</comment>
@@ -576,10 +536,6 @@
   <data name="SubmitReview_Changes_Description" xml:space="preserve">
     <value>changes to make to raw predictions</value>
     <comment>property description</comment>
-  </data>
-  <data name="Input_Category" xml:space="preserve">
-    <value>Input</value>
-    <comment>category</comment>
   </data>
   <data name="SubmitReview_Rejected_DisplayName" xml:space="preserve">
     <value>Rejected</value>
@@ -589,10 +545,6 @@
     <value>reject the predictions and place the submissionin the review queue. Must be true if Changes not provided</value>
     <comment>property description</comment>
   </data>
-  <data name="Input_Category" xml:space="preserve">
-    <value>Input</value>
-    <comment>category</comment>
-  </data>
   <data name="SubmitReview_ForceComplete_DisplayName" xml:space="preserve">
     <value>ForceComplete</value>
     <comment>property name</comment>
@@ -601,10 +553,6 @@
     <value>have this submission bypass the Review queue(or exceptions queue if &lt;Rejected&gt; is True) and mark as Complete. *NOT RECOMMENDED*</value>
     <comment>property description</comment>
   </data>
-  <data name="Input_Category" xml:space="preserve">
-    <value>Input</value>
-    <comment>category</comment>
-  </data>
   <data name="SubmitReview_Result_DisplayName" xml:space="preserve">
     <value>Result</value>
     <comment>property name</comment>
@@ -612,9 +560,5 @@
   <data name="SubmitReview_Result_Description" xml:space="preserve">
     <value>JSON response</value>
     <comment>property description</comment>
-  </data>
-  <data name="Output_Category" xml:space="preserve">
-    <value>Output</value>
-    <comment>category</comment>
   </data>
 </root>

@@ -53,7 +53,7 @@ namespace Indico.RPAActivities.Activities
         [LocalizedDisplayName(nameof(Resources.ListSubmissions_Submissions_DisplayName))]
         [LocalizedDescription(nameof(Resources.ListSubmissions_Submissions_Description))]
         [LocalizedCategory(nameof(Resources.Output_Category))]
-        public OutArgument<List<int>> Submissions { get; set; }
+        public OutArgument<List<Submission>> Submissions { get; set; }
 
         #endregion
 
@@ -89,7 +89,7 @@ namespace Indico.RPAActivities.Activities
             };
         }
 
-        private async Task<List<int>> ExecuteWithTimeout(AsyncCodeActivityContext context, CancellationToken cancellationToken = default)
+        private async Task<List<Submission>> ExecuteWithTimeout(AsyncCodeActivityContext context, CancellationToken cancellationToken = default)
         {
             var submissionids = SubmissionIDs.Get(context);
             var workflowids = WorkflowIDs.Get(context);

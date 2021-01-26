@@ -137,7 +137,7 @@ namespace Indico.RPAActivities
             return blob.AsJSONObject();
         }
 
-        public async Task<List<int>> ListSubmissions(List<int> submissionIds, List<int> workflowIds, SubmissionFilter filters, int limit, CancellationToken cancellationToken)
+        public async Task<List<Submission>> ListSubmissions(List<int> submissionIds, List<int> workflowIds, SubmissionFilter filters, int limit, CancellationToken cancellationToken)
         {
             var listSubmissions = new ListSubmissions(_client)
             {
@@ -151,7 +151,7 @@ namespace Indico.RPAActivities
                 listSubmissions.Limit = limit;
 
             var submissions = await listSubmissions.Exec();
-            return submissions.Any() ? submissions.Select(s => s.Id).ToList() : new List<int>();
+            return submissions;
         }
 
         public async Task<List<Dictionary<string, double>>> Classify(List<string> values, int modelGroup, CancellationToken cancellationToken)
