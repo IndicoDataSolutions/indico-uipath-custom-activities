@@ -2,12 +2,9 @@
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Indico.Entity;
-using Indico.Request;
-using Indico.Jobs;
 using Indico.Mutation;
 using Indico.Query;
 using Indico.RPAActivities.Entity;
-using System.Linq;
 using Indico.Types;
 using Indico.Storage;
 using System.Threading;
@@ -18,7 +15,7 @@ namespace Indico.RPAActivities
     {
         #region Properties
 
-        IndicoClient _client;
+        private readonly IndicoClient _client;
 
         #endregion
 
@@ -26,7 +23,7 @@ namespace Indico.RPAActivities
 
         public Application(string token, string host)
         {
-            IndicoConfig config = new IndicoConfig(host: host, apiToken: token);
+            var config = new IndicoConfig(host: host, apiToken: token);
             _client = new IndicoClient(config);
         }
 
@@ -49,23 +46,24 @@ namespace Indico.RPAActivities
               }
             ";
 
-            GraphQLRequest request = _client.GraphQLRequest(query, "GetDatasets");
-            JObject result = await request.Call();
-            JArray datasets = (JArray) result.GetValue("datasets");
+            var request = _client.GraphQLRequest(query, "GetDatasets");
+            var result = await request.Call();
+            var datasets = (JArray)result.GetValue("datasets");
+
             return datasets.ToObject<List<Dataset>>();
         }
 
-        public async Task<List<Workflow>> ListWorkflows(int datasetId, CancellationToken cancellationToken)
+        public async Task<List<Workflow>> ListWorkflows(int datasetId, CancellationToken cancellationToken = default)
         {
-            ListWorkflows listWorkflows = new ListWorkflows(_client)
+            var listWorkflows = new ListWorkflows(_client)
             {
                 DatasetIds = new List<int> { datasetId }
             };
-            List<Workflow> workflows = await listWorkflows.Exec();
-            return workflows;
+
+            return await listWorkflows.Exec(cancellationToken);
         }
 
-        public async Task<JObject> SubmitReview(int submissionId, JObject changes, bool rejected, bool? forceComplete, CancellationToken cancellationToken)
+        public async Task<JObject> SubmitReview(int submissionId, JObject changes, bool rejected, bool? forceComplete, CancellationToken cancellationToken = default)
         {
             var submitReview = new SubmitReview(_client)
             {
@@ -74,37 +72,38 @@ namespace Indico.RPAActivities
                 Rejected = rejected,
                 ForceComplete = forceComplete
             };
-            var job = await submitReview.Exec();
+            var job = await submitReview.Exec(cancellationToken);
             return await job.Result();
         }
 
         public async Task<ModelGroup> GetModelGroup(int mgId, CancellationToken cancellationToken)
         {
-            ModelGroup mg = await _client.ModelGroupQuery(mgId).Exec();
-            return mg;
+            return await _client.ModelGroupQuery(mgId).Exec(cancellationToken);
         }
 
-        public async Task<Document> ExtractDocument(string document, string configType, CancellationToken cancellationToken)
+        public async Task<Document> ExtractDocument(string document, string configType, CancellationToken cancellationToken = default)
         {
-            JObject extractConfig = new JObject()
+            var extractConfig = new JObject()
             {
                 {"preset_config", configType}
             };
 
-            DocumentExtraction ocr = _client.DocumentExtraction(extractConfig);
-            Job job = await ocr.Exec(document);
-            JObject result = await job.Result();
-            string resUrl = (string) result.GetValue("url");
-            Storage.Blob blob = await _client.RetrieveBlob(resUrl).Exec();
-            JObject obj = blob.AsJSONObject();
+            var ocr = _client.DocumentExtraction(extractConfig);
+            var job = await ocr.Exec(document);
+            var result = await job.Result();
+            var resUrl = (string)result.GetValue("url");
+            var blob = await _client.RetrieveBlob(resUrl).Exec();
+            var obj = blob.AsJSONObject();
 
-            var doc = new Document();
-            doc.Text = (string) obj.GetValue("text");
+            var doc = new Document
+            {
+                Text = (string)obj.GetValue("text")
+            };
 
             return doc;
         }
 
-        public async Task<List<int>> WorkflowSubmission(int workflowId, List<string> files, List<string> urls, CancellationToken cancellationToken)
+        public async Task<List<int>> WorkflowSubmission(int workflowId, List<string> files, List<string> urls, CancellationToken cancellationToken = default)
         {
             var workflowSubmission = new WorkflowSubmission(_client)
             {
@@ -113,10 +112,10 @@ namespace Indico.RPAActivities
                 Urls = urls
             };
 
-            return await workflowSubmission.Exec();
+            return await workflowSubmission.Exec(cancellationToken);
         }
 
-        public async Task<JObject> SubmissionResult(int submissionId, SubmissionStatus? checkStatus, CancellationToken cancellationToken)
+        public async Task<JObject> SubmissionResult(int submissionId, SubmissionStatus? checkStatus, CancellationToken cancellationToken = default)
         {
             var submissionResult = new SubmissionResult(_client)
             {
@@ -124,20 +123,20 @@ namespace Indico.RPAActivities
                 CheckStatus = checkStatus
             };
 
-            Job job = await submissionResult.Exec();
-            JObject result = await job.Result();
-            string resUrl = (string)result.GetValue("url");
+            var job = await submissionResult.Exec(cancellationToken);
+            var result = await job.Result();
+            var resUrl = (string)result.GetValue("url");
 
-            var retrieveBlob = new RetrieveBlob(_client) 
+            var retrieveBlob = new RetrieveBlob(_client)
             {
                 Url = resUrl
             };
 
-            Blob blob = await retrieveBlob.Exec();
+            var blob = await retrieveBlob.Exec();
             return blob.AsJSONObject();
         }
 
-        public async Task<List<Submission>> ListSubmissions(List<int> submissionIds, List<int> workflowIds, SubmissionFilter filters, int limit, CancellationToken cancellationToken)
+        public async Task<List<Submission>> ListSubmissions(List<int> submissionIds, List<int> workflowIds, SubmissionFilter filters, int limit, CancellationToken cancellationToken = default)
         {
             var listSubmissions = new ListSubmissions(_client)
             {
@@ -150,25 +149,26 @@ namespace Indico.RPAActivities
             if (limit > 0)
                 listSubmissions.Limit = limit;
 
-            var submissions = await listSubmissions.Exec();
-            return submissions;
+            return await listSubmissions.Exec();
         }
 
-        public async Task<List<Dictionary<string, double>>> Classify(List<string> values, int modelGroup, CancellationToken cancellationToken)
+        public async Task<List<Dictionary<string, double>>> Classify(List<string> values, int modelGroup, CancellationToken cancellationToken = default)
         {
-            ModelGroup mg = await _client.ModelGroupQuery(modelGroup).Exec();
-            var status = await _client.ModelGroupLoad(mg).Exec();
-            Job job = await _client.ModelGroupPredict(mg).Data(values).Exec();
-            JArray jobResult = await job.Results();
+            var mg = await _client.ModelGroupQuery(modelGroup).Exec(cancellationToken);
+            var status = await _client.ModelGroupLoad(mg).Exec(cancellationToken);
+            var job = await _client.ModelGroupPredict(mg).Data(values).Exec(cancellationToken);
+            var jobResult = await job.Results();
+
             return jobResult.ToObject<List<Dictionary<string, double>>>();
         }
 
-        public async Task<List<List<Extraction>>> Extract(List<string> values, int modelGroup, CancellationToken cancellationToken)
+        public async Task<List<List<Extraction>>> Extract(List<string> values, int modelGroup, CancellationToken cancellationToken = default)
         {
-            ModelGroup mg = await _client.ModelGroupQuery(modelGroup).Exec();
-            string status = await _client.ModelGroupLoad(mg).Exec();
-            Job job = await _client.ModelGroupPredict(mg).Data(values).Exec();
-            JArray jobResult = await job.Results();
+            var mg = await _client.ModelGroupQuery(modelGroup).Exec(cancellationToken);
+            var status = await _client.ModelGroupLoad(mg).Exec(cancellationToken);
+            var job = await _client.ModelGroupPredict(mg).Data(values).Exec(cancellationToken);
+            var jobResult = await job.Results();
+
             return jobResult.ToObject<List<List<Extraction>>>();
         }
     }
