@@ -39,6 +39,26 @@ namespace Indico.RPAActivities.Activities.Design
             builder.AddCustomAttributes(typeof(ExtractValues), new DesignerAttribute(typeof(ExtractValuesDesigner)));
             builder.AddCustomAttributes(typeof(ExtractValues), new HelpKeywordAttribute(""));
 
+            builder.AddCustomAttributes(typeof(ListWorkflows), categoryAttribute);
+            builder.AddCustomAttributes(typeof(ListWorkflows), new DesignerAttribute(typeof(ListWorkflowsDesigner)));
+            builder.AddCustomAttributes(typeof(ListWorkflows), new HelpKeywordAttribute(""));
+
+            builder.AddCustomAttributes(typeof(WorkflowSubmission), categoryAttribute);
+            builder.AddCustomAttributes(typeof(WorkflowSubmission), new DesignerAttribute(typeof(WorkflowSubmissionDesigner)));
+            builder.AddCustomAttributes(typeof(WorkflowSubmission), new HelpKeywordAttribute(""));
+
+            builder.AddCustomAttributes(typeof(SubmissionResult), categoryAttribute);
+            builder.AddCustomAttributes(typeof(SubmissionResult), new DesignerAttribute(typeof(SubmissionResultDesigner)));
+            builder.AddCustomAttributes(typeof(SubmissionResult), new HelpKeywordAttribute(""));
+
+            builder.AddCustomAttributes(typeof(ListSubmissions), categoryAttribute);
+            builder.AddCustomAttributes(typeof(ListSubmissions), new DesignerAttribute(typeof(ListSubmissionsDesigner)));
+            builder.AddCustomAttributes(typeof(ListSubmissions), new HelpKeywordAttribute(""));
+
+            builder.AddCustomAttributes(typeof(SubmitReview), categoryAttribute);
+            builder.AddCustomAttributes(typeof(SubmitReview), new DesignerAttribute(typeof(SubmitReviewDesigner)));
+            builder.AddCustomAttributes(typeof(SubmitReview), new HelpKeywordAttribute(""));
+
 
             MetadataStore.AddAttributeTable(builder.CreateTable());
         }

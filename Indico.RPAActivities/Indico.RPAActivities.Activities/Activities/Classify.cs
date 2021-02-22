@@ -88,7 +88,7 @@ namespace Indico.RPAActivities.Activities
                 KeyValuePair<String, Double> topClass = new KeyValuePair<String, Double>();
                 foreach (KeyValuePair<String, Double> result in resultSet)
                 {
-                    if(result.Value > topClass.Value)
+                    if (result.Value > topClass.Value)
                     {
                         topClass = result;
                     }
@@ -97,9 +97,10 @@ namespace Indico.RPAActivities.Activities
             }
 
             // Outputs
-            return (ctx) => {
+            return async (ctx) =>
+            {
                 TopResults.Set(ctx, topResults);
-                Results.Set(ctx, task.Result);
+                Results.Set(ctx, await task);
             };
         }
 
@@ -110,7 +111,7 @@ namespace Indico.RPAActivities.Activities
 
             var objectContainer = context.GetFromContext<IObjectContainer>(IndicoScope.ParentContainerPropertyTag);
             var application = objectContainer.Get<Application>();
-            var result = await application.Classify(text, modelgroup);
+            var result = await application.Classify(text, modelgroup, cancellationToken);
             return result;
         }
 

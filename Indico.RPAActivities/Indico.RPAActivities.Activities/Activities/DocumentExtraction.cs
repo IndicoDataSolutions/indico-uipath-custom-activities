@@ -2,9 +2,8 @@ using System;
 using System.Activities;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using Indico.RPAActivities.Activities.Properties;
-using Indico.RPAActivities.Models;
+using Indico.RPAActivities.Entity;
 using UiPath.Shared.Activities;
 using UiPath.Shared.Activities.Localization;
 using UiPath.Shared.Activities.Utilities;
@@ -33,7 +32,7 @@ namespace Indico.RPAActivities.Activities
         [LocalizedDisplayName(nameof(Resources.DocumentExtraction_ConfigType_DisplayName))]
         [LocalizedDescription(nameof(Resources.DocumentExtraction_ConfigType_Description))]
         [LocalizedCategory(nameof(Resources.Input_Category))]
-        public InArgument<string> ConfigType { get; set; }
+        public InArgument<string> ConfigType { get; set; } = "standard";
 
         [LocalizedDisplayName(nameof(Resources.DocumentExtraction_Document_DisplayName))]
         [LocalizedDescription(nameof(Resources.DocumentExtraction_Document_Description))]
@@ -78,8 +77,8 @@ namespace Indico.RPAActivities.Activities
             if (await Task.WhenAny(task, Task.Delay(timeout, cancellationToken)) != task) throw new TimeoutException(Resources.Timeout_Error);
 
             // Outputs
-            return (ctx) => {
-                Results.Set(ctx, task.Result);
+            return async (ctx) => {
+                Results.Set(ctx, await task);
             };
         }
 
@@ -91,7 +90,7 @@ namespace Indico.RPAActivities.Activities
 
             var document = Document.Get(context);
             var config = ConfigType.Get(context);
-            var extractedDocument = await application.ExtractDocument(document, config);
+            var extractedDocument = await application.ExtractDocument(document, config, cancellationToken);
             return extractedDocument;
         }
 

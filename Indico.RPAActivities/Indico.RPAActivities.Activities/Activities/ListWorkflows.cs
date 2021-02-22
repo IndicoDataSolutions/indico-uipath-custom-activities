@@ -1,5 +1,6 @@
 using System;
 using System.Activities;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Indico.Entity;
@@ -10,9 +11,9 @@ using UiPath.Shared.Activities.Utilities;
 
 namespace Indico.RPAActivities.Activities
 {
-    [LocalizedDisplayName(nameof(Resources.GetModelGroup_DisplayName))]
-    [LocalizedDescription(nameof(Resources.GetModelGroup_Description))]
-    public class GetModelGroup : ContinuableAsyncCodeActivity
+    [LocalizedDisplayName(nameof(Resources.ListWorkflows_DisplayName))]
+    [LocalizedDescription(nameof(Resources.ListWorkflows_Description))]
+    public class ListWorkflows : ContinuableAsyncCodeActivity
     {
         #region Properties
 
@@ -29,24 +30,24 @@ namespace Indico.RPAActivities.Activities
         [LocalizedDescription(nameof(Resources.Timeout_Description))]
         public InArgument<int> TimeoutMS { get; set; } = 60000;
 
-        [LocalizedDisplayName(nameof(Resources.GetModelGroup_ModelGroupID_DisplayName))]
-        [LocalizedDescription(nameof(Resources.GetModelGroup_ModelGroupID_Description))]
+        [LocalizedDisplayName(nameof(Resources.ListWorkflows_DatasetID_DisplayName))]
+        [LocalizedDescription(nameof(Resources.ListWorkflows_DatasetID_Description))]
         [LocalizedCategory(nameof(Resources.Input_Category))]
-        public InArgument<int> ModelGroupID { get; set; }
+        public InArgument<int> DatasetID { get; set; }
 
-        [LocalizedDisplayName(nameof(Resources.GetModelGroup_ModelGroupData_DisplayName))]
-        [LocalizedDescription(nameof(Resources.GetModelGroup_ModelGroupData_Description))]
+        [LocalizedDisplayName(nameof(Resources.ListWorkflows_Workflows_DisplayName))]
+        [LocalizedDescription(nameof(Resources.ListWorkflows_Workflows_Description))]
         [LocalizedCategory(nameof(Resources.Output_Category))]
-        public OutArgument<ModelGroup> ModelGroupData { get; set; }
+        public OutArgument<object> Workflows { get; set; }
 
         #endregion
 
 
         #region Constructors
 
-        public GetModelGroup()
+        public ListWorkflows()
         {
-            Constraints.Add(ActivityConstraints.HasParentType<GetModelGroup, IndicoScope>(string.Format(Resources.ValidationScope_Error, Resources.IndicoScope_DisplayName)));
+            Constraints.Add(ActivityConstraints.HasParentType<ListWorkflows, IndicoScope>(string.Format(Resources.ValidationScope_Error, Resources.IndicoScope_DisplayName)));
         }
 
         #endregion
@@ -56,7 +57,7 @@ namespace Indico.RPAActivities.Activities
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
-            if (ModelGroupID == null) metadata.AddValidationError(string.Format(Resources.ValidationValue_Error, nameof(ModelGroupID)));
+            if (DatasetID == null) metadata.AddValidationError(string.Format(Resources.ValidationValue_Error, nameof(DatasetID)));
 
             base.CacheMetadata(metadata);
         }
@@ -65,6 +66,7 @@ namespace Indico.RPAActivities.Activities
         {
             // Inputs
             var timeout = TimeoutMS.Get(context);
+            var datasetid = DatasetID.Get(context);
 
             // Set a timeout on the execution
             var task = ExecuteWithTimeout(context, cancellationToken);
@@ -72,17 +74,17 @@ namespace Indico.RPAActivities.Activities
 
             // Outputs
             return async (ctx) => {
-                ModelGroupData.Set(ctx, await task);
+                Workflows.Set(ctx, await task);
             };
         }
 
-        private async Task<ModelGroup> ExecuteWithTimeout(AsyncCodeActivityContext context, CancellationToken cancellationToken = default)
+        private async Task<List<Workflow>> ExecuteWithTimeout(AsyncCodeActivityContext context, CancellationToken cancellationToken = default)
         {
-            var modelGroupId = ModelGroupID.Get(context);
+            var datasetId = DatasetID.Get(context);
             var objectContainer = context.GetFromContext<IObjectContainer>(IndicoScope.ParentContainerPropertyTag);
             var application = objectContainer.Get<Application>();
 
-            return await application.GetModelGroup(modelGroupId, cancellationToken);
+            return await application.ListWorkflows(datasetId, cancellationToken);
         }
 
         #endregion

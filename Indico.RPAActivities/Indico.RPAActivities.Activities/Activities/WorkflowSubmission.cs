@@ -2,7 +2,7 @@ using System;
 using System.Activities;
 using System.Threading;
 using System.Threading.Tasks;
-using Indico.Entity;
+using System.Collections.Generic;
 using Indico.RPAActivities.Activities.Properties;
 using UiPath.Shared.Activities;
 using UiPath.Shared.Activities.Localization;
@@ -10,9 +10,9 @@ using UiPath.Shared.Activities.Utilities;
 
 namespace Indico.RPAActivities.Activities
 {
-    [LocalizedDisplayName(nameof(Resources.GetModelGroup_DisplayName))]
-    [LocalizedDescription(nameof(Resources.GetModelGroup_Description))]
-    public class GetModelGroup : ContinuableAsyncCodeActivity
+    [LocalizedDisplayName(nameof(Resources.WorkflowSubmission_DisplayName))]
+    [LocalizedDescription(nameof(Resources.WorkflowSubmission_Description))]
+    public class WorkflowSubmission : ContinuableAsyncCodeActivity
     {
         #region Properties
 
@@ -29,24 +29,33 @@ namespace Indico.RPAActivities.Activities
         [LocalizedDescription(nameof(Resources.Timeout_Description))]
         public InArgument<int> TimeoutMS { get; set; } = 60000;
 
-        [LocalizedDisplayName(nameof(Resources.GetModelGroup_ModelGroupID_DisplayName))]
-        [LocalizedDescription(nameof(Resources.GetModelGroup_ModelGroupID_Description))]
+        [LocalizedDisplayName(nameof(Resources.WorkflowSubmission_WorkflowID_DisplayName))]
+        [LocalizedDescription(nameof(Resources.WorkflowSubmission_WorkflowID_Description))]
         [LocalizedCategory(nameof(Resources.Input_Category))]
-        public InArgument<int> ModelGroupID { get; set; }
+        public InArgument<int> WorkflowID { get; set; }
 
-        [LocalizedDisplayName(nameof(Resources.GetModelGroup_ModelGroupData_DisplayName))]
-        [LocalizedDescription(nameof(Resources.GetModelGroup_ModelGroupData_Description))]
+        [LocalizedDisplayName(nameof(Resources.WorkflowSubmission_FilePaths_DisplayName))]
+        [LocalizedDescription(nameof(Resources.WorkflowSubmission_FilePaths_Description))]
+        [LocalizedCategory(nameof(Resources.Input_Category))]
+        public InArgument<List<string>> FilePaths { get; set; }
+
+        [LocalizedDisplayName(nameof(Resources.WorkflowSubmission_Urls_DisplayName))]
+        [LocalizedDescription(nameof(Resources.WorkflowSubmission_Urls_Description))]
+        [LocalizedCategory(nameof(Resources.Input_Category))]
+        public InArgument<List<string>> Urls { get; set; }
+
+        [LocalizedDisplayName(nameof(Resources.WorkflowSubmission_SubmissionIDs_DisplayName))]
+        [LocalizedDescription(nameof(Resources.WorkflowSubmission_SubmissionIDs_Description))]
         [LocalizedCategory(nameof(Resources.Output_Category))]
-        public OutArgument<ModelGroup> ModelGroupData { get; set; }
+        public OutArgument<List<int>> SubmissionIDs { get; set; }
 
         #endregion
 
 
         #region Constructors
 
-        public GetModelGroup()
+        public WorkflowSubmission()
         {
-            Constraints.Add(ActivityConstraints.HasParentType<GetModelGroup, IndicoScope>(string.Format(Resources.ValidationScope_Error, Resources.IndicoScope_DisplayName)));
         }
 
         #endregion
@@ -56,7 +65,7 @@ namespace Indico.RPAActivities.Activities
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
-            if (ModelGroupID == null) metadata.AddValidationError(string.Format(Resources.ValidationValue_Error, nameof(ModelGroupID)));
+            if (WorkflowID == null) metadata.AddValidationError(string.Format(Resources.ValidationValue_Error, nameof(WorkflowID)));
 
             base.CacheMetadata(metadata);
         }
@@ -65,6 +74,9 @@ namespace Indico.RPAActivities.Activities
         {
             // Inputs
             var timeout = TimeoutMS.Get(context);
+            var workflowid = WorkflowID.Get(context);
+            var filepaths = FilePaths.Get(context);
+            var urls = Urls.Get(context);
 
             // Set a timeout on the execution
             var task = ExecuteWithTimeout(context, cancellationToken);
@@ -72,17 +84,20 @@ namespace Indico.RPAActivities.Activities
 
             // Outputs
             return async (ctx) => {
-                ModelGroupData.Set(ctx, await task);
+                SubmissionIDs.Set(ctx, await task);
             };
         }
 
-        private async Task<ModelGroup> ExecuteWithTimeout(AsyncCodeActivityContext context, CancellationToken cancellationToken = default)
+        private async Task<List<int>> ExecuteWithTimeout(AsyncCodeActivityContext context, CancellationToken cancellationToken = default)
         {
-            var modelGroupId = ModelGroupID.Get(context);
+            var workflowId = WorkflowID.Get(context);
+            var files = FilePaths.Get(context);
+            var urls = Urls.Get(context);
+
             var objectContainer = context.GetFromContext<IObjectContainer>(IndicoScope.ParentContainerPropertyTag);
             var application = objectContainer.Get<Application>();
 
-            return await application.GetModelGroup(modelGroupId, cancellationToken);
+            return await application.WorkflowSubmission(workflowId, files, urls, cancellationToken);
         }
 
         #endregion

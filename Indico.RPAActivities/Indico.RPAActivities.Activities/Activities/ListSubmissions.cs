@@ -2,17 +2,18 @@ using System;
 using System.Activities;
 using System.Threading;
 using System.Threading.Tasks;
-using Indico.Entity;
+using System.Collections.Generic;
 using Indico.RPAActivities.Activities.Properties;
 using UiPath.Shared.Activities;
 using UiPath.Shared.Activities.Localization;
+using Indico.Entity;
 using UiPath.Shared.Activities.Utilities;
 
 namespace Indico.RPAActivities.Activities
 {
-    [LocalizedDisplayName(nameof(Resources.GetModelGroup_DisplayName))]
-    [LocalizedDescription(nameof(Resources.GetModelGroup_Description))]
-    public class GetModelGroup : ContinuableAsyncCodeActivity
+    [LocalizedDisplayName(nameof(Resources.ListSubmissions_DisplayName))]
+    [LocalizedDescription(nameof(Resources.ListSubmissions_Description))]
+    public class ListSubmissions : ContinuableAsyncCodeActivity
     {
         #region Properties
 
@@ -29,24 +30,38 @@ namespace Indico.RPAActivities.Activities
         [LocalizedDescription(nameof(Resources.Timeout_Description))]
         public InArgument<int> TimeoutMS { get; set; } = 60000;
 
-        [LocalizedDisplayName(nameof(Resources.GetModelGroup_ModelGroupID_DisplayName))]
-        [LocalizedDescription(nameof(Resources.GetModelGroup_ModelGroupID_Description))]
+        [LocalizedDisplayName(nameof(Resources.ListSubmissions_SubmissionIDs_DisplayName))]
+        [LocalizedDescription(nameof(Resources.ListSubmissions_SubmissionIDs_Description))]
         [LocalizedCategory(nameof(Resources.Input_Category))]
-        public InArgument<int> ModelGroupID { get; set; }
+        public InArgument<List<int>> SubmissionIDs { get; set; }
 
-        [LocalizedDisplayName(nameof(Resources.GetModelGroup_ModelGroupData_DisplayName))]
-        [LocalizedDescription(nameof(Resources.GetModelGroup_ModelGroupData_Description))]
+        [LocalizedDisplayName(nameof(Resources.ListSubmissions_WorkflowIDs_DisplayName))]
+        [LocalizedDescription(nameof(Resources.ListSubmissions_WorkflowIDs_Description))]
+        [LocalizedCategory(nameof(Resources.Input_Category))]
+        public InArgument<List<int>> WorkflowIDs { get; set; }
+
+        [LocalizedDisplayName(nameof(Resources.ListSubmissions_Filters_DisplayName))]
+        [LocalizedDescription(nameof(Resources.ListSubmissions_Filters_Description))]
+        [LocalizedCategory(nameof(Resources.Input_Category))]
+        public InArgument<SubmissionFilter> Filters { get; set; }
+
+        [LocalizedDisplayName(nameof(Resources.ListSubmissions_Limit_DisplayName))]
+        [LocalizedDescription(nameof(Resources.ListSubmissions_Limit_Description))]
+        [LocalizedCategory(nameof(Resources.Input_Category))]
+        public InArgument<int> Limit { get; set; }
+
+        [LocalizedDisplayName(nameof(Resources.ListSubmissions_Submissions_DisplayName))]
+        [LocalizedDescription(nameof(Resources.ListSubmissions_Submissions_Description))]
         [LocalizedCategory(nameof(Resources.Output_Category))]
-        public OutArgument<ModelGroup> ModelGroupData { get; set; }
+        public OutArgument<List<Submission>> Submissions { get; set; }
 
         #endregion
 
 
         #region Constructors
 
-        public GetModelGroup()
+        public ListSubmissions()
         {
-            Constraints.Add(ActivityConstraints.HasParentType<GetModelGroup, IndicoScope>(string.Format(Resources.ValidationScope_Error, Resources.IndicoScope_DisplayName)));
         }
 
         #endregion
@@ -56,8 +71,6 @@ namespace Indico.RPAActivities.Activities
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
-            if (ModelGroupID == null) metadata.AddValidationError(string.Format(Resources.ValidationValue_Error, nameof(ModelGroupID)));
-
             base.CacheMetadata(metadata);
         }
 
@@ -72,17 +85,21 @@ namespace Indico.RPAActivities.Activities
 
             // Outputs
             return async (ctx) => {
-                ModelGroupData.Set(ctx, await task);
+                Submissions.Set(ctx, await task);
             };
         }
 
-        private async Task<ModelGroup> ExecuteWithTimeout(AsyncCodeActivityContext context, CancellationToken cancellationToken = default)
+        private async Task<List<Submission>> ExecuteWithTimeout(AsyncCodeActivityContext context, CancellationToken cancellationToken = default)
         {
-            var modelGroupId = ModelGroupID.Get(context);
+            var submissionids = SubmissionIDs.Get(context);
+            var workflowids = WorkflowIDs.Get(context);
+            var filters = Filters.Get(context);
+            var limit = Limit.Get(context);
+
             var objectContainer = context.GetFromContext<IObjectContainer>(IndicoScope.ParentContainerPropertyTag);
             var application = objectContainer.Get<Application>();
 
-            return await application.GetModelGroup(modelGroupId, cancellationToken);
+            return await application.ListSubmissions(submissionids, workflowids, filters, limit, cancellationToken);
         }
 
         #endregion

@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Indico.RPAActivities.Activities.Properties;
-using Indico.RPAActivities.Models;
+using Indico.RPAActivities.Entity;
 using UiPath.Shared.Activities;
 using UiPath.Shared.Activities.Localization;
 using UiPath.Shared.Activities.Utilities;
@@ -66,8 +66,8 @@ namespace Indico.RPAActivities.Activities
             if (await Task.WhenAny(task, Task.Delay(timeout, cancellationToken)) != task) throw new TimeoutException(Resources.Timeout_Error);
 
             // Outputs
-            return (ctx) => {
-                Datasets.Set(ctx, task.Result);
+            return async (ctx) => {
+                Datasets.Set(ctx, await task);
             };
         }
 
@@ -76,7 +76,7 @@ namespace Indico.RPAActivities.Activities
 
             var objectContainer = context.GetFromContext<IObjectContainer>(IndicoScope.ParentContainerPropertyTag);
             var application = objectContainer.Get<Application>();
-            List<Dataset> dsets = await application.ListDatasets();
+            List<Dataset> dsets = await application.ListDatasets(cancellationToken);
             return dsets;
         }
 

@@ -363,10 +363,202 @@
   </data>
   <data name="Classify_TopResults_Description" xml:space="preserve">
     <value>Top class for each prediction</value>
-    <comment>property descriptoin</comment>
+    <comment>property description</comment>
   </data>
   <data name="Classify_TopResults_DisplayName" xml:space="preserve">
     <value>Top Results</value>
     <comment>property name</comment>
+  </data>
+  <data name="ListWorkflows_DisplayName" xml:space="preserve">
+    <value>ListWorkflows</value>
+    <comment>activity name</comment>
+  </data>
+  <data name="ListWorkflows_Description" xml:space="preserve">
+    <value>List workflows for a dataset</value>
+    <comment>activity description</comment>
+  </data>
+  <data name="ListWorkflows_DatasetID_DisplayName" xml:space="preserve">
+    <value>DatasetID</value>
+    <comment>property name</comment>
+  </data>
+  <data name="ListWorkflows_DatasetID_Description" xml:space="preserve">
+    <value>ID of dataset to query</value>
+    <comment>property description</comment>
+  </data>
+  <data name="ListWorkflows_Workflows_DisplayName" xml:space="preserve">
+    <value>Workflows</value>
+    <comment>property name</comment>
+  </data>
+  <data name="ListWorkflows_Workflows_Description" xml:space="preserve">
+    <value>List of workflows</value>
+    <comment>property description</comment>
+  </data>
+  <data name="WorkflowSubmission_DisplayName" xml:space="preserve">
+    <value>WorkflowSubmission</value>
+    <comment>activity name</comment>
+  </data>
+  <data name="WorkflowSubmission_Description" xml:space="preserve">
+    <value>Submit files or urls to workflow</value>
+    <comment>activity description</comment>
+  </data>
+  <data name="WorkflowSubmission_WorkflowID_DisplayName" xml:space="preserve">
+    <value>WorkflowID</value>
+    <comment>property name</comment>
+  </data>
+  <data name="WorkflowSubmission_WorkflowID_Description" xml:space="preserve">
+    <value>Id of workflow for submission</value>
+    <comment>property description</comment>
+  </data>
+  <data name="WorkflowSubmission_FilePaths_DisplayName" xml:space="preserve">
+    <value>FilePaths</value>
+    <comment>property name</comment>
+  </data>
+  <data name="WorkflowSubmission_FilePaths_Description" xml:space="preserve">
+    <value>Paths of files to submit</value>
+    <comment>property description</comment>
+  </data>
+  <data name="WorkflowSubmission_Urls_DisplayName" xml:space="preserve">
+    <value>Urls</value>
+    <comment>property name</comment>
+  </data>
+  <data name="WorkflowSubmission_Urls_Description" xml:space="preserve">
+    <value>Urls to submit</value>
+    <comment>property description</comment>
+  </data>
+  <data name="WorkflowSubmission_SubmissionIDs_DisplayName" xml:space="preserve">
+    <value>SubmissionIDs</value>
+    <comment>property name</comment>
+  </data>
+  <data name="WorkflowSubmission_SubmissionIDs_Description" xml:space="preserve">
+    <value>List of submission ids</value>
+    <comment>property description</comment>
+  </data>
+  <data name="SubmissionResult_DisplayName" xml:space="preserve">
+    <value>SubmissionResult</value>
+    <comment>activity name</comment>
+  </data>
+  <data name="SubmissionResult_Description" xml:space="preserve">
+    <value>fetches json result for a submission</value>
+    <comment>activity description</comment>
+  </data>
+  <data name="SubmissionResult_SubmissionID_DisplayName" xml:space="preserve">
+    <value>SubmissionID</value>
+    <comment>property name</comment>
+  </data>
+  <data name="SubmissionResult_SubmissionID_Description" xml:space="preserve">
+    <value>id of the submission</value>
+    <comment>property description</comment>
+  </data>
+  <data name="SubmissionResult_CheckStatus_DisplayName" xml:space="preserve">
+    <value>CheckStatus</value>
+    <comment>property name</comment>
+  </data>
+  <data name="SubmissionResult_CheckStatus_Description" xml:space="preserve">
+    <value>checks the particular submission status for submission</value>
+    <comment>property description</comment>
+  </data>
+  <data name="SubmissionResult_Result_DisplayName" xml:space="preserve">
+    <value>Result</value>
+    <comment>property name</comment>
+  </data>
+  <data name="SubmissionResult_Result_Description" xml:space="preserve">
+    <value>result of the submission</value>
+    <comment>property description</comment>
+  </data>
+  <data name="ListSubmissions_DisplayName" xml:space="preserve">
+    <value>ListSubmissions</value>
+    <comment>activity name</comment>
+  </data>
+  <data name="ListSubmissions_Description" xml:space="preserve">
+    <value>Returns a list of submission ids</value>
+    <comment>activity description</comment>
+  </data>
+  <data name="ListSubmissions_SubmissionIDs_DisplayName" xml:space="preserve">
+    <value>SubmissionIDs</value>
+    <comment>property name</comment>
+  </data>
+  <data name="ListSubmissions_SubmissionIDs_Description" xml:space="preserve">
+    <value>List of submission ids</value>
+    <comment>property description</comment>
+  </data>
+  <data name="ListSubmissions_WorkflowIDs_DisplayName" xml:space="preserve">
+    <value>WorkflowIDs</value>
+    <comment>property name</comment>
+  </data>
+  <data name="ListSubmissions_WorkflowIDs_Description" xml:space="preserve">
+    <value>List of workflow ids to filter output</value>
+    <comment>property description</comment>
+  </data>
+  <data name="ListSubmissions_Filters_DisplayName" xml:space="preserve">
+    <value>Filters</value>
+    <comment>property name</comment>
+  </data>
+  <data name="ListSubmissions_Filters_Description" xml:space="preserve">
+    <value>Instance of SubmissionFilter to filter output</value>
+    <comment>property description</comment>
+  </data>
+  <data name="ListSubmissions_Limit_DisplayName" xml:space="preserve">
+    <value>Limit</value>
+    <comment>property name</comment>
+  </data>
+  <data name="ListSubmissions_Limit_Description" xml:space="preserve">
+    <value>limits the number of submission ids returned</value>
+    <comment>property description</comment>
+  </data>
+  <data name="ListSubmissions_Submissions_DisplayName" xml:space="preserve">
+    <value>Submissions</value>
+    <comment>property name</comment>
+  </data>
+  <data name="ListSubmissions_Submissions_Description" xml:space="preserve">
+    <value>Returns submission list</value>
+    <comment>property description</comment>
+  </data>
+  <data name="SubmitReview_DisplayName" xml:space="preserve">
+    <value>SubmitReview</value>
+    <comment>activity name</comment>
+  </data>
+  <data name="SubmitReview_Description" xml:space="preserve">
+    <value>Submit an "Auto" Review for a submission. Requires that the submission be in PENDING_AUTO_REVIEW status.</value>
+    <comment>activity description</comment>
+  </data>
+  <data name="SubmitReview_SubmissionID_DisplayName" xml:space="preserve">
+    <value>SubmissionID</value>
+    <comment>property name</comment>
+  </data>
+  <data name="SubmitReview_SubmissionID_Description" xml:space="preserve">
+    <value>Id of submission to submit reviewEnabled for</value>
+    <comment>property description</comment>
+  </data>
+  <data name="SubmitReview_Changes_DisplayName" xml:space="preserve">
+    <value>Changes</value>
+    <comment>property name</comment>
+  </data>
+  <data name="SubmitReview_Changes_Description" xml:space="preserve">
+    <value>changes to make to raw predictions</value>
+    <comment>property description</comment>
+  </data>
+  <data name="SubmitReview_Rejected_DisplayName" xml:space="preserve">
+    <value>Rejected</value>
+    <comment>property name</comment>
+  </data>
+  <data name="SubmitReview_Rejected_Description" xml:space="preserve">
+    <value>reject the predictions and place the submissionin the review queue. Must be true if Changes not provided</value>
+    <comment>property description</comment>
+  </data>
+  <data name="SubmitReview_ForceComplete_DisplayName" xml:space="preserve">
+    <value>ForceComplete</value>
+    <comment>property name</comment>
+  </data>
+  <data name="SubmitReview_ForceComplete_Description" xml:space="preserve">
+    <value>have this submission bypass the Review queue(or exceptions queue if &lt;Rejected&gt; is True) and mark as Complete. *NOT RECOMMENDED*</value>
+    <comment>property description</comment>
+  </data>
+  <data name="SubmitReview_Result_DisplayName" xml:space="preserve">
+    <value>Result</value>
+    <comment>property name</comment>
+  </data>
+  <data name="SubmitReview_Result_Description" xml:space="preserve">
+    <value>JSON response</value>
+    <comment>property description</comment>
   </data>
 </root>

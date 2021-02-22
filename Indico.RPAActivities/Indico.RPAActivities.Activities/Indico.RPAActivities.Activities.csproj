@@ -1,52 +1,45 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>net461</TargetFrameworks>
-		<RootNamespace>Indico.RPAActivities.Activities</RootNamespace>
-		<AssemblyName>Indico.RPAActivities.Activities</AssemblyName>
-    <PackageId>Indico.RPAActivities.Activities.Implementation</PackageId>
-  </PropertyGroup>
-  <PropertyGroup>
-    <OutputPath>bin\$(Configuration)\</OutputPath>
-    <DocumentationFile>bin\$(Configuration)\Indico.RPAActivities.Activities.xml</DocumentationFile>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="IndicoClient" Version="0.8.0" />
-  </ItemGroup>
-	<ItemGroup>
-		<Reference Include="System" />
-		
-		<Reference Include="System.Core" />
-		<Reference Include="System.Xml.Linq" />
-		<Reference Include="System.Data.DataSetExtensions" />
-		
-		
-		<Reference Include="Microsoft.CSharp" />
- 		
-		<Reference Include="System.Data" />
-		<Reference Include="System.Xml" />
-    <Reference Include="System.Activities" />
-    <Reference Include="System.Windows" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="WindowsBase" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Indico.RPAActivities\Indico.RPAActivities.csproj" PrivateAssets="All" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Properties\Resources.*.resx">
-      <DependentUpon>Resources.resx</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <Import Project="..\..\Shared\UiPath.Shared.Activities\UiPath.Shared.Activities.projitems" Label="Shared" />
+    <PropertyGroup>
+        <TargetFramework>net461</TargetFramework>
+        <RootNamespace>Indico.RPAActivities.Activities</RootNamespace>
+        <AssemblyName>Indico.RPAActivities.Activities</AssemblyName>
+        <PackageId>Indico.RPAActivities.Activities.Implementation</PackageId>
+    </PropertyGroup>
+    <PropertyGroup>
+        <OutputPath>bin\$(Configuration)\</OutputPath>
+        <DocumentationFile>bin\$(Configuration)\Indico.RPAActivities.Activities.xml</DocumentationFile>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="System"/>
+        <Reference Include="System.Core"/>
+        <Reference Include="System.Xml.Linq"/>
+        <Reference Include="System.Data.DataSetExtensions"/>
+        <Reference Include="Microsoft.CSharp"/>
+        <Reference Include="System.Data"/>
+        <Reference Include="System.Xml"/>
+        <Reference Include="System.Activities"/>
+        <Reference Include="System.Windows"/>
+        <Reference Include="System.Xaml"/>
+        <Reference Include="WindowsBase"/>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Indico.RPAActivities\Indico.RPAActivities.csproj" PrivateAssets="All"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Update="Properties\Resources.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Resources.resx</DependentUpon>
+        </Compile>
+    </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Update="Properties\Resources.resx">
+            <Generator>PublicResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Properties\Resources.*.resx">
+            <DependentUpon>Resources.resx</DependentUpon>
+        </EmbeddedResource>
+    </ItemGroup>
+    <Import Project="..\..\Shared\UiPath.Shared.Activities\UiPath.Shared.Activities.projitems" Label="Shared"/>
 </Project>
