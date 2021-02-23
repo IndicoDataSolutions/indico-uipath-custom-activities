@@ -26,10 +26,10 @@
     </PropertyGroup>
     <!-- Package Versions -->
     <PropertyGroup Condition="'$(Configuration)' == 'Debug' AND '$(DesignTimeBuild)' != 'true'">
-        <PackageVersion>2.1.0.$([System.DateTime]::UtcNow.ToString(MMddHHmmss))</PackageVersion>
+        <PackageVersion>2.2.0.$([System.DateTime]::UtcNow.ToString(MMddHHmmss))</PackageVersion>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-        <PackageVersion>2.1.0</PackageVersion>
+        <PackageVersion>2.2.0</PackageVersion>
     </PropertyGroup>
     <ItemGroup>
         <None Remove="Designers\ClassifyDesigner.xaml" />
