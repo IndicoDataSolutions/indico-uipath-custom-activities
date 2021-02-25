@@ -2,19 +2,16 @@ using System.Activities;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Linq;
 using Indico.RPAActivities.Activities.Properties;
-using UiPath.Shared.Activities;
 using UiPath.Shared.Activities.Localization;
 using Indico.Entity;
-using UiPath.Shared.Activities.RuntimeSimple;
-using UiPath.Shared.Activities.Utilities;
+using Indico.RPAActivities.Activities.Activities;
 
 namespace Indico.RPAActivities.Activities
 {
     [LocalizedDisplayName(nameof(Resources.ListSubmissions_DisplayName))]
     [LocalizedDescription(nameof(Resources.ListSubmissions_Description))]
-    public class ListSubmissions : TaskActivity
+    public class ListSubmissions : IndicoActivityBase<(List<int> WorkflowIds, List<int> SubmissionIds, SubmissionFilter Filters, int Limit), List<Submission>>
     {
         [LocalizedDisplayName(nameof(Resources.ListSubmissions_SubmissionIDs_DisplayName))]
         [LocalizedDescription(nameof(Resources.ListSubmissions_SubmissionIDs_Description))]
@@ -41,21 +38,13 @@ namespace Indico.RPAActivities.Activities
         [LocalizedCategory(nameof(Resources.Output_Category))]
         public OutArgument<List<Submission>> Submissions { get; set; }
 
+        protected override (List<int> WorkflowIds, List<int> SubmissionIds, SubmissionFilter Filters, int Limit) GetInputs(AsyncCodeActivityContext ctx) =>
+            (WorkflowIDs.Get(ctx), SubmissionIDs.Get(ctx), Filters.Get(ctx), Limit.Get(ctx));
 
-        protected override async Task ExecuteAsync(AsyncCodeActivityContext context, CancellationToken cancellationToken)
-        {
-            var submissionids = SubmissionIDs.Get(context);
-            var workflowids = WorkflowIDs.Get(context);
-            var filters = Filters.Get(context);
-            var limit = Limit.Get(context);
+        protected override async Task<List<Submission>> ExecuteAsync((List<int> WorkflowIds, List<int> SubmissionIds, SubmissionFilter Filters, int Limit) p, CancellationToken cancellationToken) => 
+            await Application.ListSubmissions(p.SubmissionIds, p.WorkflowIds, p.Filters, p.Limit, cancellationToken);
 
-            var objectContainer = context.GetFromContext<IObjectContainer>(IndicoScope.ParentContainerPropertyTag);
-            var application = objectContainer.Get<Application>();
-
-            var submissions = await application.ListSubmissions(submissionids, workflowids, filters, limit, cancellationToken);
-
-            Submissions.Set(context, submissions.ToList());
-        }
+        protected override void SetOutputs(AsyncCodeActivityContext ctx, List<Submission> submissions) => Submissions.Set(ctx, submissions);
     }
 }
 

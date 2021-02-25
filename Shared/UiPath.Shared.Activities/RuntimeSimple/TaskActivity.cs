@@ -7,7 +7,7 @@ using UiPath.Shared.Activities.Localization;
 
 namespace UiPath.Shared.Activities.RuntimeSimple
 {
-    public abstract class TaskActivity : AsyncCodeActivity
+    public abstract class TaskActivity<TInput, TOutput> : AsyncCodeActivity
     {
         [LocalizedCategory(nameof(Resources.Common_Category))]
         [LocalizedDisplayName(nameof(Resources.ContinueOnError_DisplayName))]
@@ -18,10 +18,10 @@ namespace UiPath.Shared.Activities.RuntimeSimple
         [LocalizedDisplayName(nameof(Resources.Timeout_DisplayName))]
         [LocalizedDescription(nameof(Resources.Timeout_Description))]
         public InArgument<int> TimeoutMS { get; set; } = 60000;
-        
+
         protected override IAsyncResult BeginExecute(AsyncCodeActivityContext context, AsyncCallback callback, object state)
         {
-            var tcs = new TaskCompletionSource<bool>(state);
+            var tcs = new TaskCompletionSource<TOutput>(state);
             var timeoutMs = TimeoutMS.Get(context);
             var cancellationTokenSource = new CancellationTokenSource(timeoutMs);
 
@@ -29,7 +29,10 @@ namespace UiPath.Shared.Activities.RuntimeSimple
 
             try
             {
-                ExecuteAsync(context, cancellationTokenSource.Token)
+                Init(context);
+                var inputs = GetInputs(context);
+
+                ExecuteAsync(inputs, cancellationTokenSource.Token)
                     .ContinueWith(
                         t =>
                         {
@@ -43,7 +46,7 @@ namespace UiPath.Shared.Activities.RuntimeSimple
                             }
                             else
                             {
-                                tcs.SetResult(true);
+                                tcs.SetResult(t.Result);
                             }
 
                             callback?.Invoke(tcs.Task);
@@ -59,20 +62,32 @@ namespace UiPath.Shared.Activities.RuntimeSimple
             return tcs.Task;
         }
 
-        protected override void EndExecute(AsyncCodeActivityContext context, IAsyncResult result) =>
-            EndExecute((State)context.UserState, (Task<bool>)result, ContinueOnError.Get(context));
+        protected override void EndExecute(AsyncCodeActivityContext context, IAsyncResult result) => EndExecute(context, (Task<TOutput>)result);
 
-        private void EndExecute(State state, Task<bool> task, bool continueOnError)
+        private void EndExecute(AsyncCodeActivityContext ctx, Task<TOutput> task)
         {
-            state.Dispose();
+            if (task.Status == TaskStatus.RanToCompletion)
+            {
+                SetOutputs(ctx, task.Result);
+            }
 
-            if (task.IsFaulted && !continueOnError)
+            ((State)ctx.UserState).Dispose();
+
+            if (task.IsFaulted && !ContinueOnError.Get(ctx))
             {
                 throw task.Exception?.InnerException ?? task.Exception ?? new Exception("Unexpected exception");
             }
         }
 
-        protected abstract Task ExecuteAsync(AsyncCodeActivityContext context, CancellationToken cancellationToken);
+        protected virtual void Init(AsyncCodeActivityContext context)
+        {
+        }
+
+        protected abstract TInput GetInputs(AsyncCodeActivityContext ctx);
+
+        protected abstract Task<TOutput> ExecuteAsync(TInput input, CancellationToken cancellationToken);
+
+        protected abstract void SetOutputs(AsyncCodeActivityContext ctx, TOutput output);
 
         private class State : IDisposable
         {
