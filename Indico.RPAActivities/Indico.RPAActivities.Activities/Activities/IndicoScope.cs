@@ -21,7 +21,7 @@ namespace Indico.RPAActivities.Activities
         [LocalizedCategory(nameof(Resources.Common_Category))]
         [LocalizedDisplayName(nameof(Resources.ContinueOnError_DisplayName))]
         [LocalizedDescription(nameof(Resources.ContinueOnError_Description))]
-        [Obsolete("No idea what shoud it do - it's not being passed")]
+        [Obsolete("Can probably be removed")]
         public InArgument<bool> ContinueOnError { get; set; }
 
         [LocalizedDisplayName(nameof(Resources.IndicoScope_Host_DisplayName))]
