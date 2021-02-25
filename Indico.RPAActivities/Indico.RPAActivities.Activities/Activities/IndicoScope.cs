@@ -1,7 +1,5 @@
 using System;
 using System.Activities;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Activities.Statements;
 using System.ComponentModel;
 using Indico.RPAActivities.Activities.Properties;
@@ -12,10 +10,8 @@ namespace Indico.RPAActivities.Activities
 {
     [LocalizedDisplayName(nameof(Resources.IndicoScope_DisplayName))]
     [LocalizedDescription(nameof(Resources.IndicoScope_Description))]
-    public class IndicoScope : ContinuableAsyncNativeActivity
+    public class IndicoScope : NativeActivity
     {
-        #region Properties
-
         [Browsable(false)]
         public ActivityAction<IObjectContainer> Body { get; set; }
 
@@ -25,7 +21,8 @@ namespace Indico.RPAActivities.Activities
         [LocalizedCategory(nameof(Resources.Common_Category))]
         [LocalizedDisplayName(nameof(Resources.ContinueOnError_DisplayName))]
         [LocalizedDescription(nameof(Resources.ContinueOnError_Description))]
-        public override InArgument<bool> ContinueOnError { get; set; }
+        [Obsolete("No idea what shoud it do - it's not being passed")]
+        public InArgument<bool> ContinueOnError { get; set; }
 
         [LocalizedDisplayName(nameof(Resources.IndicoScope_Host_DisplayName))]
         [LocalizedDescription(nameof(Resources.IndicoScope_Host_Description))]
@@ -43,14 +40,10 @@ namespace Indico.RPAActivities.Activities
         // Object Container: Add strongly-typed objects here and they will be available in the scope's child activities.
         private readonly IObjectContainer _objectContainer;
 
-        #endregion
 
-
-        #region Constructors
-
-        public IndicoScope(IObjectContainer objectContainer)
+        public IndicoScope()
         {
-            _objectContainer = objectContainer;
+            _objectContainer = new ObjectContainer();
 
             Body = new ActivityAction<IObjectContainer>
             {
@@ -58,16 +51,6 @@ namespace Indico.RPAActivities.Activities
                 Handler = new Sequence { DisplayName = Resources.Do }
             };
         }
-
-        public IndicoScope() : this(new ObjectContainer())
-        {
-
-        }
-
-        #endregion
-
-
-        #region Protected Methods
 
         protected override void CacheMetadata(NativeActivityMetadata metadata)
         {
@@ -77,7 +60,7 @@ namespace Indico.RPAActivities.Activities
             base.CacheMetadata(metadata);
         }
 
-        protected override async Task<Action<NativeActivityContext>> ExecuteAsync(NativeActivityContext  context, CancellationToken cancellationToken)
+        protected override void Execute(NativeActivityContext context)
         {
             // Inputs
             string host = Host.Get(context);
@@ -85,19 +68,11 @@ namespace Indico.RPAActivities.Activities
             Application application = new Application(token, host);
             _objectContainer.Add(application);
 
-            return (ctx) => {
-                // Schedule child activities
-                if (Body != null)
-				    ctx.ScheduleAction<IObjectContainer>(Body, _objectContainer, OnCompleted, OnFaulted);
-
-                // Outputs
-            };
+            if (Body != null)
+            {
+                context.ScheduleAction<IObjectContainer>(Body, _objectContainer, OnCompleted, OnFaulted);
+            }
         }
-
-        #endregion
-
-
-        #region Events
 
         private void OnFaulted(NativeActivityFaultContext faultContext, System.Exception propagatedException, ActivityInstance propagatedFrom)
         {
@@ -110,11 +85,6 @@ namespace Indico.RPAActivities.Activities
             Cleanup();
         }
 
-        #endregion
-
-
-        #region Helpers
-        
         private void Cleanup()
         {
             var disposableObjects = _objectContainer.Where(o => o is IDisposable);
@@ -125,8 +95,6 @@ namespace Indico.RPAActivities.Activities
             }
             _objectContainer.Clear();
         }
-
-        #endregion
     }
 }
 
