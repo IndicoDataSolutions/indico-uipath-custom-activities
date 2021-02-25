@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Runtime\AsyncTaskCodeActivity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Runtime\AsyncTaskNativeActivity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Runtime\AsyncTaskNativeImplementation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RuntimeSimple\TaskActivity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\ChildActivityExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Runtime\BookmarkResumptionHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Runtime\ContinuableAsyncCodeActivity.cs" />
