@@ -2,6 +2,7 @@
 using System.Activities;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using Indico.RPAActivities.Activities.Properties;
 using UiPath.Shared.Activities.Localization;
 
@@ -66,14 +67,22 @@ namespace UiPath.Shared.Activities.RuntimeSimple
 
         private void EndExecute(AsyncCodeActivityContext ctx, Task<TOutput> task)
         {
-            if (task.Status == TaskStatus.RanToCompletion)
+            var continueOnError = ContinueOnError.Get(ctx);
+
+            try
             {
-                SetOutputs(ctx, task.Result);
+                if (task.Status == TaskStatus.RanToCompletion)
+                {
+                    SetOutputs(ctx, task.Result);
+                }
+            }
+            catch when(continueOnError)
+            {
             }
 
             ((State)ctx.UserState).Dispose();
 
-            if (task.IsFaulted && !ContinueOnError.Get(ctx))
+            if (task.IsFaulted && !continueOnError)
             {
                 throw task.Exception?.InnerException ?? task.Exception ?? new Exception("Unexpected exception");
             }

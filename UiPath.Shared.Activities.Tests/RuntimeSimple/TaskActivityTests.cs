@@ -9,57 +9,121 @@ using FluentAssertions;
 
 namespace UiPath.Shared.Activities.Tests.RuntimeSimple
 {
-    public class TaskActivityTests1 : TaskActivityTests<TaskActivityTests1.ExceptionThrowingActivity<InvalidOperationException>, InvalidOperationException>
+    public class TaskActivityTests1 : TaskActivityTests<InvalidOperationException>
     {
-        public class ExceptionThrowingActivity<TException> : ExceptionThrowingActivityBase
-            where TException : Exception, new()
-        {
-            // Exception thrown by a task
-            protected override async Task<int> ExecuteAsync(int p, CancellationToken cancellationToken) =>
-                throw new TException();
-        }
     }
 
-    public class TaskActivityTests2 : TaskActivityTests<TaskActivityTests2.ExceptionThrowingActivity<ArgumentException>, ArgumentException>
+    public class TaskActivityTests2 : TaskActivityTests<NotImplementedException>
     {
-        public class ExceptionThrowingActivity<TException> : ExceptionThrowingActivityBase
-            where TException : Exception, new()
-        {
-            // Exception thrown when starting a task
-            protected override Task<int> ExecuteAsync(int p, CancellationToken cancellationToken) =>
-                throw new TException();
-        }
     }
 
-    public abstract class ExceptionThrowingActivityBase : TaskActivity<int, int>
-    {
-        protected override int GetInputs(AsyncCodeActivityContext ctx) => 1;
-
-        protected override void SetOutputs(AsyncCodeActivityContext ctx, int output)
-        {
-        }
-    }
-
-    public abstract class TaskActivityTests<TActivity, TExpectedException>
-        where TActivity : Activity, new()
-        where TExpectedException : Exception
+    public abstract class TaskActivityTests<TExpectedException>
+        where TExpectedException : Exception, new()
     {
         private WorkflowInvoker _invoker;
+        private FakeActivity _fakeActivity;
 
         [SetUp]
-        public void SetUp() => _invoker = new WorkflowInvoker(new TActivity());
+        public void SetUp() => _invoker = new WorkflowInvoker((_fakeActivity = new FakeActivity()));
 
         [Test]
-        public void Invoke_ShouldThrow_WhenContinueOnErrorIsFalse() => _invoker.Invoking(i =>
-                           i.Invoke(new Dictionary<string, object> { { nameof(TaskActivity<int, int>.ContinueOnError), false } }))
-           .Should()
-           .Throw<TExpectedException>();
+        public void Invoke_ShouldReturnObject()
+        {
+            // Arrange
+            var inputs = new object();
+            object outputs = null;
 
-        [Test]
-        public void Invoke_ShouldReturnNoError_WhenContinueOnErrorIsTrue() =>
-            _invoker.Invoking(i =>
-                i.Invoke(new Dictionary<string, object> { { nameof(TaskActivity<int, int>.ContinueOnError), true } }))
-            .Should()
-            .NotThrow();
+            _fakeActivity.GetInputsHandler = _ => inputs;
+            _fakeActivity.ExecuteAsyncHandler = (inParams, ct) => Task.FromResult(inParams);
+            _fakeActivity.SetOutputsHandler = (context, o) => outputs = o;
+
+            // Act
+            var result = _invoker.Invoke();
+
+            // Assert
+            outputs.Should().Be(inputs);
+        }
+
+        [Theory]
+        public void Invoke_ShouldThrow_WhenInitThrows_AndContinueOnErrorIsFalse(bool continueOnError)
+        {
+            _fakeActivity.InitHandler = _ => throw new TExpectedException();
+
+            AssertThrowsWhenContinueOnErrorFalse(continueOnError);
+        }
+
+        [Theory]
+        public void Invoke_ShouldThrow_WhenGetInputsThrows_AndContinueOnErrorIsFalse(bool continueOnError)
+        {
+            _fakeActivity.GetInputsHandler = _ => throw new TExpectedException();
+
+            AssertThrowsWhenContinueOnErrorFalse(continueOnError);
+        }
+
+
+        [Theory]
+        public void Invoke_ShouldThrow_WhenExecuteAsyncThrows_AndContinueOnErrorIsFalse(bool continueOnError)
+        {
+            _fakeActivity.ExecuteAsyncHandler = (i, ct) => throw new TExpectedException();
+
+            AssertThrowsWhenContinueOnErrorFalse(continueOnError);
+        }
+
+        [Theory]
+        public void Invoke_ShouldThrow_WhenExecuteAsyncReturnsTaskThrowing_AndContinueOnErrorIsFalse(bool continueOnError)
+        {
+            _fakeActivity.ExecuteAsyncHandler = (inputs, ct) => Task.FromException<object>(new TExpectedException());
+
+            AssertThrowsWhenContinueOnErrorFalse(continueOnError);
+        }
+
+        [Theory]
+        public void Invoke_ShouldThrow_WhenSetOutputThrows_AndContinueOnErrorIsFalse(bool continueOnError)
+        {
+            _fakeActivity.SetOutputsHandler = (context, o) => throw new TExpectedException();
+
+            AssertThrowsWhenContinueOnErrorFalse(continueOnError);
+        }
+
+        private void AssertThrowsWhenContinueOnErrorFalse(bool continueOnError)
+        {
+            // Act, Assert
+            var invokeAssertionBuilder = _invoker.Invoking(i =>
+                   i.Invoke(new Dictionary<string, object> { { nameof(TaskActivity<int, int>.ContinueOnError), continueOnError } }));
+
+            if (!continueOnError)
+            {
+                invokeAssertionBuilder
+               .Should()
+               .Throw<TExpectedException>();
+            }
+            else
+            {
+                invokeAssertionBuilder.Should().NotThrow();
+            }
+        }
+
+        private class FakeActivity : TaskActivity<object, object>
+        {
+            public Action<AsyncCodeActivityContext> InitHandler { get; set; } = _ => { };
+            public Func<AsyncCodeActivityContext, object> GetInputsHandler { get; set; } = _ => new object();
+            public Func<object, CancellationToken, Task<object>> ExecuteAsyncHandler { get; set; } = (inputs, _) => Task.FromResult(inputs);
+            public Action<AsyncCodeActivityContext, object> SetOutputsHandler { get; set; } = (_, o) => { };
+
+            protected override void Init(AsyncCodeActivityContext context)
+            {
+                base.Init(context);
+
+                InitHandler(context);
+            }
+
+            protected override object GetInputs(AsyncCodeActivityContext ctx) => GetInputsHandler(ctx);
+
+            protected override Task<object> ExecuteAsync(object input, CancellationToken cancellationToken) =>
+                ExecuteAsyncHandler(input, cancellationToken);
+
+            protected override void SetOutputs(AsyncCodeActivityContext ctx, object output) =>
+                SetOutputsHandler(ctx, output);
+        }
     }
 }
