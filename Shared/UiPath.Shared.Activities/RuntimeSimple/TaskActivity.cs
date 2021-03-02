@@ -39,7 +39,7 @@ namespace UiPath.Shared.Activities.RuntimeSimple
                         {
                             if (t.IsFaulted)
                             {
-                                tcs.SetException(t.Exception?.InnerException ?? t.Exception ?? new Exception("Unknown error"));
+                                tcs.SetException(t.Exception?.InnerException ?? t.Exception ?? new Exception("Unexpected error"));
                             }
                             else if (t.IsCanceled)
                             {
@@ -84,7 +84,7 @@ namespace UiPath.Shared.Activities.RuntimeSimple
 
             if (task.IsFaulted && !continueOnError)
             {
-                throw task.Exception?.InnerException ?? task.Exception ?? new Exception("Unexpected exception");
+                throw task.Exception?.InnerException ?? task.Exception ?? new Exception("Unexpected error");
             }
         }
 
