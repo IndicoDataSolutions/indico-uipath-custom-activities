@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Indico.Entity;
@@ -15,7 +16,8 @@ namespace Indico.RPAActivities
     {
         #region Properties
 
-        private readonly IndicoClient _client;
+        [Obsolete]
+        private readonly IndicoClient _clientLegacy;
 
         #endregion
 
@@ -24,7 +26,7 @@ namespace Indico.RPAActivities
         public Application(string token, string host)
         {
             var config = new IndicoConfig(host: host, apiToken: token);
-            _client = new IndicoClient(config);
+            _clientLegacy = new IndicoClient(config);
         }
 
         #endregion
@@ -46,7 +48,7 @@ namespace Indico.RPAActivities
               }
             ";
 
-            var request = _client.GraphQLRequest(query, "GetDatasets");
+            var request = _clientLegacy.GraphQLRequest(query, "GetDatasets");
             var result = await request.Call();
             var datasets = (JArray)result.GetValue("datasets");
 
@@ -55,7 +57,7 @@ namespace Indico.RPAActivities
 
         public async Task<List<Workflow>> ListWorkflows(int datasetId, CancellationToken cancellationToken = default)
         {
-            var listWorkflows = new ListWorkflows(_client)
+            var listWorkflows = new ListWorkflows(_clientLegacy)
             {
                 DatasetIds = new List<int> { datasetId }
             };
@@ -65,7 +67,7 @@ namespace Indico.RPAActivities
 
         public async Task<JObject> SubmitReview(int submissionId, JObject changes, bool rejected, bool? forceComplete, CancellationToken cancellationToken = default)
         {
-            var submitReview = new SubmitReview(_client)
+            var submitReview = new SubmitReview(_clientLegacy)
             {
                 SubmissionId = submissionId,
                 Changes = changes,
@@ -78,7 +80,7 @@ namespace Indico.RPAActivities
 
         public async Task<ModelGroup> GetModelGroup(int mgId, CancellationToken cancellationToken)
         {
-            return await _client.ModelGroupQuery(mgId).Exec(cancellationToken);
+            return await _clientLegacy.ModelGroupQuery(mgId).Exec(cancellationToken);
         }
 
         public async Task<Document> ExtractDocument(string document, string configType, CancellationToken cancellationToken = default)
@@ -88,11 +90,11 @@ namespace Indico.RPAActivities
                 {"preset_config", configType}
             };
 
-            var ocr = _client.DocumentExtraction(extractConfig);
+            var ocr = _clientLegacy.DocumentExtraction(extractConfig);
             var job = await ocr.Exec(document);
             var result = await job.Result();
             var resUrl = (string)result.GetValue("url");
-            var blob = await _client.RetrieveBlob(resUrl).Exec();
+            var blob = await _clientLegacy.RetrieveBlob(resUrl).Exec();
             var obj = blob.AsJSONObject();
 
             var doc = new Document
@@ -105,7 +107,7 @@ namespace Indico.RPAActivities
 
         public async Task<List<int>> WorkflowSubmission(int workflowId, List<string> files, List<string> urls, CancellationToken cancellationToken = default)
         {
-            var workflowSubmission = new WorkflowSubmission(_client)
+            var workflowSubmission = new WorkflowSubmission(_clientLegacy)
             {
                 WorkflowId = workflowId,
                 Files = files,
@@ -117,7 +119,7 @@ namespace Indico.RPAActivities
 
         public async Task<JObject> SubmissionResult(int submissionId, SubmissionStatus? checkStatus, CancellationToken cancellationToken = default)
         {
-            var submissionResult = new SubmissionResult(_client)
+            var submissionResult = new SubmissionResult(_clientLegacy)
             {
                 SubmissionId = submissionId,
                 CheckStatus = checkStatus
@@ -127,7 +129,7 @@ namespace Indico.RPAActivities
             var result = await job.Result();
             var resUrl = (string)result.GetValue("url");
 
-            var retrieveBlob = new RetrieveBlob(_client)
+            var retrieveBlob = new RetrieveBlob(_clientLegacy)
             {
                 Url = resUrl
             };
@@ -138,7 +140,7 @@ namespace Indico.RPAActivities
 
         public async Task<List<Submission>> ListSubmissions(List<int> submissionIds, List<int> workflowIds, SubmissionFilter filters, int limit, CancellationToken cancellationToken = default)
         {
-            var listSubmissions = new ListSubmissions(_client)
+            var listSubmissions = new ListSubmissions(_clientLegacy)
             {
                 SubmissionIds = submissionIds,
                 WorkflowIds = workflowIds,
@@ -154,9 +156,9 @@ namespace Indico.RPAActivities
 
         public async Task<List<Dictionary<string, double>>> Classify(List<string> values, int modelGroup, CancellationToken cancellationToken = default)
         {
-            var mg = await _client.ModelGroupQuery(modelGroup).Exec(cancellationToken);
-            var status = await _client.ModelGroupLoad(mg).Exec(cancellationToken);
-            var job = await _client.ModelGroupPredict(mg).Data(values).Exec(cancellationToken);
+            var mg = await _clientLegacy.ModelGroupQuery(modelGroup).Exec(cancellationToken);
+            var status = await _clientLegacy.ModelGroupLoad(mg).Exec(cancellationToken);
+            var job = await _clientLegacy.ModelGroupPredict(mg).Data(values).Exec(cancellationToken);
             var jobResult = await job.Results();
 
             return jobResult.ToObject<List<Dictionary<string, double>>>();
@@ -164,9 +166,9 @@ namespace Indico.RPAActivities
 
         public async Task<List<List<Extraction>>> Extract(List<string> values, int modelGroup, CancellationToken cancellationToken = default)
         {
-            var mg = await _client.ModelGroupQuery(modelGroup).Exec(cancellationToken);
-            var status = await _client.ModelGroupLoad(mg).Exec(cancellationToken);
-            var job = await _client.ModelGroupPredict(mg).Data(values).Exec(cancellationToken);
+            var mg = await _clientLegacy.ModelGroupQuery(modelGroup).Exec(cancellationToken);
+            var status = await _clientLegacy.ModelGroupLoad(mg).Exec(cancellationToken);
+            var job = await _clientLegacy.ModelGroupPredict(mg).Data(values).Exec(cancellationToken);
             var jobResult = await job.Results();
 
             return jobResult.ToObject<List<List<Extraction>>>();
