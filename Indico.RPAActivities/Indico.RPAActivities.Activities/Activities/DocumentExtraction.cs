@@ -1,34 +1,18 @@
-using System;
 using System.Activities;
 using System.Threading;
 using System.Threading.Tasks;
+using Indico.RPAActivities.Activities.Activities;
 using Indico.RPAActivities.Activities.Properties;
 using Indico.RPAActivities.Entity;
 using UiPath.Shared.Activities;
 using UiPath.Shared.Activities.Localization;
-using UiPath.Shared.Activities.Utilities;
 
 namespace Indico.RPAActivities.Activities
 {
     [LocalizedDisplayName(nameof(Resources.DocumentExtraction_DisplayName))]
     [LocalizedDescription(nameof(Resources.DocumentExtraction_Description))]
-    public class DocumentExtraction : ContinuableAsyncCodeActivity
+    public class DocumentExtraction : IndicoActivityBase<(string ConfigType, string Document), Document>
     {
-        #region Properties
-
-        /// <summary>
-        /// If set, continue executing the remaining activities even if the current activity has failed.
-        /// </summary>
-        [LocalizedCategory(nameof(Resources.Common_Category))]
-        [LocalizedDisplayName(nameof(Resources.ContinueOnError_DisplayName))]
-        [LocalizedDescription(nameof(Resources.ContinueOnError_Description))]
-        public override InArgument<bool> ContinueOnError { get; set; }
-
-        [LocalizedCategory(nameof(Resources.Common_Category))]
-        [LocalizedDisplayName(nameof(Resources.Timeout_DisplayName))]
-        [LocalizedDescription(nameof(Resources.Timeout_Description))]
-        public InArgument<int> TimeoutMS { get; set; } = 60000;
-
         [LocalizedDisplayName(nameof(Resources.DocumentExtraction_ConfigType_DisplayName))]
         [LocalizedDescription(nameof(Resources.DocumentExtraction_ConfigType_Description))]
         [LocalizedCategory(nameof(Resources.Input_Category))]
@@ -44,20 +28,12 @@ namespace Indico.RPAActivities.Activities
         [LocalizedCategory(nameof(Resources.Output_Category))]
         public OutArgument<Document> Results { get; set; }
 
-        #endregion
-
-
-        #region Constructors
 
         public DocumentExtraction()
         {
             Constraints.Add(ActivityConstraints.HasParentType<DocumentExtraction, IndicoScope>(string.Format(Resources.ValidationScope_Error, Resources.IndicoScope_DisplayName)));
         }
 
-        #endregion
-
-
-        #region Protected Methods
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
@@ -66,35 +42,14 @@ namespace Indico.RPAActivities.Activities
 
             base.CacheMetadata(metadata);
         }
+        
+        protected override (string ConfigType, string Document) GetInputs(AsyncCodeActivityContext ctx) =>
+            (ConfigType.Get(ctx), Document.Get(ctx));
 
-        protected override async Task<Action<AsyncCodeActivityContext>> ExecuteAsync(AsyncCodeActivityContext context, CancellationToken cancellationToken)
-        {
-            // Inputs
-            var timeout = TimeoutMS.Get(context);
+        protected override async Task<Document> ExecuteAsync((string ConfigType, string Document) input, CancellationToken cancellationToken)
+            => await Application.ExtractDocument(input.Document, input.ConfigType, cancellationToken);
 
-            // Set a timeout on the execution
-            var task = ExecuteWithTimeout(context, cancellationToken);
-            if (await Task.WhenAny(task, Task.Delay(timeout, cancellationToken)) != task) throw new TimeoutException(Resources.Timeout_Error);
-
-            // Outputs
-            return async (ctx) => {
-                Results.Set(ctx, await task);
-            };
-        }
-
-        private async Task<Document> ExecuteWithTimeout(AsyncCodeActivityContext context, CancellationToken cancellationToken = default)
-        {
-
-            var objectContainer = context.GetFromContext<IObjectContainer>(IndicoScope.ParentContainerPropertyTag);
-            var application = objectContainer.Get<Application>();
-
-            var document = Document.Get(context);
-            var config = ConfigType.Get(context);
-            var extractedDocument = await application.ExtractDocument(document, config, cancellationToken);
-            return extractedDocument;
-        }
-
-        #endregion
+        protected override void SetOutputs(AsyncCodeActivityContext ctx, Document output) => Results.Set(ctx, output);
     }
 }
 

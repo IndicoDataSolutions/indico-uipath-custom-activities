@@ -1,35 +1,18 @@
-using System;
 using System.Activities;
 using System.Threading;
 using System.Threading.Tasks;
+using Indico.RPAActivities.Activities.Activities;
 using Newtonsoft.Json.Linq;
 using Indico.RPAActivities.Activities.Properties;
-using UiPath.Shared.Activities;
 using UiPath.Shared.Activities.Localization;
 using Indico.Types;
-using UiPath.Shared.Activities.Utilities;
 
 namespace Indico.RPAActivities.Activities
 {
     [LocalizedDisplayName(nameof(Resources.SubmissionResult_DisplayName))]
     [LocalizedDescription(nameof(Resources.SubmissionResult_Description))]
-    public class SubmissionResult : ContinuableAsyncCodeActivity
+    public class SubmissionResult : IndicoActivityBase<(int SubmissionId, SubmissionStatus? CheckStatus), JObject>
     {
-        #region Properties
-
-        /// <summary>
-        /// If set, continue executing the remaining activities even if the current activity has failed.
-        /// </summary>
-        [LocalizedCategory(nameof(Resources.Common_Category))]
-        [LocalizedDisplayName(nameof(Resources.ContinueOnError_DisplayName))]
-        [LocalizedDescription(nameof(Resources.ContinueOnError_Description))]
-        public override InArgument<bool> ContinueOnError { get; set; }
-
-        [LocalizedCategory(nameof(Resources.Common_Category))]
-        [LocalizedDisplayName(nameof(Resources.Timeout_DisplayName))]
-        [LocalizedDescription(nameof(Resources.Timeout_Description))]
-        public InArgument<int> TimeoutMS { get; set; } = 60000;
-
         [LocalizedDisplayName(nameof(Resources.SubmissionResult_SubmissionID_DisplayName))]
         [LocalizedDescription(nameof(Resources.SubmissionResult_SubmissionID_Description))]
         [LocalizedCategory(nameof(Resources.Input_Category))]
@@ -45,19 +28,6 @@ namespace Indico.RPAActivities.Activities
         [LocalizedCategory(nameof(Resources.Output_Category))]
         public OutArgument<JObject> Result { get; set; }
 
-        #endregion
-
-
-        #region Constructors
-
-        public SubmissionResult()
-        {
-        }
-
-        #endregion
-
-
-        #region Protected Methods
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
@@ -66,35 +36,13 @@ namespace Indico.RPAActivities.Activities
             base.CacheMetadata(metadata);
         }
 
-        protected override async Task<Action<AsyncCodeActivityContext>> ExecuteAsync(AsyncCodeActivityContext context, CancellationToken cancellationToken)
-        {
-            // Inputs
-            var timeout = TimeoutMS.Get(context);
-            var submissionid = SubmissionID.Get(context);
-            var checkstatus = CheckStatus.Get(context);
+        protected override (int SubmissionId, SubmissionStatus? CheckStatus) GetInputs(AsyncCodeActivityContext ctx) =>
+            (SubmissionID.Get(ctx), CheckStatus.Get(ctx));
 
-            // Set a timeout on the execution
-            var task = ExecuteWithTimeout(context, cancellationToken);
-            if (await Task.WhenAny(task, Task.Delay(timeout, cancellationToken)) != task) throw new TimeoutException(Resources.Timeout_Error);
+        protected override Task<JObject> ExecuteAsync((int SubmissionId, SubmissionStatus? CheckStatus) input, CancellationToken cancellationToken) =>
+            Application.SubmissionResult(input.SubmissionId, input.CheckStatus, cancellationToken);
 
-            // Outputs
-            return async (ctx) => {
-                Result.Set(ctx, await task);
-            };
-        }
-
-        private async Task<JObject> ExecuteWithTimeout(AsyncCodeActivityContext context, CancellationToken cancellationToken = default)
-        {
-            var submissionId = SubmissionID.Get(context);
-            var checkStatus = CheckStatus.Get(context);
-
-            var objectContainer = context.GetFromContext<IObjectContainer>(IndicoScope.ParentContainerPropertyTag);
-            var application = objectContainer.Get<Application>();
-
-            return await application.SubmissionResult(submissionId, checkStatus, cancellationToken);
-        }
-
-        #endregion
+        protected override void SetOutputs(AsyncCodeActivityContext ctx, JObject output) => Result.Set(ctx, output);
     }
 }
 
