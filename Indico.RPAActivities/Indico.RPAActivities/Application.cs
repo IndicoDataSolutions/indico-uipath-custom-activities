@@ -9,6 +9,8 @@ using Indico.RPAActivities.Entity;
 using Indico.Types;
 using Indico.Storage;
 using System.Threading;
+using IndicoV2;
+using IndicoV2.DataSets.Models;
 
 namespace Indico.RPAActivities
 {
@@ -19,6 +21,8 @@ namespace Indico.RPAActivities
         [Obsolete]
         private readonly IndicoClient _clientLegacy;
 
+        private IndicoV2.IndicoClient _client;
+
         #endregion
 
         #region Constructors
@@ -27,33 +31,13 @@ namespace Indico.RPAActivities
         {
             var config = new IndicoConfig(host: host, apiToken: token);
             _clientLegacy = new IndicoClient(config);
+            _client = new IndicoV2.IndicoClient(token, new Uri(host));
         }
 
         #endregion
 
-        public async Task<List<Dataset>> ListDatasets(CancellationToken cancellationToken)
-        {
-            string query = @"
-              query GetDatasets {
-                datasets {
-                  id
-                  name
-                  status
-                  rowCount
-                  numModelGroups
-                  modelGroups {
-                    id
-                  }
-                }
-              }
-            ";
-
-            var request = _clientLegacy.GraphQLRequest(query, "GetDatasets");
-            var result = await request.Call();
-            var datasets = (JArray)result.GetValue("datasets");
-
-            return datasets.ToObject<List<Dataset>>();
-        }
+        public async Task<IEnumerable<IDataSetFull>> ListDatasets(CancellationToken cancellationToken) =>
+            await _client.DataSets().ListFullAsync(cancellationToken);
 
         public async Task<List<Workflow>> ListWorkflows(int datasetId, CancellationToken cancellationToken = default)
         {
