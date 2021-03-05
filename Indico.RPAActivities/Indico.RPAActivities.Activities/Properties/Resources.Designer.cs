@@ -412,7 +412,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Indico Application Host Address.
+        ///   Looks up a localized string similar to Indico Application BaseUrl Address.
         /// </summary>
         public static string IndicoIPA_Host_Description {
             get {

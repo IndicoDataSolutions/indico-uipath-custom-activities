@@ -35,6 +35,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IndicoV2.Tests", "indico-cl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IndicoV2.V1Adapters.Tests", "indico-client-csharp\IndicoV2.V1Adapters.Tests\IndicoV2.V1Adapters.Tests.csproj", "{BD64D7F3-371D-4A1A-B522-4E1F70149CC4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Indico.RPAActivities.IntegrationTests", "Indico.RPAActivities.IntegrationTests\Indico.RPAActivities.IntegrationTests.csproj", "{BA50C5C3-35C0-4988-9437-D3200C5CEA49}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Shared\UiPath.Shared.Activities\UiPath.Shared.Activities.projitems*{4546856d-ea50-45c6-9419-eeeacb5a80aa}*SharedItemsImports = 13
@@ -91,6 +93,10 @@ Global
 		{BD64D7F3-371D-4A1A-B522-4E1F70149CC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD64D7F3-371D-4A1A-B522-4E1F70149CC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD64D7F3-371D-4A1A-B522-4E1F70149CC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA50C5C3-35C0-4988-9437-D3200C5CEA49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA50C5C3-35C0-4988-9437-D3200C5CEA49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA50C5C3-35C0-4988-9437-D3200C5CEA49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA50C5C3-35C0-4988-9437-D3200C5CEA49}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +115,7 @@ Global
 		{4507660A-35E3-44EC-ADFB-59F946918D27} = {3701D342-31F5-43EB-82C0-19CB03B83FD2}
 		{3DB908E9-9ACD-4D79-B58E-E0D6EF471A34} = {3701D342-31F5-43EB-82C0-19CB03B83FD2}
 		{BD64D7F3-371D-4A1A-B522-4E1F70149CC4} = {3701D342-31F5-43EB-82C0-19CB03B83FD2}
+		{BA50C5C3-35C0-4988-9437-D3200C5CEA49} = {48DE06B4-1D5A-4D7B-837C-56EBDB9FDC80}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AB6B0D92-AB63-4156-A537-B946B44D2A53}

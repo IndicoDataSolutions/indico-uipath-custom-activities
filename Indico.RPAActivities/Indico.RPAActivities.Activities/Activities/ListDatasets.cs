@@ -1,16 +1,11 @@
-using System;
 using System.Activities;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
-using UiPath.Shared.Activities.Utilities;
 using Indico.RPAActivities.Activities.Activities;
-using System.Linq;
 using Indico.RPAActivities.Activities.Properties;
-using Indico.RPAActivities.Entity;
 using IndicoV2.DataSets.Models;
-using UiPath.Shared.Activities;
 using UiPath.Shared.Activities.Localization;
 
 namespace Indico.RPAActivities.Activities
@@ -22,10 +17,7 @@ namespace Indico.RPAActivities.Activities
         [LocalizedDisplayName(nameof(Resources.ListDatasets_Datasets_DisplayName))]
         [LocalizedDescription(nameof(Resources.ListDatasets_Datasets_Description))]
         [LocalizedCategory(nameof(Resources.Output_Category))]
-        public OutArgument<List<Dataset>> Datasets { get; set; }
-
-
-        
+        public OutArgument<List<IDataSetFull>> Datasets { get; set; }
         
         protected override bool GetInputs(AsyncCodeActivityContext ctx) => true; // no input, using dummy bool
 

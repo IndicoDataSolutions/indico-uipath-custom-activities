@@ -27,11 +27,12 @@ namespace Indico.RPAActivities
 
         #region Constructors
 
-        public Application(string token, string host)
+        public Application(string token, string baseUrlString)
         {
-            var config = new IndicoConfig(host: host, apiToken: token);
+            var baseUrl = new Uri(baseUrlString);
+            var config = new IndicoConfig(host: baseUrl.Host, apiToken: token);
             _clientLegacy = new IndicoClient(config);
-            _client = new IndicoV2.IndicoClient(token, new Uri(host));
+            _client = new IndicoV2.IndicoClient(token,  baseUrl);
         }
 
         #endregion

@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.13.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.1" />
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\indico-client-csharp\IndicoV2.Abstractions\IndicoV2.Abstractions.csproj" />
+    <ProjectReference Include="..\Indico.RPAActivities\Indico.RPAActivities.Activities\Indico.RPAActivities.Activities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Activities" />
+  </ItemGroup>
+
+</Project>

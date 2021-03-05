@@ -27,7 +27,7 @@ namespace Indico.RPAActivities.Activities
         [LocalizedDisplayName(nameof(Resources.IndicoScope_Host_DisplayName))]
         [LocalizedDescription(nameof(Resources.IndicoScope_Host_Description))]
         [LocalizedCategory(nameof(Resources.Input_Category))]
-        public InArgument<string> Host { get; set; }
+        public InArgument<string> BaseUrl { get; set; }
 
         [LocalizedDisplayName(nameof(Resources.IndicoScope_Token_DisplayName))]
         [LocalizedDescription(nameof(Resources.IndicoScope_Token_Description))]
@@ -54,16 +54,16 @@ namespace Indico.RPAActivities.Activities
 
         protected override void CacheMetadata(NativeActivityMetadata metadata)
         {
-            if (Host == null) metadata.AddValidationError(string.Format(Resources.ValidationValue_Error, nameof(Host)));
-            if (Token == null) metadata.AddValidationError(string.Format(Resources.ValidationValue_Error, nameof(Token)));
-
             base.CacheMetadata(metadata);
+
+            if (BaseUrl == null) metadata.AddValidationError(string.Format(Resources.ValidationValue_Error, nameof(BaseUrl)));
+            if (Token == null) metadata.AddValidationError(string.Format(Resources.ValidationValue_Error, nameof(Token)));
         }
 
         protected override void Execute(NativeActivityContext context)
         {
             // Inputs
-            string host = Host.Get(context);
+            string host = BaseUrl.Get(context);
             string token = Token.Get(context);
             Application application = new Application(token, host);
             _objectContainer.Add(application);

@@ -186,11 +186,11 @@
     <comment>activity description</comment>
   </data>
   <data name="IndicoIPA_Host_DisplayName" xml:space="preserve">
-    <value>host</value>
+    <value>baseUrl</value>
     <comment>property name</comment>
   </data>
   <data name="IndicoIPA_Host_Description" xml:space="preserve">
-    <value>Indico Application Host Address</value>
+    <value>Indico Application BaseUrl Address</value>
     <comment>property description</comment>
   </data>
   <data name="IndicoIPA_Token_DisplayName" xml:space="preserve">
@@ -226,11 +226,11 @@
     <comment>activity description</comment>
   </data>
   <data name="IndicoScope_Host_DisplayName" xml:space="preserve">
-    <value>host</value>
+    <value>baseUrl</value>
     <comment>property name</comment>
   </data>
   <data name="IndicoScope_Host_Description" xml:space="preserve">
-    <value>indico host url</value>
+    <value>indico baseUrl url</value>
     <comment>property description</comment>
   </data>
   <data name="IndicoScope_Token_DisplayName" xml:space="preserve">

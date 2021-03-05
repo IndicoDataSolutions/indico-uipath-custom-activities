@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Activities;
+using System.CodeDom;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
@@ -24,24 +26,22 @@ namespace UiPath.Shared.Activities.Tests.RuntimeSimple
         private FakeActivity _fakeActivity;
 
         [SetUp]
-        public void SetUp() => _invoker = new WorkflowInvoker((_fakeActivity = new FakeActivity()));
+        public void SetUp() => _invoker = new WorkflowInvoker(_fakeActivity = new FakeActivity());
 
         [Test]
         public void Invoke_ShouldReturnObject()
         {
             // Arrange
             var inputs = new object();
-            object outputs = null;
 
             _fakeActivity.GetInputsHandler = _ => inputs;
             _fakeActivity.ExecuteAsyncHandler = (inParams, ct) => Task.FromResult(inParams);
-            _fakeActivity.SetOutputsHandler = (context, o) => outputs = o;
 
             // Act
             var result = _invoker.Invoke();
 
             // Assert
-            outputs.Should().Be(inputs);
+            result.Single().Value.Should().Be(inputs);
         }
 
         [Theory]
@@ -105,10 +105,11 @@ namespace UiPath.Shared.Activities.Tests.RuntimeSimple
 
         private class FakeActivity : TaskActivity<object, object>
         {
+            public OutArgument<object> OutArg { get; set; }
             public Action<AsyncCodeActivityContext> InitHandler { get; set; } = _ => { };
             public Func<AsyncCodeActivityContext, object> GetInputsHandler { get; set; } = _ => new object();
             public Func<object, CancellationToken, Task<object>> ExecuteAsyncHandler { get; set; } = (inputs, _) => Task.FromResult(inputs);
-            public Action<AsyncCodeActivityContext, object> SetOutputsHandler { get; set; } = (_, o) => { };
+            public Action<AsyncCodeActivityContext, object> SetOutputsHandler { get; set; } = (ctx, o) => { };
 
             protected override void Init(AsyncCodeActivityContext context)
             {
@@ -122,8 +123,11 @@ namespace UiPath.Shared.Activities.Tests.RuntimeSimple
             protected override Task<object> ExecuteAsync(object input, CancellationToken cancellationToken) =>
                 ExecuteAsyncHandler(input, cancellationToken);
 
-            protected override void SetOutputs(AsyncCodeActivityContext ctx, object output) =>
+            protected override void SetOutputs(AsyncCodeActivityContext ctx, object output)
+            {
+                OutArg.Set(ctx, output);
                 SetOutputsHandler(ctx, output);
+            }
         }
     }
 }
