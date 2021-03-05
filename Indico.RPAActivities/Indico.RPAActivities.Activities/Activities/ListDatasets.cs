@@ -25,10 +25,7 @@ namespace Indico.RPAActivities.Activities
         public OutArgument<List<Dataset>> Datasets { get; set; }
 
 
-        public ListDatasets()
-        {
-            Constraints.Add(ActivityConstraints.HasParentType<ListDatasets, IndicoScope>(string.Format(Resources.ValidationScope_Error, Resources.IndicoScope_DisplayName)));
-        }
+        
         
         protected override bool GetInputs(AsyncCodeActivityContext ctx) => true; // no input, using dummy bool
 

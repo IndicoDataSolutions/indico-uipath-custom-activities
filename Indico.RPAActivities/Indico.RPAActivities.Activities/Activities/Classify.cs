@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Indico.RPAActivities.Activities.Activities;
 using Indico.RPAActivities.Activities.Properties;
-using UiPath.Shared.Activities;
 using UiPath.Shared.Activities.Localization;
 
 namespace Indico.RPAActivities.Activities
@@ -37,12 +36,6 @@ namespace Indico.RPAActivities.Activities
         [LocalizedDescription(nameof(Resources.Classify_Results_Description))]
         [LocalizedCategory(nameof(Resources.Output_Category))]
         public OutArgument<List<Dictionary<string, double>>> Results { get; set; }
-
-
-        public Classify()
-        {
-            Constraints.Add(ActivityConstraints.HasParentType<Classify, IndicoScope>(string.Format(Resources.ValidationScope_Error, Resources.IndicoScope_DisplayName)));
-        }
 
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)

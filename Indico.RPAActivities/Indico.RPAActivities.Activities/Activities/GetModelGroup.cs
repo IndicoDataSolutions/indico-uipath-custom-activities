@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Indico.Entity;
 using Indico.RPAActivities.Activities.Activities;
 using Indico.RPAActivities.Activities.Properties;
-using UiPath.Shared.Activities;
 using UiPath.Shared.Activities.Localization;
 
 namespace Indico.RPAActivities.Activities
@@ -22,13 +21,6 @@ namespace Indico.RPAActivities.Activities
         [LocalizedDescription(nameof(Resources.GetModelGroup_ModelGroupData_Description))]
         [LocalizedCategory(nameof(Resources.Output_Category))]
         public OutArgument<ModelGroup> ModelGroupData { get; set; }
-
-
-        public GetModelGroup()
-        {
-            Constraints.Add(ActivityConstraints.HasParentType<GetModelGroup, IndicoScope>(string.Format(Resources.ValidationScope_Error, Resources.IndicoScope_DisplayName)));
-        }
-
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {

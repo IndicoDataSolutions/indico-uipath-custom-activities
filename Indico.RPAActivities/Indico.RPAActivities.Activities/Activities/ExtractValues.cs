@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Indico.RPAActivities.Activities.Activities;
 using Indico.RPAActivities.Activities.Properties;
 using Indico.RPAActivities.Entity;
-using UiPath.Shared.Activities;
 using UiPath.Shared.Activities.Localization;
 
 namespace Indico.RPAActivities.Activities
@@ -29,13 +28,7 @@ namespace Indico.RPAActivities.Activities
         [LocalizedCategory(nameof(Resources.Output_Category))]
         public OutArgument<List<List<Extraction>>> Results { get; set; }
 
-
-        public ExtractValues()
-        {
-            Constraints.Add(ActivityConstraints.HasParentType<ExtractValues, IndicoScope>(string.Format(Resources.ValidationScope_Error, Resources.IndicoScope_DisplayName)));
-        }
-
-
+        
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
             if (Text == null) metadata.AddValidationError(string.Format(Resources.ValidationValue_Error, nameof(Text)));

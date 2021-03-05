@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Indico.RPAActivities.Activities.Activities;
 using Indico.RPAActivities.Activities.Properties;
 using Indico.RPAActivities.Entity;
-using UiPath.Shared.Activities;
 using UiPath.Shared.Activities.Localization;
 
 namespace Indico.RPAActivities.Activities
@@ -27,12 +26,6 @@ namespace Indico.RPAActivities.Activities
         [LocalizedDescription(nameof(Resources.DocumentExtraction_Results_Description))]
         [LocalizedCategory(nameof(Resources.Output_Category))]
         public OutArgument<Document> Results { get; set; }
-
-
-        public DocumentExtraction()
-        {
-            Constraints.Add(ActivityConstraints.HasParentType<DocumentExtraction, IndicoScope>(string.Format(Resources.ValidationScope_Error, Resources.IndicoScope_DisplayName)));
-        }
 
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
