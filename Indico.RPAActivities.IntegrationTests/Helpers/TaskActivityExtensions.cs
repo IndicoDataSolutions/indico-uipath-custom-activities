@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Indico.RPAActivities.Activities;
 using IndicoV2.DataSets.Models;
+using IndicoV2.Workflows.Models;
 using UiPath.Shared.Activities.RuntimeSimple;
 
 namespace Indico.RPAActivities.IntegrationTests.Helpers
@@ -17,6 +18,9 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
 
         public static List<IDataSetFull> Invoke(this ListDatasets listDataSetsActivity) =>
             listDataSetsActivity.Invoke<ListDatasets, bool, List<IDataSetFull>>((lds, output) => lds.Datasets = output);
+
+        public static List<IWorkflow> Invoke(this ListWorkflows listWorkflowsActivity) =>
+            listWorkflowsActivity.Invoke<ListWorkflows, int, List<IWorkflow>>((a, output) => a.Workflows = output);
 
         public static TOutput Invoke<TActivity, TInput, TOutput>(this TActivity activity, Action<TActivity, OutArgument<TOutput>> setOutput)
             where TActivity : TaskActivity<TInput, TOutput>
@@ -35,6 +39,8 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
 
             indicoScope.Body.Handler = activity;
             setOutput(activity, new OutArgument<TOutput>(outVar));
+
+            const string outArgName = "OutArg";
             
             var root = new DynamicActivity
             {
@@ -54,7 +60,7 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
                     },
                     new DynamicActivityProperty
                     {
-                        Name = nameof(ListDatasets.Datasets),
+                        Name = outArgName ,
                         Type = outArg.GetType(),
                         Value = outArg,
                     }
@@ -65,10 +71,10 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
                     Activities =
                     {
                         indicoScope,
-                        new Assign<List<IDataSetFull>>()
+                        new Assign<TOutput>()
                         {
                             Value = outVar,
-                            To = new ArgumentReference<List<IDataSetFull>>(nameof(ListDatasets.Datasets)),
+                            To = new ArgumentReference<TOutput>(outArgName),
                         }
                     },
                 },

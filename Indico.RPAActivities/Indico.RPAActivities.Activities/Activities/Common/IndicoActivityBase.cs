@@ -12,7 +12,7 @@ namespace Indico.RPAActivities.Activities.Activities
 
         protected IndicoActivityBase()
         {
-            Constraints.Add(ActivityConstraints.HasParentType<ListDatasets, IndicoScope>(string.Format(Resources.ValidationScope_Error, Resources.IndicoScope_DisplayName)));
+            Constraints.Add(ActivityConstraints.HasParentType<IndicoActivityBase<TInput, TOutput>, IndicoScope>(string.Format(Resources.ValidationScope_Error, Resources.IndicoScope_DisplayName)));
         }
 
         protected override void Init(AsyncCodeActivityContext context)

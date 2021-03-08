@@ -11,6 +11,7 @@ using Indico.Storage;
 using System.Threading;
 using IndicoV2;
 using IndicoV2.DataSets.Models;
+using IndicoV2.Workflows.Models;
 
 namespace Indico.RPAActivities
 {
@@ -40,15 +41,8 @@ namespace Indico.RPAActivities
         public async Task<IEnumerable<IDataSetFull>> ListDatasets(CancellationToken cancellationToken) =>
             await _client.DataSets().ListFullAsync(cancellationToken);
 
-        public async Task<List<Workflow>> ListWorkflows(int datasetId, CancellationToken cancellationToken = default)
-        {
-            var listWorkflows = new ListWorkflows(_clientLegacy)
-            {
-                DatasetIds = new List<int> { datasetId }
-            };
-
-            return await listWorkflows.Exec(cancellationToken);
-        }
+        public async Task<IEnumerable<IWorkflow>> ListWorkflows(int datasetId, CancellationToken cancellationToken = default) =>
+            await _client.Workflows().ListAsync(datasetId, cancellationToken);
 
         public async Task<JObject> SubmitReview(int submissionId, JObject changes, bool rejected, bool? forceComplete, CancellationToken cancellationToken = default)
         {
