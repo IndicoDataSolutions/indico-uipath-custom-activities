@@ -33,7 +33,7 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
 
             IndicoScope indicoScope = new IndicoScope()
             {
-                BaseUrl = new InArgument<string>(ctx => inBaseUrl.Get(ctx)),
+                Host = new InArgument<string>(ctx => inBaseUrl.Get(ctx)),
                 Token = new InArgument<string>(ctx => inToken.Get(ctx)),
             };
 
@@ -54,7 +54,7 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
                     },
                     new DynamicActivityProperty
                     {
-                        Name = nameof(IndicoScope.BaseUrl),
+                        Name = nameof(IndicoScope.Host),
                         Value = inBaseUrl,
                         Type = inBaseUrl.GetType(),
                     },
@@ -90,6 +90,6 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
         }
 
         public static IDictionary<string, object> GetScopeParams() => new Dictionary<string, object>
-            {{nameof(IndicoScope.BaseUrl), BaseUrl}, {nameof(IndicoScope.Token), ApiToken}};
+            {{nameof(IndicoScope.Host), BaseUrl}, {nameof(IndicoScope.Token), ApiToken}};
     }
 }
