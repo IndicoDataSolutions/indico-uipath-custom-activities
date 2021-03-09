@@ -28,7 +28,6 @@ namespace Indico.RPAActivities.Activities
         [LocalizedDescription(nameof(Resources.IndicoScope_Host_Description))]
         [LocalizedCategory(nameof(Resources.Input_Category))]
         [RequiredArgument]
-        // TODO: rename to BaseUrl
         public InArgument<string> Host { get; set; }
 
         [LocalizedDisplayName(nameof(Resources.IndicoScope_Token_DisplayName))]

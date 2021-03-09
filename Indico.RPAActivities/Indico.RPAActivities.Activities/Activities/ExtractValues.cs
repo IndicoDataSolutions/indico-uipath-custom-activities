@@ -28,7 +28,6 @@ namespace Indico.RPAActivities.Activities
         [LocalizedCategory(nameof(Resources.Output_Category))]
         public OutArgument<List<List<Extraction>>> Results { get; set; }
 
-        
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
             if (Text == null) metadata.AddValidationError(string.Format(Resources.ValidationValue_Error, nameof(Text)));

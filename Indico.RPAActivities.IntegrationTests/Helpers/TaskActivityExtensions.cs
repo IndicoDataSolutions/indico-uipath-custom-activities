@@ -27,20 +27,16 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
         {
             var inToken = new InArgument<string>("inToken");
             var inBaseUrl = new InArgument<string>("inBaseUrl");
-
             var outVar = new Variable<TOutput>("outVar");
-            var outArg = new OutArgument<TOutput>();
+            const string outArgName = "OutArg";
 
-            IndicoScope indicoScope = new IndicoScope()
+            var indicoScope = new IndicoScope()
             {
                 Host = new InArgument<string>(ctx => inBaseUrl.Get(ctx)),
                 Token = new InArgument<string>(ctx => inToken.Get(ctx)),
             };
-
             indicoScope.Body.Handler = activity;
             setOutput(activity, new OutArgument<TOutput>(outVar));
-
-            const string outArgName = "OutArg";
             
             var root = new DynamicActivity
             {
@@ -61,8 +57,8 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
                     new DynamicActivityProperty
                     {
                         Name = outArgName ,
-                        Type = outArg.GetType(),
-                        Value = outArg,
+                        Type = typeof(OutArgument<TOutput>),
+                        Value = new OutArgument<TOutput>(),
                     }
                 },
                 Implementation = () => new Sequence
@@ -79,8 +75,6 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
                     },
                 },
             };
-
-
 
             var resultDictionary = WorkflowInvoker.Invoke(root, GetScopeParams());
 
