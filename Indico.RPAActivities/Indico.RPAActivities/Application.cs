@@ -33,7 +33,7 @@ namespace Indico.RPAActivities
             var baseUrl = new Uri(baseUrlString);
             var config = new IndicoConfig(host: baseUrl.Host, apiToken: token);
             _clientLegacy = new IndicoClient(config);
-            _client = new IndicoV2.IndicoClient(token,  baseUrl);
+            _client = new IndicoV2.IndicoClient(token, baseUrl);
         }
 
         #endregion
@@ -84,19 +84,23 @@ namespace Indico.RPAActivities
             return doc;
         }
 
-        public async Task<List<int>> WorkflowSubmission(int workflowId, List<string> files, List<string> urls, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<int>> WorkflowSubmission(int workflowId, IEnumerable<string> files, IEnumerable<string> urls, CancellationToken cancellationToken = default)
         {
-            var workflowSubmission = new WorkflowSubmission(_clientLegacy)
-            {
-                WorkflowId = workflowId,
-                Files = files,
-                Urls = urls
-            };
+            IEnumerable<int> result = null;
 
-            return await workflowSubmission.Exec(cancellationToken);
+            if (files != null)
+            {
+                result = await _client.Submissions().CreateAsync(workflowId, files, cancellationToken);
+            }
+            else if (urls != null)
+            {
+                result = await _client.Submissions().CreateAsync(workflowId, urls.Select(u => new Uri(u)).ToList());
+            }
+
+            return result;
         }
 
-        public async Task<JObject> SubmissionResult(int submissionId, SubmissionStatus? checkStatus, CancellationToken cancellationToken = default)
+        public async Task<JObject> SubmissionResult(int submissionId, Types.SubmissionStatus? checkStatus, CancellationToken cancellationToken = default)
         {
             var submissionResult = new SubmissionResult(_clientLegacy)
             {
