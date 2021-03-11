@@ -4,14 +4,15 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Indico.Entity;
 using Indico.Mutation;
-using Indico.Query;
 using Indico.RPAActivities.Entity;
-using Indico.Types;
 using Indico.Storage;
 using System.Threading;
 using IndicoV2;
 using IndicoV2.DataSets.Models;
 using IndicoV2.Workflows.Models;
+using System.Linq;
+using IndicoV2.Submissions.Models;
+using SubmissionFilterV2 = IndicoV2.Submissions.Models.SubmissionFilter;
 
 namespace Indico.RPAActivities
 {
@@ -121,21 +122,8 @@ namespace Indico.RPAActivities
             return blob.AsJSONObject();
         }
 
-        public async Task<List<Submission>> ListSubmissions(List<int> submissionIds, List<int> workflowIds, SubmissionFilter filters, int limit, CancellationToken cancellationToken = default)
-        {
-            var listSubmissions = new ListSubmissions(_clientLegacy)
-            {
-                SubmissionIds = submissionIds,
-                WorkflowIds = workflowIds,
-            };
-
-            if (filters != null)
-                listSubmissions.Filters = filters;
-            if (limit > 0)
-                listSubmissions.Limit = limit;
-
-            return await listSubmissions.Exec();
-        }
+        public async Task<List<ISubmission>> ListSubmissions(List<int> submissionIds, List<int> workflowIds, SubmissionFilterV2 filters, int limit, CancellationToken cancellationToken = default) 
+            => (await _client.Submissions().ListAsync(submissionIds, workflowIds, filters, limit, cancellationToken)).ToList();
 
         public async Task<List<Dictionary<string, double>>> Classify(List<string> values, int modelGroup, CancellationToken cancellationToken = default)
         {
