@@ -21,6 +21,11 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
 
         public static List<IWorkflow> Invoke(this ListWorkflows listWorkflowsActivity) =>
             listWorkflowsActivity.Invoke<ListWorkflows, int, List<IWorkflow>>((a, output) => a.Workflows = output);
+        
+        public static List<int> Invoke(this WorkflowSubmission workflowSubmissionActivity) =>
+            workflowSubmissionActivity
+            .Invoke<WorkflowSubmission, (int WorkflowId, List<string> FilePaths, List<string> Urls), List<int>>((a, output) 
+                => a.SubmissionIDs = output);
 
         public static TOutput Invoke<TActivity, TInput, TOutput>(this TActivity activity, Action<TActivity, OutArgument<TOutput>> setOutput)
             where TActivity : TaskActivity<TInput, TOutput>
