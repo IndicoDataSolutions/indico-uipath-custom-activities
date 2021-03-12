@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace Indico.RPAActivities.IntegrationTests.Activities
 {
-    public class SubmissionResult_ShouldReturn_Submission
+    public class SubmissionResultTests
     {
         private TestDataHelper _testData;
 

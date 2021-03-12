@@ -28,8 +28,11 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
         public static List<ISubmission> Invoke(this ListSubmissions listSubmissions) =>
             listSubmissions.Invoke<ListSubmissions, List<ISubmission>>((a, outArg) => a.Submissions = outArg);
 
-        public static JObject Invoke(this SubmissionResult submissionResultAction) =>
-            submissionResultAction.Invoke<SubmissionResult, JObject>((a, outArg) => a.Result = outArg);
+        public static JObject Invoke(this SubmissionResult submissionResultActivity) =>
+            submissionResultActivity.Invoke<SubmissionResult, JObject>((a, outArg) => a.Result = outArg);
+
+        public static JObject Invoke(this SubmitReview submitReviewActivity) =>
+            submitReviewActivity.Invoke<SubmitReview, JObject>((a, outArg) => a.Result = outArg);
 
         public static TOutput Invoke<TActivity, TOutput>(this TActivity activity, Action<TActivity, OutArgument<TOutput>> setOutput)
             where TActivity : Activity

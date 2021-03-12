@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Indico.Entity;
-using Indico.Mutation;
 using Indico.RPAActivities.Entity;
 using System.Threading;
 using IndicoV2;
@@ -22,7 +21,7 @@ namespace Indico.RPAActivities
         [Obsolete]
         private readonly IndicoClient _clientLegacy;
 
-        private IndicoV2.IndicoClient _client;
+        private readonly IndicoV2.IndicoClient _client;
 
 
         public Application(string token, string baseUrlString)
@@ -40,17 +39,14 @@ namespace Indico.RPAActivities
         public async Task<IEnumerable<IWorkflow>> ListWorkflows(int datasetId, CancellationToken cancellationToken = default) =>
             await _client.Workflows().ListAsync(datasetId, cancellationToken);
 
-        public async Task<JObject> SubmitReview(int submissionId, JObject changes, bool rejected, bool? forceComplete, CancellationToken cancellationToken = default)
+        public async Task<JObject> SubmitReview(int submissionId, JObject changes, bool rejected, bool? forceComplete,
+            CancellationToken cancellationToken = default)
         {
-            var submitReview = new SubmitReview(_clientLegacy)
-            {
-                SubmissionId = submissionId,
-                Changes = changes,
-                Rejected = rejected,
-                ForceComplete = forceComplete
-            };
-            var job = await submitReview.Exec(cancellationToken);
-            return await job.Result();
+            var jobId = await _client.Reviews()
+                .SubmitReviewAsync(submissionId, changes, rejected, forceComplete, cancellationToken);
+            var jobResult = (JObject) await _client.JobAwaiter().WaitReadyAsync(jobId, _checkInterval, cancellationToken);
+
+            return jobResult;
         }
 
         public async Task<ModelGroup> GetModelGroup(int mgId, CancellationToken cancellationToken)
