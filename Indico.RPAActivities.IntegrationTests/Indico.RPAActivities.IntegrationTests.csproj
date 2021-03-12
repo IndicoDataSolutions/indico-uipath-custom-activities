@@ -27,4 +27,10 @@
     <Folder Include="Helpers\Files\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Helpers\Files\workflow-sample.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

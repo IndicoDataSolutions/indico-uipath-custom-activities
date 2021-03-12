@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using Indico.RPAActivities.Activities;
 
 namespace Indico.RPAActivities.IntegrationTests.Helpers
@@ -12,7 +14,9 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
 
         public IEnumerable<string> GetWorkflowSubmissionFilePaths()
         {
-            return new List<string> { "./Helpers/Files/workflow-sample.pdf" };
+            var root = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+            yield return Path.Combine(root, "./Helpers/Files/workflow-sample.pdf");
         }
 
         public IEnumerable<string> GetWorkflowSubmissionUris()

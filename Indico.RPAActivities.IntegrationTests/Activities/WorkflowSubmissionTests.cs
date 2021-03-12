@@ -1,5 +1,4 @@
 ﻿using System.Activities;
-using System.Activities.Expressions;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
@@ -26,15 +25,14 @@ namespace Indico.RPAActivities.IntegrationTests.Activities
         }
 
         [Test]
-        public void WorkflowSubmission_ShouldReturnListOfIds_WhenFilepathsPosted()
-        {
-            //new InArgument<List<string>>(ExpressionServices.Convert((env) => _filepaths))
-            new WorkflowSubmission { WorkflowID = _workflowId, FilePaths = new InArgument<List<string>>(ExpressionServices.Convert((env) => _filepaths)) }.Invoke().Should().HaveSameCount(_filepaths);
-        }
+        public void WorkflowSubmission_ShouldReturnListOfIds_WhenFilepathsPosted() => new WorkflowSubmission
+                {WorkflowID = _workflowId, FilePaths = new InArgument<List<string>>(ctx => _filepaths)}.Invoke()
+            .Should()
+            .HaveSameCount(_filepaths);
 
         [Test]
-        public void WorkflowSubmission_ShouldReturnListOfIds_WhenUrisPosted() => 
-            new WorkflowSubmission { WorkflowID = _workflowId, Urls = new InArgument<List<string>>(_uris.ToList()) }
+        public void WorkflowSubmission_ShouldReturnListOfIds_WhenUrisPosted() =>
+            new WorkflowSubmission { WorkflowID = _workflowId, Urls = new InArgument<List<string>>(ctx => _uris.ToList()) }
             .Invoke().Should().HaveSameCount(_uris);
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Activities;
-using System.Activities.Expressions;
-using System.Activities.Statements;
 using System.Collections.Generic;
 using System.Linq;
 using Indico.RPAActivities.Activities;
@@ -21,10 +19,10 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
 
         public static List<IWorkflow> Invoke(this ListWorkflows listWorkflowsActivity) =>
             listWorkflowsActivity.Invoke<ListWorkflows, int, List<IWorkflow>>((a, output) => a.Workflows = output);
-        
+
         public static List<int> Invoke(this WorkflowSubmission workflowSubmissionActivity) =>
             workflowSubmissionActivity
-            .Invoke<WorkflowSubmission, (int WorkflowId, List<string> FilePaths, List<string> Urls), List<int>>((a, output) 
+            .Invoke<WorkflowSubmission, (int WorkflowId, List<string> FilePaths, List<string> Urls), List<int>>((a, output)
                 => a.SubmissionIDs = output);
 
         public static TOutput Invoke<TActivity, TInput, TOutput>(this TActivity activity, Action<TActivity, OutArgument<TOutput>> setOutput)
@@ -32,17 +30,16 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
         {
             var inToken = new InArgument<string>("inToken");
             var inBaseUrl = new InArgument<string>("inBaseUrl");
-            var outVar = new Variable<TOutput>("outVar");
-            const string outArgName = "OutArg";
 
-            var indicoScope = new IndicoScope()
+            var indicoScope = new IndicoScope
             {
                 Host = new InArgument<string>(ctx => inBaseUrl.Get(ctx)),
                 Token = new InArgument<string>(ctx => inToken.Get(ctx)),
+                Body = { Handler = activity },
             };
-            indicoScope.Body.Handler = activity;
-            setOutput(activity, new OutArgument<TOutput>(outVar));
-            
+
+            OutArgument<TOutput> outArg = new OutArgument<TOutput>();
+
             var root = new DynamicActivity
             {
                 Properties =
@@ -61,25 +58,14 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
                     },
                     new DynamicActivityProperty
                     {
-                        Name = outArgName ,
+                        Name = "OutArg" ,
                         Type = typeof(OutArgument<TOutput>),
-                        Value = new OutArgument<TOutput>(),
+                        Value = outArg,
                     }
                 },
-                Implementation = () => new Sequence
-                {
-                    Variables = { outVar },
-                    Activities =
-                    {
-                        indicoScope,
-                        new Assign<TOutput>()
-                        {
-                            Value = outVar,
-                            To = new ArgumentReference<TOutput>(outArgName),
-                        }
-                    },
-                },
+                Implementation = () => indicoScope
             };
+            setOutput(activity, new OutArgument<TOutput>(ctx => outArg.Get(ctx)));
 
             var resultDictionary = WorkflowInvoker.Invoke(root, GetScopeParams());
 
