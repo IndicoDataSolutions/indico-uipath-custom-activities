@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Indico.RPAActivities.Activities;
 using IndicoV2.DataSets.Models;
+using IndicoV2.Submissions.Models;
 using IndicoV2.Workflows.Models;
-using UiPath.Shared.Activities.RuntimeSimple;
 
 namespace Indico.RPAActivities.IntegrationTests.Helpers
 {
@@ -15,18 +15,20 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
         private static string ApiToken => Environment.GetEnvironmentVariable("INDICO_TOKEN");
 
         public static List<IDataSetFull> Invoke(this ListDatasets listDataSetsActivity) =>
-            listDataSetsActivity.Invoke<ListDatasets, bool, List<IDataSetFull>>((lds, output) => lds.Datasets = output);
+            listDataSetsActivity.Invoke<ListDatasets, List<IDataSetFull>>((lds, output) => lds.Datasets = output);
 
         public static List<IWorkflow> Invoke(this ListWorkflows listWorkflowsActivity) =>
-            listWorkflowsActivity.Invoke<ListWorkflows, int, List<IWorkflow>>((a, output) => a.Workflows = output);
+            listWorkflowsActivity.Invoke<ListWorkflows, List<IWorkflow>>((a, output) => a.Workflows = output);
 
         public static List<int> Invoke(this WorkflowSubmission workflowSubmissionActivity) =>
             workflowSubmissionActivity
-            .Invoke<WorkflowSubmission, (int WorkflowId, List<string> FilePaths, List<string> Urls), List<int>>((a, output)
-                => a.SubmissionIDs = output);
+                .Invoke<WorkflowSubmission, List<int>>((a, output) => a.SubmissionIDs = output);
 
-        public static TOutput Invoke<TActivity, TInput, TOutput>(this TActivity activity, Action<TActivity, OutArgument<TOutput>> setOutput)
-            where TActivity : TaskActivity<TInput, TOutput>
+        public static List<ISubmission> Invoke(this ListSubmissions listSubmissions) =>
+            listSubmissions.Invoke<ListSubmissions, List<ISubmission>>((a, outArg) => a.Submissions = outArg);
+
+        public static TOutput Invoke<TActivity, TOutput>(this TActivity activity, Action<TActivity, OutArgument<TOutput>> setOutput)
+            where TActivity : Activity
         {
             var inToken = new InArgument<string>("inToken");
             var inBaseUrl = new InArgument<string>("inBaseUrl");

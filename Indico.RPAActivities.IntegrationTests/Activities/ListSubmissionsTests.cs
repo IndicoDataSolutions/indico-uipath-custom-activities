@@ -1,10 +1,7 @@
-﻿using System.Activities;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using FluentAssertions;
 using Indico.RPAActivities.Activities;
 using Indico.RPAActivities.IntegrationTests.Helpers;
-using IndicoV2.Submissions.Models;
 using NUnit.Framework;
 
 namespace Indico.RPAActivities.IntegrationTests.Activities
@@ -14,13 +11,9 @@ namespace Indico.RPAActivities.IntegrationTests.Activities
         [Test]
         public void ListSubmissions_ReturnsSubmissions()
         {
-            var action = new ListSubmissions
-            {
-                Limit = 1
-            };
+            var action = new ListSubmissions { Limit = 1 };
 
-            var result = action.Invoke<ListSubmissions, (List<int> WorkflowIds, List<int> SubmissionIds, SubmissionFilter Filters, int Limit), List<ISubmission>>(
-                (a, outArg) => a.Submissions = outArg);
+            var result = action.Invoke();
 
             result.Count.Should().Be(1);
             var submission = result.Single();
