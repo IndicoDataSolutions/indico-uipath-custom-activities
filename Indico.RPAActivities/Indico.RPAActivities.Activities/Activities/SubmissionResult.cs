@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using Indico.RPAActivities.Activities.Activities;
 using Newtonsoft.Json.Linq;
 using Indico.RPAActivities.Activities.Properties;
+using IndicoV2.Submissions.Models;
 using UiPath.Shared.Activities.Localization;
-using Indico.Types;
 
 namespace Indico.RPAActivities.Activities
 {
@@ -16,6 +16,7 @@ namespace Indico.RPAActivities.Activities
         [LocalizedDisplayName(nameof(Resources.SubmissionResult_SubmissionID_DisplayName))]
         [LocalizedDescription(nameof(Resources.SubmissionResult_SubmissionID_Description))]
         [LocalizedCategory(nameof(Resources.Input_Category))]
+        [RequiredArgument]
         public InArgument<int> SubmissionID { get; set; }
 
         [LocalizedDisplayName(nameof(Resources.SubmissionResult_CheckStatus_DisplayName))]
@@ -27,15 +28,7 @@ namespace Indico.RPAActivities.Activities
         [LocalizedDescription(nameof(Resources.SubmissionResult_Result_Description))]
         [LocalizedCategory(nameof(Resources.Output_Category))]
         public OutArgument<JObject> Result { get; set; }
-
-
-        protected override void CacheMetadata(CodeActivityMetadata metadata)
-        {
-            if (SubmissionID == null) metadata.AddValidationError(string.Format(Resources.ValidationValue_Error, nameof(SubmissionID)));
-
-            base.CacheMetadata(metadata);
-        }
-
+        
         protected override (int SubmissionId, SubmissionStatus? CheckStatus) GetInputs(AsyncCodeActivityContext ctx) =>
             (SubmissionID.Get(ctx), CheckStatus.Get(ctx));
 

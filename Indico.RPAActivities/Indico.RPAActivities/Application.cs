@@ -5,7 +5,6 @@ using Newtonsoft.Json.Linq;
 using Indico.Entity;
 using Indico.Mutation;
 using Indico.RPAActivities.Entity;
-using Indico.Storage;
 using System.Threading;
 using IndicoV2;
 using IndicoV2.DataSets.Models;
@@ -18,16 +17,13 @@ namespace Indico.RPAActivities
 {
     public class Application
     {
-        #region Properties
+        private readonly TimeSpan _checkInterval = TimeSpan.FromSeconds(0.5);
 
         [Obsolete]
         private readonly IndicoClient _clientLegacy;
 
         private IndicoV2.IndicoClient _client;
 
-        #endregion
-
-        #region Constructors
 
         public Application(string token, string baseUrlString)
         {
@@ -37,7 +33,6 @@ namespace Indico.RPAActivities
             _client = new IndicoV2.IndicoClient(token, baseUrl);
         }
 
-        #endregion
 
         public async Task<IEnumerable<IDataSetFull>> ListDatasets(CancellationToken cancellationToken) =>
             await _client.DataSets().ListFullAsync(cancellationToken);
@@ -101,26 +96,10 @@ namespace Indico.RPAActivities
             return result;
         }
 
-        public async Task<JObject> SubmissionResult(int submissionId, Types.SubmissionStatus? checkStatus, CancellationToken cancellationToken = default)
-        {
-            var submissionResult = new SubmissionResult(_clientLegacy)
-            {
-                SubmissionId = submissionId,
-                CheckStatus = checkStatus
-            };
-
-            var job = await submissionResult.Exec(cancellationToken);
-            var result = await job.Result();
-            var resUrl = (string)result.GetValue("url");
-
-            var retrieveBlob = new RetrieveBlob(_clientLegacy)
-            {
-                Url = resUrl
-            };
-
-            var blob = await retrieveBlob.Exec();
-            return blob.AsJSONObject();
-        }
+        public async Task<JObject> SubmissionResult(int submissionId, SubmissionStatus? checkStatus, CancellationToken cancellationToken = default)
+            => checkStatus.HasValue 
+                ? await _client.GetSubmissionResultAwaiter().WaitReady(submissionId, checkStatus.Value, _checkInterval, cancellationToken)
+                : await _client.GetSubmissionResultAwaiter().WaitReady(submissionId, _checkInterval, cancellationToken);
 
         public async Task<List<ISubmission>> ListSubmissions(List<int> submissionIds, List<int> workflowIds, SubmissionFilterV2 filters, int limit, CancellationToken cancellationToken = default) 
             => (await _client.Submissions().ListAsync(submissionIds, workflowIds, filters, limit, cancellationToken)).ToList();

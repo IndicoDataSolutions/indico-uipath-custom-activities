@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Activities;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -21,13 +22,21 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
 
         public IEnumerable<string> GetWorkflowSubmissionUris()
         {
-            return new List<string> 
-            { 
+            return new List<string>
+            {
                 @"https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
                 @"https://www.wmaccess.com/downloads/sample-invoice.pdf"
             };
         }
 
-        
+
+        public int GetSubmissionId() =>
+            new WorkflowSubmission
+            {
+                WorkflowID = GetWorkflowId(),
+                FilePaths = new InArgument<List<string>>(_ => GetWorkflowSubmissionFilePaths().ToList()),
+            }
+                .Invoke()
+                .Single();
     }
 }

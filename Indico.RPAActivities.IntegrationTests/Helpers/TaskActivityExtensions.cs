@@ -6,6 +6,7 @@ using Indico.RPAActivities.Activities;
 using IndicoV2.DataSets.Models;
 using IndicoV2.Submissions.Models;
 using IndicoV2.Workflows.Models;
+using Newtonsoft.Json.Linq;
 
 namespace Indico.RPAActivities.IntegrationTests.Helpers
 {
@@ -26,6 +27,9 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
 
         public static List<ISubmission> Invoke(this ListSubmissions listSubmissions) =>
             listSubmissions.Invoke<ListSubmissions, List<ISubmission>>((a, outArg) => a.Submissions = outArg);
+
+        public static JObject Invoke(this SubmissionResult submissionResultAction) =>
+            submissionResultAction.Invoke<SubmissionResult, JObject>((a, outArg) => a.Result = outArg);
 
         public static TOutput Invoke<TActivity, TOutput>(this TActivity activity, Action<TActivity, OutArgument<TOutput>> setOutput)
             where TActivity : Activity
