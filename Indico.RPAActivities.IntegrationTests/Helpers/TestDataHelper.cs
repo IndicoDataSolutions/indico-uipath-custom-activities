@@ -38,5 +38,7 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
             }
                 .Invoke()
                 .Single();
+
+        public int GetModelGroupId() => new ListDatasets().Invoke().First().ModelGroups.First().Id;
     }
 }
