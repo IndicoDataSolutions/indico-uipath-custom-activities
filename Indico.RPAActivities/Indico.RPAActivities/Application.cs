@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
-using Indico.Entity;
 using Indico.RPAActivities.Entity;
 using System.Threading;
 using IndicoV2;
 using IndicoV2.DataSets.Models;
 using IndicoV2.Workflows.Models;
 using System.Linq;
+using IndicoV2.Models.Models;
 using IndicoV2.Submissions.Models;
 using SubmissionFilterV2 = IndicoV2.Submissions.Models.SubmissionFilter;
 
@@ -44,15 +44,13 @@ namespace Indico.RPAActivities
         {
             var jobId = await _client.Reviews()
                 .SubmitReviewAsync(submissionId, changes, rejected, forceComplete, cancellationToken);
-            var jobResult = (JObject) await _client.JobAwaiter().WaitReadyAsync(jobId, _checkInterval, cancellationToken);
+            var jobResult = (JObject)await _client.JobAwaiter().WaitReadyAsync(jobId, _checkInterval, cancellationToken);
 
             return jobResult;
         }
 
-        public async Task<ModelGroup> GetModelGroup(int mgId, CancellationToken cancellationToken)
-        {
-            return await _clientLegacy.ModelGroupQuery(mgId).Exec(cancellationToken);
-        }
+        public async Task<IModelGroup> GetModelGroup(int modelGroupId, CancellationToken cancellationToken) => 
+            await _client.Models().GetGroup(modelGroupId, cancellationToken);
 
         public async Task<Document> ExtractDocument(string document, string configType, CancellationToken cancellationToken = default)
         {
@@ -93,11 +91,11 @@ namespace Indico.RPAActivities
         }
 
         public async Task<JObject> SubmissionResult(int submissionId, SubmissionStatus? checkStatus, CancellationToken cancellationToken = default)
-            => checkStatus.HasValue 
+            => checkStatus.HasValue
                 ? await _client.GetSubmissionResultAwaiter().WaitReady(submissionId, checkStatus.Value, _checkInterval, cancellationToken)
                 : await _client.GetSubmissionResultAwaiter().WaitReady(submissionId, _checkInterval, cancellationToken);
 
-        public async Task<List<ISubmission>> ListSubmissions(List<int> submissionIds, List<int> workflowIds, SubmissionFilterV2 filters, int limit, CancellationToken cancellationToken = default) 
+        public async Task<List<ISubmission>> ListSubmissions(List<int> submissionIds, List<int> workflowIds, SubmissionFilterV2 filters, int limit, CancellationToken cancellationToken = default)
             => (await _client.Submissions().ListAsync(submissionIds, workflowIds, filters, limit, cancellationToken)).ToList();
 
         public async Task<List<Dictionary<string, double>>> Classify(List<string> values, int modelGroup, CancellationToken cancellationToken = default)

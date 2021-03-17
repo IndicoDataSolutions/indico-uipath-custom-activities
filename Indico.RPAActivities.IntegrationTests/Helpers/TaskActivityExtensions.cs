@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Indico.RPAActivities.Activities;
 using IndicoV2.DataSets.Models;
+using IndicoV2.Models.Models;
 using IndicoV2.Submissions.Models;
 using IndicoV2.Workflows.Models;
 using Newtonsoft.Json.Linq;
@@ -33,6 +34,9 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
 
         public static JObject Invoke(this SubmitReview submitReviewActivity) =>
             submitReviewActivity.Invoke<SubmitReview, JObject>((a, outArg) => a.Result = outArg);
+
+        public static IModelGroup Invoke(this GetModelGroup getModelGroupActivity) =>
+            getModelGroupActivity.Invoke<GetModelGroup, IModelGroup>((a, outArg) => a.ModelGroupData = outArg);
 
         public static TOutput Invoke<TActivity, TOutput>(this TActivity activity, Action<TActivity, OutArgument<TOutput>> setOutput)
             where TActivity : Activity
