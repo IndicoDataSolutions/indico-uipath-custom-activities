@@ -15,6 +15,7 @@ namespace Indico.RPAActivities.Activities
         [LocalizedDisplayName(nameof(Resources.SubmitReview_SubmissionID_DisplayName))]
         [LocalizedDescription(nameof(Resources.SubmitReview_SubmissionID_Description))]
         [LocalizedCategory(nameof(Resources.Input_Category))]
+        [RequiredArgument]
         public InArgument<int> SubmissionID { get; set; }
 
         [LocalizedDisplayName(nameof(Resources.SubmitReview_Changes_DisplayName))]
@@ -36,14 +37,6 @@ namespace Indico.RPAActivities.Activities
         [LocalizedDescription(nameof(Resources.SubmitReview_Result_Description))]
         [LocalizedCategory(nameof(Resources.Output_Category))]
         public OutArgument<JObject> Result { get; set; }
-
-
-        protected override void CacheMetadata(CodeActivityMetadata metadata)
-        {
-            if (SubmissionID == null) metadata.AddValidationError(string.Format(Resources.ValidationValue_Error, nameof(SubmissionID)));
-
-            base.CacheMetadata(metadata);
-        }
         
         protected override (int SubmissionId, JObject Changes, bool Rejected, bool? ForceComplete) GetInputs(AsyncCodeActivityContext ctx)
             => (SubmissionID.Get(ctx), Changes.Get(ctx), Rejected.Get(ctx), ForceComplete.Get(ctx));

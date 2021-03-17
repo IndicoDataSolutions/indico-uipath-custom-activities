@@ -1,6 +1,5 @@
 ﻿using System.Activities;
 using FluentAssertions;
-using Indico.Exception;
 using Indico.RPAActivities.Activities;
 using Indico.RPAActivities.IntegrationTests.Helpers;
 using NUnit.Framework;
@@ -32,8 +31,7 @@ namespace Indico.RPAActivities.IntegrationTests.Activities
         public void ListWorkflows_ShouldThrow_WhenInvalidDataSetId(int invalidDataSetId) =>
             new ListWorkflows {DatasetID = invalidDataSetId}
                 .Invoking(action => action.Invoke())
-                .Should().Throw<GraphQLException>()
-                .WithMessage(
-                    @"1 : http://elnino:5000/api/workflow?dataset_ids=0: {""code"": 403, ""content"": {}, ""error_class"": ""ServiceException"", ""error_type"": ""ForbiddenAccess"", ""message"": ""This user does not have access to this resource""}");
+                .Should()
+                .ThrowAuthorizationException();
     }
 }

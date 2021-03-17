@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Activities;
-using System.Activities.Expressions;
-using System.Activities.Statements;
 using System.Collections.Generic;
 using System.Linq;
 using Indico.RPAActivities.Activities;
 using IndicoV2.DataSets.Models;
+using IndicoV2.Submissions.Models;
 using IndicoV2.Workflows.Models;
-using UiPath.Shared.Activities.RuntimeSimple;
+using Newtonsoft.Json.Linq;
 
 namespace Indico.RPAActivities.IntegrationTests.Helpers
 {
@@ -17,27 +16,39 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
         private static string ApiToken => Environment.GetEnvironmentVariable("INDICO_TOKEN");
 
         public static List<IDataSetFull> Invoke(this ListDatasets listDataSetsActivity) =>
-            listDataSetsActivity.Invoke<ListDatasets, bool, List<IDataSetFull>>((lds, output) => lds.Datasets = output);
+            listDataSetsActivity.Invoke<ListDatasets, List<IDataSetFull>>((lds, output) => lds.Datasets = output);
 
         public static List<IWorkflow> Invoke(this ListWorkflows listWorkflowsActivity) =>
-            listWorkflowsActivity.Invoke<ListWorkflows, int, List<IWorkflow>>((a, output) => a.Workflows = output);
+            listWorkflowsActivity.Invoke<ListWorkflows, List<IWorkflow>>((a, output) => a.Workflows = output);
 
-        public static TOutput Invoke<TActivity, TInput, TOutput>(this TActivity activity, Action<TActivity, OutArgument<TOutput>> setOutput)
-            where TActivity : TaskActivity<TInput, TOutput>
+        public static List<int> Invoke(this WorkflowSubmission workflowSubmissionActivity) =>
+            workflowSubmissionActivity
+                .Invoke<WorkflowSubmission, List<int>>((a, output) => a.SubmissionIDs = output);
+
+        public static List<ISubmission> Invoke(this ListSubmissions listSubmissions) =>
+            listSubmissions.Invoke<ListSubmissions, List<ISubmission>>((a, outArg) => a.Submissions = outArg);
+
+        public static JObject Invoke(this SubmissionResult submissionResultActivity) =>
+            submissionResultActivity.Invoke<SubmissionResult, JObject>((a, outArg) => a.Result = outArg);
+
+        public static JObject Invoke(this SubmitReview submitReviewActivity) =>
+            submitReviewActivity.Invoke<SubmitReview, JObject>((a, outArg) => a.Result = outArg);
+
+        public static TOutput Invoke<TActivity, TOutput>(this TActivity activity, Action<TActivity, OutArgument<TOutput>> setOutput)
+            where TActivity : Activity
         {
             var inToken = new InArgument<string>("inToken");
             var inBaseUrl = new InArgument<string>("inBaseUrl");
-            var outVar = new Variable<TOutput>("outVar");
-            const string outArgName = "OutArg";
 
-            var indicoScope = new IndicoScope()
+            var indicoScope = new IndicoScope
             {
                 Host = new InArgument<string>(ctx => inBaseUrl.Get(ctx)),
                 Token = new InArgument<string>(ctx => inToken.Get(ctx)),
+                Body = { Handler = activity },
             };
-            indicoScope.Body.Handler = activity;
-            setOutput(activity, new OutArgument<TOutput>(outVar));
-            
+
+            OutArgument<TOutput> outArg = new OutArgument<TOutput>();
+
             var root = new DynamicActivity
             {
                 Properties =
@@ -56,25 +67,14 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
                     },
                     new DynamicActivityProperty
                     {
-                        Name = outArgName ,
+                        Name = "OutArg" ,
                         Type = typeof(OutArgument<TOutput>),
-                        Value = new OutArgument<TOutput>(),
+                        Value = outArg,
                     }
                 },
-                Implementation = () => new Sequence
-                {
-                    Variables = { outVar },
-                    Activities =
-                    {
-                        indicoScope,
-                        new Assign<TOutput>()
-                        {
-                            Value = outVar,
-                            To = new ArgumentReference<TOutput>(outArgName),
-                        }
-                    },
-                },
+                Implementation = () => indicoScope
             };
+            setOutput(activity, new OutArgument<TOutput>(ctx => outArg.Get(ctx)));
 
             var resultDictionary = WorkflowInvoker.Invoke(root, GetScopeParams());
 
