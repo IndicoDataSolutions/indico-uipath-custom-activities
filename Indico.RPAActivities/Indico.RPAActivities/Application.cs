@@ -34,7 +34,7 @@ namespace Indico.RPAActivities
 
 
         public async Task<IEnumerable<IDataSetFull>> ListDatasets(CancellationToken cancellationToken) =>
-            await _client.DataSets().ListFullAsync(cancellationToken);
+            await _client.DataSets().ListFullAsync(null, cancellationToken);
 
         public async Task<IEnumerable<IWorkflow>> ListWorkflows(int datasetId, CancellationToken cancellationToken = default) =>
             await _client.Workflows().ListAsync(datasetId, cancellationToken);
