@@ -9,6 +9,7 @@ using IndicoV2.DataSets.Models;
 using IndicoV2.Workflows.Models;
 using System.Linq;
 using IndicoV2.Models.Models;
+using IndicoV2.Ocr.Models;
 using IndicoV2.Submissions.Models;
 using SubmissionFilterV2 = IndicoV2.Submissions.Models.SubmissionFilter;
 
@@ -34,7 +35,7 @@ namespace Indico.RPAActivities
 
 
         public async Task<IEnumerable<IDataSetFull>> ListDatasets(CancellationToken cancellationToken) =>
-            await _client.DataSets().ListFullAsync(null, cancellationToken);
+            await _client.DataSets().ListFullAsync(cancellationToken);
 
         public async Task<IEnumerable<IWorkflow>> ListWorkflows(int datasetId, CancellationToken cancellationToken = default) =>
             await _client.Workflows().ListAsync(datasetId, cancellationToken);
@@ -52,24 +53,12 @@ namespace Indico.RPAActivities
         public async Task<IModelGroup> GetModelGroup(int modelGroupId, CancellationToken cancellationToken) => 
             await _client.Models().GetGroup(modelGroupId, cancellationToken);
 
-        public async Task<Document> ExtractDocument(string document, string configType, CancellationToken cancellationToken = default)
+        public async Task<string> ExtractDocument(string filePath, string configType, CancellationToken cancellationToken = default)
         {
-            var extractConfig = new JObject()
-            {
-                {"preset_config", configType}
-            };
-
-            var ocr = _clientLegacy.DocumentExtraction(extractConfig);
-            var job = await ocr.Exec(document);
-            var result = await job.Result();
-            var resUrl = (string)result.GetValue("url");
-            var blob = await _clientLegacy.RetrieveBlob(resUrl).Exec();
-            var obj = blob.AsJSONObject();
-
-            var doc = new Document
-            {
-                Text = (string)obj.GetValue("text")
-            };
+            var ocrClient = _client.Ocr();
+            var jobId = await ocrClient.ExtractDocumentAsync(filePath, configType, cancellationToken);
+            var result = await _client.JobAwaiter().WaitReadyAsync<ExtractionJobResult>(jobId, _checkInterval, cancellationToken);
+            var doc = await ocrClient.GetExtractionResult(result.Url);
 
             return doc;
         }

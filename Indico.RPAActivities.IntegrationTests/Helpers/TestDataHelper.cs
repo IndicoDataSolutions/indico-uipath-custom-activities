@@ -13,12 +13,11 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
 
         public int GetWorkflowId() => new ListWorkflows { DatasetID = GetDataSetId() }.Invoke().First().Id;
 
-        public IEnumerable<string> GetWorkflowSubmissionFilePaths()
-        {
-            var root = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        public IEnumerable<string> GetWorkflowSubmissionFilePaths() => new[] {GetFilePath()};
 
-            yield return Path.Combine(root, "./Helpers/Files/workflow-sample.pdf");
-        }
+        public string GetFilePath() => Path.Combine(
+            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+            "./Helpers/Files/workflow-sample.pdf");
 
         public IEnumerable<string> GetWorkflowSubmissionUris()
         {
