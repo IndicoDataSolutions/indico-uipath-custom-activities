@@ -35,7 +35,7 @@ namespace Indico.RPAActivities
 
 
         public async Task<IEnumerable<IDataSetFull>> ListDatasets(CancellationToken cancellationToken) =>
-            await _client.DataSets().ListFullAsync(cancellationToken);
+            await _client.DataSets().ListFullAsync(null, cancellationToken);
 
         public async Task<IEnumerable<IWorkflow>> ListWorkflows(int datasetId, CancellationToken cancellationToken = default) =>
             await _client.Workflows().ListAsync(datasetId, cancellationToken);
@@ -50,7 +50,7 @@ namespace Indico.RPAActivities
             return jobResult;
         }
 
-        public async Task<IModelGroup> GetModelGroup(int modelGroupId, CancellationToken cancellationToken) => 
+        public async Task<IModelGroup> GetModelGroup(int modelGroupId, CancellationToken cancellationToken) =>
             await _client.Models().GetGroup(modelGroupId, cancellationToken);
 
         public async Task<string> ExtractDocument(string filePath, string configType, CancellationToken cancellationToken = default)
@@ -87,14 +87,17 @@ namespace Indico.RPAActivities
         public async Task<List<ISubmission>> ListSubmissions(List<int> submissionIds, List<int> workflowIds, SubmissionFilterV2 filters, int limit, CancellationToken cancellationToken = default)
             => (await _client.Submissions().ListAsync(submissionIds, workflowIds, filters, limit, cancellationToken)).ToList();
 
-        public async Task<List<Dictionary<string, double>>> Classify(List<string> values, int modelGroup, CancellationToken cancellationToken = default)
+        public async Task<IPredictionJobResult> Classify(List<string> values, int modelGroupId, CancellationToken cancellationToken = default)
         {
-            var mg = await _clientLegacy.ModelGroupQuery(modelGroup).Exec(cancellationToken);
-            var status = await _clientLegacy.ModelGroupLoad(mg).Exec(cancellationToken);
-            var job = await _clientLegacy.ModelGroupPredict(mg).Data(values).Exec(cancellationToken);
-            var jobResult = await job.Results();
+            var models = _client.Models();
+            var modelGroup = await models.GetGroup(modelGroupId, cancellationToken);
 
-            return jobResult.ToObject<List<Dictionary<string, double>>>();
+            var selectedModelId = modelGroup.SelectedModel.Id;
+            _ = await models.LoadModel(selectedModelId, cancellationToken);
+            var jobId = await models.Predict(selectedModelId, values, cancellationToken);
+            var jobResult = await _client.JobAwaiter().WaitPredictionReadyAsync(jobId, _checkInterval, cancellationToken);
+            
+            return jobResult;
         }
 
         public async Task<List<List<Extraction>>> Extract(List<string> values, int modelGroup, CancellationToken cancellationToken = default)
@@ -102,7 +105,7 @@ namespace Indico.RPAActivities
             var mg = await _clientLegacy.ModelGroupQuery(modelGroup).Exec(cancellationToken);
             var status = await _clientLegacy.ModelGroupLoad(mg).Exec(cancellationToken);
             var job = await _clientLegacy.ModelGroupPredict(mg).Data(values).Exec(cancellationToken);
-            var jobResult = await job.Results();
+            var jobResult = await job.Results(cancellationToken);
 
             return jobResult.ToObject<List<List<Extraction>>>();
         }
