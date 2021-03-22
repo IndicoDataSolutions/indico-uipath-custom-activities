@@ -15,15 +15,6 @@ namespace Indico.RPAActivities.Activities
         [Browsable(false)]
         public ActivityAction<IObjectContainer> Body { get; set; }
 
-        /// <summary>
-        /// If set, continue executing the remaining activities even if the current activity has failed.
-        /// </summary>
-        [LocalizedCategory(nameof(Resources.Common_Category))]
-        [LocalizedDisplayName(nameof(Resources.ContinueOnError_DisplayName))]
-        [LocalizedDescription(nameof(Resources.ContinueOnError_Description))]
-        [Obsolete("Can probably be removed")]
-        public InArgument<bool> ContinueOnError { get; set; }
-
         [LocalizedDisplayName(nameof(Resources.IndicoScope_Host_DisplayName))]
         [LocalizedDescription(nameof(Resources.IndicoScope_Host_Description))]
         [LocalizedCategory(nameof(Resources.Input_Category))]
