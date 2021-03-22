@@ -44,63 +44,56 @@ namespace UiPath.Shared.Activities.Tests.RuntimeSimple
             outputs.Should().Be(inputs);
         }
 
-        [Theory]
-        public void Invoke_ShouldThrow_WhenInitThrows_AndContinueOnErrorIsFalse(bool continueOnError)
+        [Test]
+        public void Invoke_ShouldThrow_WhenInitThrows()
         {
             _fakeActivity.InitHandler = _ => throw new TExpectedException();
 
-            AssertThrowsWhenContinueOnErrorFalse(continueOnError);
+            AssertThrows();
         }
 
-        [Theory]
-        public void Invoke_ShouldThrow_WhenGetInputsThrows_AndContinueOnErrorIsFalse(bool continueOnError)
+        [Test]
+        public void Invoke_ShouldThrow_WhenGetInputsThrows()
         {
             _fakeActivity.GetInputsHandler = _ => throw new TExpectedException();
 
-            AssertThrowsWhenContinueOnErrorFalse(continueOnError);
+            AssertThrows();
         }
 
 
-        [Theory]
-        public void Invoke_ShouldThrow_WhenExecuteAsyncThrows_AndContinueOnErrorIsFalse(bool continueOnError)
+        [Test]
+        public void Invoke_ShouldThrow_WhenExecuteAsyncThrows()
         {
             _fakeActivity.ExecuteAsyncHandler = (i, ct) => throw new TExpectedException();
 
-            AssertThrowsWhenContinueOnErrorFalse(continueOnError);
+            AssertThrows();
         }
 
-        [Theory]
-        public void Invoke_ShouldThrow_WhenExecuteAsyncReturnsTaskThrowing_AndContinueOnErrorIsFalse(bool continueOnError)
+        [Test]
+        public void Invoke_ShouldThrow_WhenExecuteAsyncReturnsTaskThrowing()
         {
             _fakeActivity.ExecuteAsyncHandler = (inputs, ct) => Task.FromException<object>(new TExpectedException());
 
-            AssertThrowsWhenContinueOnErrorFalse(continueOnError);
+            AssertThrows();
         }
 
-        [Theory]
-        public void Invoke_ShouldThrow_WhenSetOutputThrows_AndContinueOnErrorIsFalse(bool continueOnError)
+        [Test]
+        public void Invoke_ShouldThrow_WhenSetOutputThrows()
         {
             _fakeActivity.SetOutputsHandler = (context, o) => throw new TExpectedException();
 
-            AssertThrowsWhenContinueOnErrorFalse(continueOnError);
+            AssertThrows();
         }
 
-        private void AssertThrowsWhenContinueOnErrorFalse(bool continueOnError)
+        private void AssertThrows()
         {
             // Act, Assert
             var invokeAssertionBuilder = _invoker.Invoking(i =>
-                   i.Invoke(new Dictionary<string, object> { { nameof(TaskActivity<int, int>.ContinueOnError), continueOnError } }));
+                   i.Invoke(new Dictionary<string, object>()));
 
-            if (!continueOnError)
-            {
-                invokeAssertionBuilder
-               .Should()
-               .Throw<TExpectedException>();
-            }
-            else
-            {
-                invokeAssertionBuilder.Should().NotThrow();
-            }
+            invokeAssertionBuilder
+           .Should()
+           .Throw<TExpectedException>();
         }
 
         private class FakeActivity : TaskActivity<object, object>
