@@ -15,7 +15,6 @@ namespace Indico.RPAActivities.IntegrationTests.Activities
         [SetUp]
         public void SetUp() => _modelGroupId = new TestDataHelper().GetModelGroupId();
 
-        [TestCase("test")]
         [TestCase("Invoice date: 2010-11-12 InvoiceNumber: test", "Invoice date: 2012-11-12")]
         public void Classify_ShouldReturnResult(params string[] data)
         {

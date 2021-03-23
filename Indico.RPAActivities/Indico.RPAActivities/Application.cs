@@ -99,15 +99,5 @@ namespace Indico.RPAActivities
             
             return jobResult;
         }
-
-        public async Task<List<List<Extraction>>> Extract(List<string> values, int modelGroup, CancellationToken cancellationToken = default)
-        {
-            var mg = await _clientLegacy.ModelGroupQuery(modelGroup).Exec(cancellationToken);
-            var status = await _clientLegacy.ModelGroupLoad(mg).Exec(cancellationToken);
-            var job = await _clientLegacy.ModelGroupPredict(mg).Data(values).Exec(cancellationToken);
-            var jobResult = await job.Results(cancellationToken);
-
-            return jobResult.ToObject<List<List<Extraction>>>();
-        }
     }
 }
