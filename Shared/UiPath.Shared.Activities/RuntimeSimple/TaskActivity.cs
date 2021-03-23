@@ -11,11 +11,6 @@ namespace UiPath.Shared.Activities.RuntimeSimple
     public abstract class TaskActivity<TInput, TOutput> : AsyncCodeActivity
     {
         [LocalizedCategory(nameof(Resources.Common_Category))]
-        [LocalizedDisplayName(nameof(Resources.ContinueOnError_DisplayName))]
-        [LocalizedDescription(nameof(Resources.ContinueOnError_Description))]
-        public InArgument<bool> ContinueOnError { get; set; }
-
-        [LocalizedCategory(nameof(Resources.Common_Category))]
         [LocalizedDisplayName(nameof(Resources.Timeout_DisplayName))]
         [LocalizedDescription(nameof(Resources.Timeout_Description))]
         public InArgument<int> TimeoutMS { get; set; } = 60000;
@@ -67,22 +62,14 @@ namespace UiPath.Shared.Activities.RuntimeSimple
 
         private void EndExecute(AsyncCodeActivityContext ctx, Task<TOutput> task)
         {
-            var continueOnError = ContinueOnError.Get(ctx);
-
-            try
+            if (task.Status == TaskStatus.RanToCompletion)
             {
-                if (task.Status == TaskStatus.RanToCompletion)
-                {
-                    SetOutputs(ctx, task.Result);
-                }
-            }
-            catch when(continueOnError)
-            {
+                SetOutputs(ctx, task.Result);
             }
 
             ((State)ctx.UserState).Dispose();
 
-            if (task.IsFaulted && !continueOnError)
+            if (task.IsFaulted)
             {
                 throw task.Exception?.InnerException ?? task.Exception ?? new Exception("Unexpected error");
             }

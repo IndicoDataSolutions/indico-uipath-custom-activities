@@ -117,14 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ContinueOnError_Description" xml:space="preserve">
-    <value>If set, continue executing the remaining activities even if the current activity has failed.</value>
-    <comment>property description</comment>
-  </data>
-  <data name="ContinueOnError_DisplayName" xml:space="preserve">
-    <value>ContinueOnError</value>
-    <comment>property name</comment>
-  </data>
   <data name="Timeout_Description" xml:space="preserve">
     <value>Specifies the amount of time (in milliseconds) to wait for the activity to run before an error is thrown. The default value is 60000 (1 minute).</value>
     <comment>property description</comment>

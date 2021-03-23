@@ -169,24 +169,6 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If set, continue executing the remaining activities even if the current activity has failed..
-        /// </summary>
-        public static string ContinueOnError_Description {
-            get {
-                return ResourceManager.GetString("ContinueOnError_Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ContinueOnError.
-        /// </summary>
-        public static string ContinueOnError_DisplayName {
-            get {
-                return ResourceManager.GetString("ContinueOnError_DisplayName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Do.
         /// </summary>
         public static string Do {
