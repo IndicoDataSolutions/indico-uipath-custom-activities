@@ -58,7 +58,7 @@ namespace Indico.RPAActivities
             var ocrClient = _client.Ocr();
             var jobId = await ocrClient.ExtractDocumentAsync(filePath, configType, cancellationToken);
             var result = await _client.JobAwaiter().WaitReadyAsync<ExtractionJobResult>(jobId, _checkInterval, cancellationToken);
-            var doc = await ocrClient.GetExtractionResult(result.Url);
+            var doc = await ocrClient.GetExtractionResultAsync(result.Url);
 
             return doc;
         }
