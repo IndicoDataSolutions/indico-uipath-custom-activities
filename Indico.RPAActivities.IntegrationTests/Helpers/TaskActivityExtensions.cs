@@ -40,6 +40,10 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
 
         public static string Invoke(this DocumentExtraction documentExtractionActivity) =>
             documentExtractionActivity.Invoke<DocumentExtraction, string>((a, outArg) => a.Results = outArg);
+       
+        public static IPredictionJobResult Invoke(this Classify classifyActivity) =>
+            classifyActivity.Invoke<Classify, IPredictionJobResult>(
+                (a, outArg) => a.Results = outArg);
         
         public static TOutput Invoke<TActivity, TOutput>(this TActivity activity, Action<TActivity, OutArgument<TOutput>> setOutput)
             where TActivity : Activity
