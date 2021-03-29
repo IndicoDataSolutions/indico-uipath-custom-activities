@@ -1,4 +1,3 @@
-using System;
 using System.Activities;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Indico.RPAActivities.Activities.Activities;
 using Indico.RPAActivities.Activities.Properties;
-using UiPath.Shared.Activities;
+using IndicoV2.Models.Models;
 using UiPath.Shared.Activities.Localization;
 
 namespace Indico.RPAActivities.Activities
@@ -15,59 +14,48 @@ namespace Indico.RPAActivities.Activities
     [LocalizedDescription(nameof(Resources.Classify_Description))]
     public class Classify : IndicoActivityBase<
         (List<string> Text, int ModelGroup),
-        (List<string> TopResults, List<Dictionary<string, double>> Results)
+        (List<string> TopResults, IPredictionJobResult Results)
     >
     {
         [LocalizedDisplayName(nameof(Resources.Classify_Text_DisplayName))]
         [LocalizedDescription(nameof(Resources.Classify_Text_Description))]
         [LocalizedCategory(nameof(Resources.Input_Category))]
+        [RequiredArgument]
         public InArgument<List<string>> Text { get; set; }
 
         [LocalizedDisplayName(nameof(Resources.Classify_ModelGroup_DisplayName))]
         [LocalizedDescription(nameof(Resources.Classify_ModelGroup_Description))]
         [LocalizedCategory(nameof(Resources.Input_Category))]
+        [RequiredArgument]
         public InArgument<int> ModelGroup { get; set; }
 
         [LocalizedDisplayName(nameof(Resources.Classify_TopResults_DisplayName))]
         [LocalizedDescription(nameof(Resources.Classify_TopResults_Description))]
         [LocalizedCategory(nameof(Resources.Output_Category))]
-        public OutArgument<List<String>> TopResults { get; set; }
+        public OutArgument<List<string>> TopResults { get; set; }
 
         [LocalizedDisplayName(nameof(Resources.Classify_Results_DisplayName))]
         [LocalizedDescription(nameof(Resources.Classify_Results_Description))]
         [LocalizedCategory(nameof(Resources.Output_Category))]
-        public OutArgument<List<Dictionary<string, double>>> Results { get; set; }
-
-
-        public Classify()
-        {
-            Constraints.Add(ActivityConstraints.HasParentType<Classify, IndicoScope>(string.Format(Resources.ValidationScope_Error, Resources.IndicoScope_DisplayName)));
-        }
-
-
-        protected override void CacheMetadata(CodeActivityMetadata metadata)
-        {
-            if (Text == null) metadata.AddValidationError(string.Format(Resources.ValidationValue_Error, nameof(Text)));
-            if (ModelGroup == null) metadata.AddValidationError(string.Format(Resources.ValidationValue_Error, nameof(ModelGroup)));
-
-            base.CacheMetadata(metadata);
-        }
+        public OutArgument<IPredictionJobResult> Results { get; set; }
+        
 
         protected override (List<string> Text, int ModelGroup) GetInputs(AsyncCodeActivityContext ctx) => (Text.Get(ctx), ModelGroup.Get(ctx));
 
-        protected override async Task<(List<string> TopResults, List<Dictionary<string, double>> Results)> ExecuteAsync((List<string> Text, int ModelGroup) input, CancellationToken cancellationToken)
+        protected override async Task<(List<string> TopResults, IPredictionJobResult Results)> ExecuteAsync((List<string> Text, int ModelGroup) input, CancellationToken cancellationToken)
         {
             var classifyResults = await Application.Classify(input.Text, input.ModelGroup, cancellationToken);
 
             return (GetTopResults(classifyResults).ToList(), classifyResults);
         }
 
-        private IEnumerable<string> GetTopResults(List<Dictionary<string, double>> classifyResults)
+        private IEnumerable<string> GetTopResults(IPredictionJobResult classifyResults)
         {
-            foreach (var resultSet in classifyResults)
+            foreach (var classifyResult in classifyResults)
+            foreach (var prediction in classifyResult)
             {
                 var topClass = new KeyValuePair<string, double>();
-                foreach (var result in resultSet)
+                foreach (var result in prediction.Confidence)
                 {
                     if (result.Value > topClass.Value)
                     {
@@ -79,10 +67,10 @@ namespace Indico.RPAActivities.Activities
             }
         }
 
-        protected override void SetOutputs(AsyncCodeActivityContext ctx, (List<string> TopResults, List<Dictionary<string, double>> Results) output)
+        protected override void SetOutputs(AsyncCodeActivityContext ctx, (List<string> TopResults, IPredictionJobResult Results) output)
         {
-            TopResults.Set(ctx, TopResults);
-            Results.Set(ctx, Results);
+            TopResults.Set(ctx, output.TopResults);
+            Results.Set(ctx, output.Results);
         }
     }
 }

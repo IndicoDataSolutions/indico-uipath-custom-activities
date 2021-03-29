@@ -274,7 +274,7 @@
     <comment>property description</comment>
   </data>
   <data name="DocumentExtraction_Document_DisplayName" xml:space="preserve">
-    <value>document</value>
+    <value>filePath</value>
     <comment>property name</comment>
   </data>
   <data name="DocumentExtraction_Document_Description" xml:space="preserve">

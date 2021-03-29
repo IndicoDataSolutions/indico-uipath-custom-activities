@@ -12,7 +12,6 @@
         <Reference Include="System" />
         <Reference Include="System.Core" />
         <Reference Include="System.Xml.Linq" />
-        <Reference Include="System.Data.DataSetExtensions" />
         <Reference Include="Microsoft.CSharp" />
         <Reference Include="System.Data" />
         <Reference Include="System.Xml" />
@@ -41,8 +40,10 @@
         <Folder Include="Contracts\" />
         <Folder Include="Enums\" />
     </ItemGroup>
+   
     <ItemGroup>
-        <PackageReference Include="AutoMapper" Version="10.0.0" />
-        <PackageReference Include="IndicoClient" Version="0.9.2" />
+      <ProjectReference Include="..\..\indico-client-csharp\IndicoV2.Abstractions\IndicoV2.Abstractions.csproj" />
+      <ProjectReference Include="..\..\indico-client-csharp\IndicoV2\IndicoV2.csproj" />
+      <ProjectReference Include="..\..\indico-client-csharp\Indico\Indico.csproj" />
     </ItemGroup>
 </Project>

@@ -18,11 +18,13 @@ namespace Indico.RPAActivities.Activities
         [LocalizedDisplayName(nameof(Resources.IndicoScope_Host_DisplayName))]
         [LocalizedDescription(nameof(Resources.IndicoScope_Host_Description))]
         [LocalizedCategory(nameof(Resources.Input_Category))]
+        [RequiredArgument]
         public InArgument<string> Host { get; set; }
 
         [LocalizedDisplayName(nameof(Resources.IndicoScope_Token_DisplayName))]
         [LocalizedDescription(nameof(Resources.IndicoScope_Token_Description))]
         [LocalizedCategory(nameof(Resources.Input_Category))]
+        [RequiredArgument]
         public InArgument<string> Token { get; set; }
 
         // A tag used to identify the scope in the activity context
@@ -41,14 +43,6 @@ namespace Indico.RPAActivities.Activities
                 Argument = new DelegateInArgument<IObjectContainer> (ParentContainerPropertyTag),
                 Handler = new Sequence { DisplayName = Resources.Do }
             };
-        }
-
-        protected override void CacheMetadata(NativeActivityMetadata metadata)
-        {
-            if (Host == null) metadata.AddValidationError(string.Format(Resources.ValidationValue_Error, nameof(Host)));
-            if (Token == null) metadata.AddValidationError(string.Format(Resources.ValidationValue_Error, nameof(Token)));
-
-            base.CacheMetadata(metadata);
         }
 
         protected override void Execute(NativeActivityContext context)

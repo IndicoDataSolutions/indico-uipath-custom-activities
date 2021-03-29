@@ -2,7 +2,6 @@
 using System.Activities;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using Indico.RPAActivities.Activities.Properties;
 using UiPath.Shared.Activities.Localization;
 
