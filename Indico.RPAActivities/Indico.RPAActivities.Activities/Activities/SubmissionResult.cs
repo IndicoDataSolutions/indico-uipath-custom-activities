@@ -9,6 +9,7 @@ using UiPath.Shared.Activities.Localization;
 
 namespace Indico.RPAActivities.Activities
 {
+    [LocalizedCategory(nameof(Resources.SubmissionCategory))]
     [LocalizedDisplayName(nameof(Resources.SubmissionResult_DisplayName))]
     [LocalizedDescription(nameof(Resources.SubmissionResult_Description))]
     public class SubmissionResult : IndicoActivityBase<(int SubmissionId, SubmissionStatus? CheckStatus), JObject>

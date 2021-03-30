@@ -10,6 +10,7 @@ using System;
 
 namespace Indico.RPAActivities.Activities
 {
+    [LocalizedCategory(nameof(Resources.WorkflowCategory))]
     [LocalizedDisplayName(nameof(Resources.WorkflowSubmission_DisplayName))]
     [LocalizedDescription(nameof(Resources.WorkflowSubmission_Description))]
     public class WorkflowSubmission : IndicoActivityBase<(int WorkflowId, List<string> FilePaths, List<string> Urls), List<int>>

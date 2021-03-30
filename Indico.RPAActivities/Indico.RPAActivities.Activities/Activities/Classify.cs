@@ -10,6 +10,7 @@ using UiPath.Shared.Activities.Localization;
 
 namespace Indico.RPAActivities.Activities
 {
+    [LocalizedCategory(nameof(Resources.PreparationCategory))]
     [LocalizedDisplayName(nameof(Resources.Classify_DisplayName))]
     [LocalizedDescription(nameof(Resources.Classify_Description))]
     public class Classify : IndicoActivityBase<

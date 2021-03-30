@@ -4,7 +4,7 @@ using UiPath.Shared.Localization;
 
 namespace UiPath.Shared.Activities.Localization
 {
-    [AttributeUsage(AttributeTargets.Property)]
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Class)]
     public class LocalizedCategoryAttribute : CategoryAttribute
     {
         public LocalizedCategoryAttribute(string category) : base(category)

@@ -104,50 +104,5 @@ namespace Indico.RPAActivities.Activities.Design.Properties {
                 return ResourceManager.GetString("Editing", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Indico.OCR.
-        /// </summary>
-        public static string OCRCategory {
-            get {
-                return ResourceManager.GetString("OCRCategory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Indico.Preparation.
-        /// </summary>
-        public static string PreparationCategory {
-            get {
-                return ResourceManager.GetString("PreparationCategory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Indico.
-        /// </summary>
-        public static string RootCategory {
-            get {
-                return ResourceManager.GetString("RootCategory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Indico.Submission.
-        /// </summary>
-        public static string SubmissionCategory {
-            get {
-                return ResourceManager.GetString("SubmissionCategory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Indico.Workflow.
-        /// </summary>
-        public static string WorkflowCategory {
-            get {
-                return ResourceManager.GetString("WorkflowCategory", resourceCulture);
-            }
-        }
     }
 }

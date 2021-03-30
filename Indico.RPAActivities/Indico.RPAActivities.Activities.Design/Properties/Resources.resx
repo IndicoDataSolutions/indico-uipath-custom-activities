@@ -137,24 +137,4 @@
     <value>Editing</value>
     <comment>label</comment>
   </data>
-  <data name="OCRCategory" xml:space="preserve">
-    <value>Indico.OCR</value>
-    <comment>category</comment>
-  </data>
-  <data name="PreparationCategory" xml:space="preserve">
-    <value>Indico.Preparation</value>
-    <comment>category</comment>
-  </data>
-  <data name="RootCategory" xml:space="preserve">
-    <value>Indico</value>
-    <comment>category</comment>
-  </data>
-  <data name="SubmissionCategory" xml:space="preserve">
-    <value>Indico.Submission</value>
-    <comment>category</comment>
-  </data>
-  <data name="WorkflowCategory" xml:space="preserve">
-    <value>Indico.Workflow</value>
-    <comment>category</comment>
-  </data>
 </root>

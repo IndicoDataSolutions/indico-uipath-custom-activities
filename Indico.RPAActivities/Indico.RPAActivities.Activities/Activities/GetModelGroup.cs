@@ -8,6 +8,7 @@ using UiPath.Shared.Activities.Localization;
 
 namespace Indico.RPAActivities.Activities
 {
+    [LocalizedCategory(nameof(Resources.PreparationCategory))]
     [LocalizedDisplayName(nameof(Resources.GetModelGroup_DisplayName))]
     [LocalizedDescription(nameof(Resources.GetModelGroup_Description))]
     public class GetModelGroup : IndicoActivityBase<int, IModelGroup>

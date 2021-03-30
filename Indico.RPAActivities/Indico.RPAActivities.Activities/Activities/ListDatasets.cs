@@ -10,6 +10,7 @@ using UiPath.Shared.Activities.Localization;
 
 namespace Indico.RPAActivities.Activities
 {
+    [LocalizedCategory(nameof(Resources.PreparationCategory))]
     [LocalizedDisplayName(nameof(Resources.ListDatasets_DisplayName))]
     [LocalizedDescription(nameof(Resources.ListDatasets_Description))]
     public class ListDatasets : IndicoActivityBase<bool, List<IDataSetFull>>

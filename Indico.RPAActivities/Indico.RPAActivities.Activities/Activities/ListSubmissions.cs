@@ -10,6 +10,7 @@ using SubmissionFilterV2 = IndicoV2.Submissions.Models.SubmissionFilter;
 
 namespace Indico.RPAActivities.Activities
 {
+    [LocalizedCategory(nameof(Resources.SubmissionCategory))]
     [LocalizedDisplayName(nameof(Resources.ListSubmissions_DisplayName))]
     [LocalizedDescription(nameof(Resources.ListSubmissions_Description))]
     public class ListSubmissions : IndicoActivityBase<(List<int> WorkflowIds, List<int> SubmissionIds, SubmissionFilterV2 Filters, int Limit), List<ISubmission>>
