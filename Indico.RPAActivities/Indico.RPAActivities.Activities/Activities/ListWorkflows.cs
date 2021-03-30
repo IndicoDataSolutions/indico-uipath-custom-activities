@@ -10,6 +10,7 @@ using UiPath.Shared.Activities.Localization;
 
 namespace Indico.RPAActivities.Activities
 {
+    [LocalizedCategory(nameof(Resources.WorkflowCategory))]
     [LocalizedDisplayName(nameof(Resources.ListWorkflows_DisplayName))]
     [LocalizedDescription(nameof(Resources.ListWorkflows_Description))]
     public class ListWorkflows : IndicoActivityBase<int, List<IWorkflow>>

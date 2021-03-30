@@ -7,6 +7,7 @@ using UiPath.Shared.Activities.Localization;
 
 namespace Indico.RPAActivities.Activities
 {
+    [LocalizedCategory(nameof(Resources.OCRCategory))]
     [LocalizedDisplayName(nameof(Resources.DocumentExtraction_DisplayName))]
     [LocalizedDescription(nameof(Resources.DocumentExtraction_Description))]
     public class DocumentExtraction : IndicoActivityBase<(string ConfigType, string Document), string>

@@ -691,6 +691,15 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Indico.OCR.
+        /// </summary>
+        public static string OCRCategory {
+            get {
+                return ResourceManager.GetString("OCRCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Options.
         /// </summary>
         public static string Options_Category {
@@ -705,6 +714,33 @@ namespace Indico.RPAActivities.Activities.Properties {
         public static string Output_Category {
             get {
                 return ResourceManager.GetString("Output_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Indico.Preparation.
+        /// </summary>
+        public static string PreparationCategory {
+            get {
+                return ResourceManager.GetString("PreparationCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Indico.
+        /// </summary>
+        public static string RootCategory {
+            get {
+                return ResourceManager.GetString("RootCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Indico.Submission.
+        /// </summary>
+        public static string SubmissionCategory {
+            get {
+                return ResourceManager.GetString("SubmissionCategory", resourceCulture);
             }
         }
         
@@ -948,6 +984,15 @@ namespace Indico.RPAActivities.Activities.Properties {
         public static string ValidationValue_Error {
             get {
                 return ResourceManager.GetString("ValidationValue_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Indico.Workflow.
+        /// </summary>
+        public static string WorkflowCategory {
+            get {
+                return ResourceManager.GetString("WorkflowCategory", resourceCulture);
             }
         }
         
