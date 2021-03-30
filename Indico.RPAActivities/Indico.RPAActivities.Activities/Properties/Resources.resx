@@ -202,7 +202,7 @@
     <comment>activity description</comment>
   </data>
   <data name="ListDatasets_Datasets_DisplayName" xml:space="preserve">
-    <value>datasets</value>
+    <value>Datasets</value>
     <comment>property name</comment>
   </data>
   <data name="ListDatasets_Datasets_Description" xml:space="preserve">
@@ -218,7 +218,7 @@
     <comment>activity description</comment>
   </data>
   <data name="IndicoScope_Host_DisplayName" xml:space="preserve">
-    <value>host</value>
+    <value>Host</value>
     <comment>property name</comment>
   </data>
   <data name="IndicoScope_Host_Description" xml:space="preserve">
@@ -226,7 +226,7 @@
     <comment>property description</comment>
   </data>
   <data name="IndicoScope_Token_DisplayName" xml:space="preserve">
-    <value>token</value>
+    <value>Token</value>
     <comment>property name</comment>
   </data>
   <data name="IndicoScope_Token_Description" xml:space="preserve">
@@ -242,7 +242,7 @@
     <comment>activity description</comment>
   </data>
   <data name="GetModelGroup_ModelGroupID_DisplayName" xml:space="preserve">
-    <value>Model Group ID</value>
+    <value>ModelGroupID</value>
     <comment>property name</comment>
   </data>
   <data name="GetModelGroup_ModelGroupID_Description" xml:space="preserve">
@@ -250,7 +250,7 @@
     <comment>property description</comment>
   </data>
   <data name="GetModelGroup_ModelGroupData_DisplayName" xml:space="preserve">
-    <value>Model Group Data</value>
+    <value>ModelGroupData</value>
     <comment>property name</comment>
   </data>
   <data name="GetModelGroup_ModelGroupData_Description" xml:space="preserve">
@@ -266,7 +266,7 @@
     <comment>activity description</comment>
   </data>
   <data name="DocumentExtraction_ConfigType_DisplayName" xml:space="preserve">
-    <value>configType</value>
+    <value>ConfigType</value>
     <comment>property name</comment>
   </data>
   <data name="DocumentExtraction_ConfigType_Description" xml:space="preserve">
@@ -274,7 +274,7 @@
     <comment>property description</comment>
   </data>
   <data name="DocumentExtraction_Document_DisplayName" xml:space="preserve">
-    <value>filePath</value>
+    <value>FilePath</value>
     <comment>property name</comment>
   </data>
   <data name="DocumentExtraction_Document_Description" xml:space="preserve">
@@ -282,7 +282,7 @@
     <comment>property description</comment>
   </data>
   <data name="DocumentExtraction_Results_DisplayName" xml:space="preserve">
-    <value>results</value>
+    <value>Results</value>
     <comment>property name</comment>
   </data>
   <data name="DocumentExtraction_Results_Description" xml:space="preserve">
@@ -306,7 +306,7 @@
     <comment>property description</comment>
   </data>
   <data name="Classify_ModelGroup_DisplayName" xml:space="preserve">
-    <value>Model Group</value>
+    <value>ModelGroup</value>
     <comment>property name</comment>
   </data>
   <data name="Classify_ModelGroup_Description" xml:space="preserve">
@@ -314,7 +314,7 @@
     <comment>property description</comment>
   </data>
   <data name="Classify_Results_DisplayName" xml:space="preserve">
-    <value>results</value>
+    <value>Results</value>
     <comment>property name</comment>
   </data>
   <data name="Classify_Results_Description" xml:space="preserve">
@@ -358,7 +358,7 @@
     <comment>property description</comment>
   </data>
   <data name="Classify_TopResults_DisplayName" xml:space="preserve">
-    <value>Top Results</value>
+    <value>TopResults</value>
     <comment>property name</comment>
   </data>
   <data name="ListWorkflows_DisplayName" xml:space="preserve">
@@ -410,7 +410,7 @@
     <comment>property description</comment>
   </data>
   <data name="WorkflowSubmission_Urls_DisplayName" xml:space="preserve">
-    <value>Urls</value>
+    <value>URLs</value>
     <comment>property name</comment>
   </data>
   <data name="WorkflowSubmission_Urls_Description" xml:space="preserve">

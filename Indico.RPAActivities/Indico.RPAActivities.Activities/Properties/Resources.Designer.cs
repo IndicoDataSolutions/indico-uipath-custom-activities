@@ -97,7 +97,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Model Group.
+        ///   Looks up a localized string similar to ModelGroup.
         /// </summary>
         public static string Classify_ModelGroup_DisplayName {
             get {
@@ -115,7 +115,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to results.
+        ///   Looks up a localized string similar to Results.
         /// </summary>
         public static string Classify_Results_DisplayName {
             get {
@@ -151,7 +151,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Top Results.
+        ///   Looks up a localized string similar to TopResults.
         /// </summary>
         public static string Classify_TopResults_DisplayName {
             get {
@@ -187,7 +187,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to configType.
+        ///   Looks up a localized string similar to ConfigType.
         /// </summary>
         public static string DocumentExtraction_ConfigType_DisplayName {
             get {
@@ -223,7 +223,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to document.
+        ///   Looks up a localized string similar to FilePath.
         /// </summary>
         public static string DocumentExtraction_Document_DisplayName {
             get {
@@ -241,7 +241,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to results.
+        ///   Looks up a localized string similar to Results.
         /// </summary>
         public static string DocumentExtraction_Results_DisplayName {
             get {
@@ -349,7 +349,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Model Group Data.
+        ///   Looks up a localized string similar to ModelGroupData.
         /// </summary>
         public static string GetModelGroup_ModelGroupData_DisplayName {
             get {
@@ -367,7 +367,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Model Group ID.
+        ///   Looks up a localized string similar to ModelGroupID.
         /// </summary>
         public static string GetModelGroup_ModelGroupID_DisplayName {
             get {
@@ -457,7 +457,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to host.
+        ///   Looks up a localized string similar to Host.
         /// </summary>
         public static string IndicoScope_Host_DisplayName {
             get {
@@ -475,7 +475,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to token.
+        ///   Looks up a localized string similar to Token.
         /// </summary>
         public static string IndicoScope_Token_DisplayName {
             get {
@@ -502,7 +502,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to datasets.
+        ///   Looks up a localized string similar to Datasets.
         /// </summary>
         public static string ListDatasets_Datasets_DisplayName {
             get {
@@ -1015,7 +1015,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Urls.
+        ///   Looks up a localized string similar to URLs.
         /// </summary>
         public static string WorkflowSubmission_Urls_DisplayName {
             get {
