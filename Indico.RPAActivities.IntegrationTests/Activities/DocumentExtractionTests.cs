@@ -1,7 +1,9 @@
-﻿using System.Activities;
+﻿using System;
+using System.Activities;
 using FluentAssertions;
 using Indico.RPAActivities.Activities;
 using Indico.RPAActivities.IntegrationTests.Helpers;
+using IndicoV2.Ocr.Models;
 using NUnit.Framework;
 
 namespace Indico.RPAActivities.IntegrationTests.Activities
@@ -14,11 +16,17 @@ namespace Indico.RPAActivities.IntegrationTests.Activities
         public void SetUp() => _testData = new TestDataHelper();
 
 
-        [Test]
-        public void Test() =>
-            new DocumentExtraction { ConfigType = "standard", Document = _testData.GetFilePath() }
+        [Theory]
+        public void DocumentExtraction_ShouldReturnResult(DocumentExtractionPreset preset) =>
+            new DocumentExtraction
+                {
+                    Document = _testData.GetFilePath(),
+                    TimeoutMS = (int)TimeSpan.FromMinutes(10).TotalMilliseconds,
+                    Preset = preset,
+                }
                 .Invoke()
-                .Should().NotBeNull();
+                .Should()
+                .StartWith("Our Google properties revenues");
 
         [Test]
         public void ShouldThrow_WhenNoDocument() => new DocumentExtraction()
