@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IndicoV2.Tests", "indico-cl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IndicoV2.V1Adapters.Tests", "indico-client-csharp\IndicoV2.V1Adapters.Tests\IndicoV2.V1Adapters.Tests.csproj", "{BD64D7F3-371D-4A1A-B522-4E1F70149CC4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Indico.RPAActivities.IntegrationTests", "Indico.RPAActivities.IntegrationTests\Indico.RPAActivities.IntegrationTests.csproj", "{BA50C5C3-35C0-4988-9437-D3200C5CEA49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Indico.RPAActivities.IntegrationTests", "Indico.RPAActivities\Indico.RPAActivities.IntegrationTests\Indico.RPAActivities.IntegrationTests.csproj", "{BA50C5C3-35C0-4988-9437-D3200C5CEA49}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Indico.UiPath.Shared.Activities.Tests", "Shared\Indico.UiPath.Shared.Activities.Tests\Indico.UiPath.Shared.Activities.Tests.csproj", "{0264EE69-D015-4AAC-908E-AED8E4EF71FD}"
 EndProject
