@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
 
-namespace UiPath.Shared.Activities.Utilities
+namespace Indico.UiPath.Shared.Activities.Utilities
 {
     public class EnumNameConverter<T> : EnumConverter
     {

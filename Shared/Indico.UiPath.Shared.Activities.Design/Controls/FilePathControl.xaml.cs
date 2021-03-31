@@ -1,11 +1,11 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Activities;
 using System.Activities.Presentation.Model;
 using System.IO;
 using System.Windows;
+using Microsoft.Win32;
 
-namespace UiPath.Shared.Activities.Design.Controls
+namespace Indico.UiPath.Shared.Activities.Design.Controls
 {
     /// <summary>
     /// Interaction logic for FilePathControl.xaml

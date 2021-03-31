@@ -9,7 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Microsoft.VisualBasic.Activities;
 
-namespace UiPath.Shared.Activities.Design.Services
+namespace Indico.UiPath.Shared.Activities.Design.Services
 {
     public static class ModelItemExtensions
     {

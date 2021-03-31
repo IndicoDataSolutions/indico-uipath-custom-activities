@@ -1,12 +1,12 @@
 ﻿using System;
+using System.Activities.Presentation;
+using System.Activities.Presentation.Hosting;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
-using System.Activities.Presentation;
-using System.Activities.Presentation.Hosting;
 using System.Windows.Media.Animation;
 
-namespace UiPath.Shared.Activities.Design.Controls
+namespace Indico.UiPath.Shared.Activities.Design.Controls
 {
     /// <summary>
     /// Interaction logic for RestrictiveBodyConnector.xaml

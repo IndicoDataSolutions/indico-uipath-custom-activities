@@ -6,8 +6,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using UiPath.Shared.Activities.RuntimeSimple;
 using FluentAssertions;
+using Indico.UiPath.Shared.Activities.RuntimeSimple;
 
 namespace UiPath.Shared.Activities.Tests.RuntimeSimple
 {

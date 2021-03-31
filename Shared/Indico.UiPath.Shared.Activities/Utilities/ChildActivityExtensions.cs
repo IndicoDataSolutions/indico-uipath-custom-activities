@@ -1,6 +1,6 @@
 ﻿using System.Activities;
 
-namespace UiPath.Shared.Activities.Utilities
+namespace Indico.UiPath.Shared.Activities.Utilities
 {
     /// <summary>Provides the standard functionality across activities.</summary>
     public static class ChildActivityExtensions

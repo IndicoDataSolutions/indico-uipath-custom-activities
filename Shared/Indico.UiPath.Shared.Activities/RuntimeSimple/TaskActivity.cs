@@ -3,9 +3,9 @@ using System.Activities;
 using System.Threading;
 using System.Threading.Tasks;
 using Indico.RPAActivities.Activities.Properties;
-using UiPath.Shared.Activities.Localization;
+using Indico.UiPath.Shared.Activities.Localization;
 
-namespace UiPath.Shared.Activities.RuntimeSimple
+namespace Indico.UiPath.Shared.Activities.RuntimeSimple
 {
     public abstract class TaskActivity<TInput, TOutput> : AsyncCodeActivity
     {
@@ -33,7 +33,7 @@ namespace UiPath.Shared.Activities.RuntimeSimple
                         {
                             if (t.IsFaulted)
                             {
-                                tcs.SetException(t.Exception?.InnerException ?? t.Exception ?? new Exception("Unexpected error"));
+                                tcs.SetException(t.Exception?.InnerException ?? t.Exception ?? new System.Exception("Unexpected error"));
                             }
                             else if (t.IsCanceled)
                             {
@@ -48,7 +48,7 @@ namespace UiPath.Shared.Activities.RuntimeSimple
                         },
                         cancellationTokenSource.Token);
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 tcs.SetException(ex);
                 callback?.Invoke(tcs.Task);
@@ -70,7 +70,7 @@ namespace UiPath.Shared.Activities.RuntimeSimple
 
             if (task.IsFaulted)
             {
-                throw task.Exception?.InnerException ?? task.Exception ?? new Exception("Unexpected error");
+                throw task.Exception?.InnerException ?? task.Exception ?? new System.Exception("Unexpected error");
             }
         }
 

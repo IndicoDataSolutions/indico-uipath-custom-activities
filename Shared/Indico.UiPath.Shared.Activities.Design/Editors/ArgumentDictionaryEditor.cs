@@ -4,7 +4,7 @@ using System.Activities.Presentation.Model;
 using System.Activities.Presentation.PropertyEditing;
 using System.Windows;
 
-namespace UiPath.Shared.Activities.Design.Editors
+namespace Indico.UiPath.Shared.Activities.Design.Editors
 {
     public class ArgumentDictionaryEditor : DialogPropertyValueEditor
     {

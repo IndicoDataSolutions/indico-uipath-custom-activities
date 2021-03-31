@@ -1,7 +1,7 @@
 ﻿using System.Activities;
 using System.Activities.Expressions;
 
-namespace UiPath.Shared.Activities
+namespace Indico.UiPath.Shared.Activities
 {
     public static class InArgumentExtensions
     {

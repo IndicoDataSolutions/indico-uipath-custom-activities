@@ -3,10 +3,9 @@ using System.Activities.Presentation.Converters;
 using System.Activities.Presentation.Model;
 using System.Activities.Presentation.PropertyEditing;
 using System.Windows;
-using UiPath.Shared.Activities.Design.Editors;
 using UiPath.Shared.Localization;
 
-namespace UiPath.Shared.Activities.Design.Editors
+namespace Indico.UiPath.Shared.Activities.Design.Editors
 {
     public partial class ArgumentCollectionEditor : DialogPropertyValueEditor
     {

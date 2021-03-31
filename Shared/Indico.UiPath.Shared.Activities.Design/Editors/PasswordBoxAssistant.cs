@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace UiPath.Shared.Activities.Design.Editors
+namespace Indico.UiPath.Shared.Activities.Design.Editors
 {
     public static class PasswordBoxAssistant
     {

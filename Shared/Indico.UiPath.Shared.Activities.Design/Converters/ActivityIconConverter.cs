@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace UiPath.Shared.Activities.Design.Converters
+namespace Indico.UiPath.Shared.Activities.Design.Converters
 {
     public class ActivityIconConverter : IValueConverter
     {
