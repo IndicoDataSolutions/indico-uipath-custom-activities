@@ -573,4 +573,28 @@
     <value>Indico.Workflow</value>
     <comment>category</comment>
   </data>
+  <data name="ListSubmissions_InputFilename_Description" xml:space="preserve">
+    <value>Input filename</value>
+    <comment>property description</comment>
+  </data>
+  <data name="ListSubmissions_InputFilename_DisplayName" xml:space="preserve">
+    <value>InputFilename</value>
+    <comment>property name</comment>
+  </data>
+  <data name="ListSubmissions_Retrieved_Description" xml:space="preserve">
+    <value>Retrieved</value>
+    <comment>property description</comment>
+  </data>
+  <data name="ListSubmissions_Retrieved_DisplayName" xml:space="preserve">
+    <value>Retrieved</value>
+    <comment>property name</comment>
+  </data>
+  <data name="ListSubmissions_Status_Description" xml:space="preserve">
+    <value>Status</value>
+    <comment>property description</comment>
+  </data>
+  <data name="ListSubmissions_Status_DisplayName" xml:space="preserve">
+    <value>Status</value>
+    <comment>property name</comment>
+  </data>
 </root>

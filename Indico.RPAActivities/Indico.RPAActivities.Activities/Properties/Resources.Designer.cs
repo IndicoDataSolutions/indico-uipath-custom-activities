@@ -565,6 +565,24 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Input filename.
+        /// </summary>
+        public static string ListSubmissions_InputFilename_Description {
+            get {
+                return ResourceManager.GetString("ListSubmissions_InputFilename_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to InputFilename.
+        /// </summary>
+        public static string ListSubmissions_InputFilename_DisplayName {
+            get {
+                return ResourceManager.GetString("ListSubmissions_InputFilename_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to limits the number of submission ids returned.
         /// </summary>
         public static string ListSubmissions_Limit_Description {
@@ -579,6 +597,42 @@ namespace Indico.RPAActivities.Activities.Properties {
         public static string ListSubmissions_Limit_DisplayName {
             get {
                 return ResourceManager.GetString("ListSubmissions_Limit_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retrieved.
+        /// </summary>
+        public static string ListSubmissions_Retrieved_Description {
+            get {
+                return ResourceManager.GetString("ListSubmissions_Retrieved_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retrieved.
+        /// </summary>
+        public static string ListSubmissions_Retrieved_DisplayName {
+            get {
+                return ResourceManager.GetString("ListSubmissions_Retrieved_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string ListSubmissions_Status_Description {
+            get {
+                return ResourceManager.GetString("ListSubmissions_Status_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string ListSubmissions_Status_DisplayName {
+            get {
+                return ResourceManager.GetString("ListSubmissions_Status_DisplayName", resourceCulture);
             }
         }
         
