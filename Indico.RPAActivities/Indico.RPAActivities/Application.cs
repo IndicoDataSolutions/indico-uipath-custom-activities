@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
-using Indico.RPAActivities.Entity;
+using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using IndicoV2;
 using IndicoV2.DataSets.Models;
-using IndicoV2.Workflows.Models;
-using System.Linq;
 using IndicoV2.Models.Models;
 using IndicoV2.Ocr.Models;
 using IndicoV2.Submissions.Models;
-using SubmissionFilterV2 = IndicoV2.Submissions.Models.SubmissionFilter;
+using IndicoV2.Workflows.Models;
+using Newtonsoft.Json.Linq;
 
 namespace Indico.RPAActivities
 {
@@ -19,17 +17,11 @@ namespace Indico.RPAActivities
     {
         private readonly TimeSpan _checkInterval = TimeSpan.FromSeconds(0.5);
 
-        [Obsolete]
-        private readonly IndicoClient _clientLegacy;
-
         private readonly IndicoV2.IndicoClient _client;
-
 
         public Application(string token, string baseUrlString)
         {
             var baseUrl = new Uri(baseUrlString);
-            var config = new IndicoConfig(host: baseUrl.Host, apiToken: token);
-            _clientLegacy = new IndicoClient(config);
             _client = new IndicoV2.IndicoClient(token, baseUrl);
         }
 
