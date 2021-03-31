@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System.Threading;
@@ -35,7 +34,7 @@ namespace Indico.RPAActivities
         {
             var jobId = await _client.Reviews()
                 .SubmitReviewAsync(submissionId, changes, rejected, forceComplete, cancellationToken);
-            var jobResult = (JObject)await _client.JobAwaiter().WaitReadyAsync(jobId, _checkInterval, cancellationToken);
+            var jobResult = await _client.JobAwaiter().WaitReadyAsync<JObject>(jobId, _checkInterval, cancellationToken);
 
             return jobResult;
         }
@@ -45,8 +44,7 @@ namespace Indico.RPAActivities
 
         public async Task<string> ExtractDocument(string filePath, DocumentExtractionPreset preset, CancellationToken cancellationToken = default)
         {
-            const DocumentExtractionPreset notSupported = DocumentExtractionPreset.OnDocument;
-            if (preset == notSupported)
+            if (preset == DocumentExtractionPreset.OnDocument)
             {
                 throw new NotSupportedException(
                     $"{preset} is not supported in this version of the library.");
