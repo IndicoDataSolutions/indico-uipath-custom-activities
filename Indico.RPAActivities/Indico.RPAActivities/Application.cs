@@ -76,8 +76,26 @@ namespace Indico.RPAActivities
                 ? await _client.GetSubmissionResultAwaiter().WaitReady(submissionId, checkStatus.Value, _checkInterval, cancellationToken)
                 : await _client.GetSubmissionResultAwaiter().WaitReady(submissionId, _checkInterval, cancellationToken);
 
-        public async Task<List<ISubmission>> ListSubmissions(List<int> submissionIds, List<int> workflowIds, SubmissionFilterV2 filters, int limit, CancellationToken cancellationToken = default)
-            => (await _client.Submissions().ListAsync(submissionIds, workflowIds, filters, limit, cancellationToken)).ToList();
+        public string InputFilename { get; set; }
+        public SubmissionStatus? Status { get; set; }
+        public bool? Retrieved { get; set; }
+
+        public async Task<List<ISubmission>> ListSubmissions(List<int> submissionIds, List<int> workflowIds, string inputFilename, SubmissionStatus? status, bool? retrieved, int limit, CancellationToken cancellationToken = default)
+        {
+            if (string.IsNullOrWhiteSpace(inputFilename))
+            {
+                inputFilename = null;
+            }
+
+            var submissionFilter = new SubmissionFilter
+            {
+                InputFilename = inputFilename,
+                Status = status,
+                Retrieved = retrieved
+            };
+
+            return (await _client.Submissions().ListAsync(submissionIds, workflowIds, submissionFilter, limit, cancellationToken)).ToList();
+        }
 
         public async Task<IPredictionJobResult> Classify(List<string> values, int modelGroupId, CancellationToken cancellationToken = default)
         {
@@ -88,7 +106,7 @@ namespace Indico.RPAActivities
             _ = await models.LoadModel(selectedModelId, cancellationToken);
             var jobId = await models.Predict(selectedModelId, values, cancellationToken);
             var jobResult = await _client.JobAwaiter().WaitPredictionReadyAsync(jobId, _checkInterval, cancellationToken);
-            
+
             return jobResult;
         }
     }
