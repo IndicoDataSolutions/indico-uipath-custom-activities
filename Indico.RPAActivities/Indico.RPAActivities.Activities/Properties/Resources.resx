@@ -481,14 +481,6 @@
     <value>List of workflow ids to filter output</value>
     <comment>property description</comment>
   </data>
-  <data name="ListSubmissions_Filters_DisplayName" xml:space="preserve">
-    <value>Filters</value>
-    <comment>property name</comment>
-  </data>
-  <data name="ListSubmissions_Filters_Description" xml:space="preserve">
-    <value>Instance of SubmissionFilter to filter output</value>
-    <comment>property description</comment>
-  </data>
   <data name="ListSubmissions_Limit_DisplayName" xml:space="preserve">
     <value>Limit</value>
     <comment>property name</comment>

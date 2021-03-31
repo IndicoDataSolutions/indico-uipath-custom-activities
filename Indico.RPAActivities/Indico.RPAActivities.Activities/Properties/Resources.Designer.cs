@@ -547,24 +547,6 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Instance of SubmissionFilter to filter output.
-        /// </summary>
-        public static string ListSubmissions_Filters_Description {
-            get {
-                return ResourceManager.GetString("ListSubmissions_Filters_Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filters.
-        /// </summary>
-        public static string ListSubmissions_Filters_DisplayName {
-            get {
-                return ResourceManager.GetString("ListSubmissions_Filters_DisplayName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Input filename.
         /// </summary>
         public static string ListSubmissions_InputFilename_Description {
