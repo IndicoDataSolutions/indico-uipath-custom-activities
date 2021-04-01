@@ -10,6 +10,9 @@
         <DocumentationFile>bin\$(Configuration)\Indico.RPAActivities.Activities.xml</DocumentationFile>
     </PropertyGroup>
     <ItemGroup>
+      <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+    </ItemGroup>
+    <ItemGroup>
         <Reference Include="System" />
         <Reference Include="System.Core" />
         <Reference Include="System.Xml.Linq" />
