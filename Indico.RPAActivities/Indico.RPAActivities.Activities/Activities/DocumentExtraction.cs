@@ -3,8 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Indico.RPAActivities.Activities.Activities;
 using Indico.RPAActivities.Activities.Properties;
+using Indico.UiPath.Shared.Activities.Localization;
 using IndicoV2.Ocr.Models;
-using UiPath.Shared.Activities.Localization;
 
 namespace Indico.RPAActivities.Activities
 {

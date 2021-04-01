@@ -2,11 +2,11 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:s="clr-namespace:System.Windows.Controls.Primitives;assembly=PresentationFramework"
-    xmlns:src="clr-namespace:UiPath.Shared.Activities.Design.Controls"
-	xmlns:loc="clr-namespace:UiPath.Shared.Localization"
+    xmlns:loc="clr-namespace:UiPath.Shared.Localization"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation"
-    xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation">
+    xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
+    xmlns:src="clr-namespace:Indico.UiPath.Shared.Activities.Design.Controls">
 
   <!--<src:ActivityDescriptionConverter x:Key="ActivityDescriptionConverter" />-->
   <Style TargetType="{x:Type src:ActivityDecoratorControl}" x:Key="ActivityDecoratorStyle">

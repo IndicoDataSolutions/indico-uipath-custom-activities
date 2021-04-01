@@ -22,11 +22,10 @@
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <FileVersion>1.0.0.0</FileVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
     </PropertyGroup>
     <!-- Package Versions -->
     <PropertyGroup Condition="'$(Configuration)' == 'Debug' AND '$(DesignTimeBuild)' != 'true'">
-        <PackageVersion>2.2.0.$([System.DateTime]::UtcNow.ToString(MMddHHmmss))</PackageVersion>
+        <PackageVersion>2.2.0.$([System.DateTime]::UtcNow.ToString(MMddHHmm))</PackageVersion>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
         <PackageVersion>2.2.0</PackageVersion>
@@ -49,21 +48,17 @@
     <ItemGroup>
         <None Include="packageIcon.png" Visible="false" />
     </ItemGroup>
-    <Target Name="CopyProjectReferencesToPackage" DependsOnTargets="BuildOnlySettings;ResolveReferences">
-        <ItemGroup>
-            <!--Filter out unnecessary files-->
-            <_ReferenceCopyLocalPaths Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference')-&gt;WithMetadataValue('PrivateAssets', 'All'))" />
-        </ItemGroup>
 
-        <!--Print batches for debug purposes-->
-        <Message Text="Batch for .nupkg: ReferenceCopyLocalPaths = @(_ReferenceCopyLocalPaths), ReferenceCopyLocalPaths.DestinationSubDirectory = %(_ReferenceCopyLocalPaths.DestinationSubDirectory) Filename = %(_ReferenceCopyLocalPaths.Filename) Extension = %(_ReferenceCopyLocalPaths.Extension)" Importance="High" Condition="'@(_ReferenceCopyLocalPaths)' != ''" />
-
-        <ItemGroup>
-            <!--Add file to package with consideration of sub folder. If empty, the root folder is chosen.-->
-            <BuildOutputInPackage Include="@(_ReferenceCopyLocalPaths)" TargetPath="%(_ReferenceCopyLocalPaths.DestinationSubDirectory)" />
-        </ItemGroup>
+	<PropertyGroup>
+	    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);IncludeP2POutput</TargetsForTfmSpecificBuildOutput>
+    </PropertyGroup>
+    <Target Name="IncludeP2POutput">
+	    <ItemGroup>
+		    <BuildOutputInPackage Include="$(OutputPath)Indico.RPAActivities*.dll" />
+	    </ItemGroup>
     </Target>
-    <PropertyGroup>
+
+	<PropertyGroup>
         <OutputPath>bin\$(Configuration)\</OutputPath>
         <DocumentationFile>bin\$(Configuration)\Indico.RPAActivities.Activities.Design.xml</DocumentationFile>
     </PropertyGroup>
@@ -142,6 +137,14 @@
     <ItemGroup>
         <ProjectReference Include="..\Indico.RPAActivities.Activities\Indico.RPAActivities.Activities.csproj" PrivateAssets="All" />
     </ItemGroup>
+
+	<ItemGroup>
+        <!--workaround: required so nuget packages have all required dependencies-->
+		<ProjectReference Include="..\Indico.RPAActivities\Indico.RPAActivities.csproj" PrivateAssets="All" />
+        <PackageReference Include="IndicoClient" Version="2.0.0.4010905" />
+        <!--workaround: required so nuget packages have all required dependencies-->
+	</ItemGroup>
+
     <ItemGroup>
         <Compile Update="Properties\Resources.Designer.cs">
             <DesignTime>True</DesignTime>
@@ -158,5 +161,5 @@
             <DependentUpon>Resources.resx</DependentUpon>
         </EmbeddedResource>
     </ItemGroup>
-    <Import Project="..\..\Shared\UiPath.Shared.Activities.Design\UiPath.Shared.Activities.Design.projitems" Label="Shared" />
+    <Import Project="..\..\Shared\Indico.UiPath.Shared.Activities.Design\Indico.UiPath.Shared.Activities.Design.projitems" Label="Shared" />
 </Project>
