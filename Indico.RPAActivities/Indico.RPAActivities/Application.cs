@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using IndicoV2;
 using IndicoV2.DataSets.Models;
 using IndicoV2.Models.Models;
