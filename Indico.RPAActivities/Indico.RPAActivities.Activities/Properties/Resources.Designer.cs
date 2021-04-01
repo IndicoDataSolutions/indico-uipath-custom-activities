@@ -547,20 +547,20 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Instance of SubmissionFilter to filter output.
+        ///   Looks up a localized string similar to Submission name of input file.
         /// </summary>
-        public static string ListSubmissions_Filters_Description {
+        public static string ListSubmissions_InputFilename_Description {
             get {
-                return ResourceManager.GetString("ListSubmissions_Filters_Description", resourceCulture);
+                return ResourceManager.GetString("ListSubmissions_InputFilename_Description", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filters.
+        ///   Looks up a localized string similar to Input filename.
         /// </summary>
-        public static string ListSubmissions_Filters_DisplayName {
+        public static string ListSubmissions_InputFilename_DisplayName {
             get {
-                return ResourceManager.GetString("ListSubmissions_Filters_DisplayName", resourceCulture);
+                return ResourceManager.GetString("ListSubmissions_InputFilename_DisplayName", resourceCulture);
             }
         }
         
@@ -579,6 +579,42 @@ namespace Indico.RPAActivities.Activities.Properties {
         public static string ListSubmissions_Limit_DisplayName {
             get {
                 return ResourceManager.GetString("ListSubmissions_Limit_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is submission retrieved.
+        /// </summary>
+        public static string ListSubmissions_Retrieved_Description {
+            get {
+                return ResourceManager.GetString("ListSubmissions_Retrieved_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retrieved.
+        /// </summary>
+        public static string ListSubmissions_Retrieved_DisplayName {
+            get {
+                return ResourceManager.GetString("ListSubmissions_Retrieved_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check the specific status of the submission.
+        /// </summary>
+        public static string ListSubmissions_Status_Description {
+            get {
+                return ResourceManager.GetString("ListSubmissions_Status_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string ListSubmissions_Status_DisplayName {
+            get {
+                return ResourceManager.GetString("ListSubmissions_Status_DisplayName", resourceCulture);
             }
         }
         
