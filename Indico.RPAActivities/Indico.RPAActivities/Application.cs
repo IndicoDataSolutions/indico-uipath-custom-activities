@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using IndicoV2;
@@ -16,15 +18,9 @@ namespace Indico.RPAActivities
     public class Application
     {
         private readonly TimeSpan _checkInterval = TimeSpan.FromSeconds(0.5);
-
         private readonly IndicoV2.IndicoClient _client;
 
-        public Application(string token, string baseUrlString)
-        {
-            var baseUrl = new Uri(baseUrlString);
-            _client = new IndicoV2.IndicoClient(token, baseUrl);
-        }
-
+        public Application(string token, string baseUrlString) => _client = new IndicoV2.IndicoClient(token, new Uri(baseUrlString));
 
         public async Task<IEnumerable<IDataSetFull>> ListDatasets(CancellationToken cancellationToken) =>
             await _client.DataSets().ListFullAsync(null, cancellationToken);
@@ -37,7 +33,7 @@ namespace Indico.RPAActivities
         {
             var jobId = await _client.Reviews()
                 .SubmitReviewAsync(submissionId, changes, rejected, forceComplete, cancellationToken);
-            var jobResult = (JObject)await _client.JobAwaiter().WaitReadyAsync(jobId, _checkInterval, cancellationToken);
+            var jobResult = await _client.JobAwaiter().WaitReadyAsync<JObject>(jobId, _checkInterval, cancellationToken);
 
             return jobResult;
         }
@@ -45,10 +41,16 @@ namespace Indico.RPAActivities
         public async Task<IModelGroup> GetModelGroup(int modelGroupId, CancellationToken cancellationToken) =>
             await _client.Models().GetGroup(modelGroupId, cancellationToken);
 
-        public async Task<string> ExtractDocument(string filePath, string configType, CancellationToken cancellationToken = default)
+        public async Task<string> ExtractDocument(string filePath, DocumentExtractionPreset preset, CancellationToken cancellationToken = default)
         {
+            if (preset == DocumentExtractionPreset.OnDocument)
+            {
+                throw new NotSupportedException(
+                    $"{preset} is not supported in this version of the library.");
+            }
+
             var ocrClient = _client.Ocr();
-            var jobId = await ocrClient.ExtractDocumentAsync(filePath, configType, cancellationToken);
+            var jobId = await ocrClient.ExtractDocumentAsync(filePath, preset, cancellationToken);
             var result = await _client.JobAwaiter().WaitReadyAsync<ExtractionJobResult>(jobId, _checkInterval, cancellationToken);
             var doc = await ocrClient.GetExtractionResultAsync(result.Url);
 
@@ -65,7 +67,7 @@ namespace Indico.RPAActivities
             }
             else if (urls != null)
             {
-                result = await _client.Submissions().CreateAsync(workflowId, urls.Select(u => new Uri(u)).ToList());
+                result = await _client.Submissions().CreateAsync(workflowId, urls.Select(u => new Uri(u)).ToList(), cancellationToken);
             }
 
             return result;

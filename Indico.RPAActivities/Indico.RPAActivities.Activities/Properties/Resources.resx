@@ -234,7 +234,7 @@
     <comment>property description</comment>
   </data>
   <data name="GetModelGroup_DisplayName" xml:space="preserve">
-    <value>GetModelGroup</value>
+    <value>Get Model Group</value>
     <comment>activity name</comment>
   </data>
   <data name="GetModelGroup_Description" xml:space="preserve">
@@ -362,7 +362,7 @@
     <comment>property name</comment>
   </data>
   <data name="ListWorkflows_DisplayName" xml:space="preserve">
-    <value>ListWorkflows</value>
+    <value>List Workflows</value>
     <comment>activity name</comment>
   </data>
   <data name="ListWorkflows_Description" xml:space="preserve">
@@ -386,7 +386,7 @@
     <comment>property description</comment>
   </data>
   <data name="WorkflowSubmission_DisplayName" xml:space="preserve">
-    <value>WorkflowSubmission</value>
+    <value>Workflow Submission</value>
     <comment>activity name</comment>
   </data>
   <data name="WorkflowSubmission_Description" xml:space="preserve">
@@ -426,7 +426,7 @@
     <comment>property description</comment>
   </data>
   <data name="SubmissionResult_DisplayName" xml:space="preserve">
-    <value>SubmissionResult</value>
+    <value>Submission Result</value>
     <comment>activity name</comment>
   </data>
   <data name="SubmissionResult_Description" xml:space="preserve">
@@ -458,7 +458,7 @@
     <comment>property description</comment>
   </data>
   <data name="ListSubmissions_DisplayName" xml:space="preserve">
-    <value>ListSubmissions</value>
+    <value>List Submissions</value>
     <comment>activity name</comment>
   </data>
   <data name="ListSubmissions_Description" xml:space="preserve">
@@ -498,7 +498,7 @@
     <comment>property description</comment>
   </data>
   <data name="SubmitReview_DisplayName" xml:space="preserve">
-    <value>SubmitReview</value>
+    <value>Submit Review</value>
     <comment>activity name</comment>
   </data>
   <data name="SubmitReview_Description" xml:space="preserve">

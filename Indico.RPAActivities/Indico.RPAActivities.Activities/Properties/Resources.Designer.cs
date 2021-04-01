@@ -331,7 +331,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to GetModelGroup.
+        ///   Looks up a localized string similar to Get Model Group.
         /// </summary>
         public static string GetModelGroup_DisplayName {
             get {
@@ -538,7 +538,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ListSubmissions.
+        ///   Looks up a localized string similar to List Submissions.
         /// </summary>
         public static string ListSubmissions_DisplayName {
             get {
@@ -700,7 +700,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ListWorkflows.
+        ///   Looks up a localized string similar to List Workflows.
         /// </summary>
         public static string ListWorkflows_DisplayName {
             get {
@@ -808,7 +808,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SubmissionResult.
+        ///   Looks up a localized string similar to Submission Result.
         /// </summary>
         public static string SubmissionResult_DisplayName {
             get {
@@ -880,7 +880,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SubmitReview.
+        ///   Looks up a localized string similar to Submit Review.
         /// </summary>
         public static string SubmitReview_DisplayName {
             get {
@@ -1042,7 +1042,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WorkflowSubmission.
+        ///   Looks up a localized string similar to Workflow Submission.
         /// </summary>
         public static string WorkflowSubmission_DisplayName {
             get {
