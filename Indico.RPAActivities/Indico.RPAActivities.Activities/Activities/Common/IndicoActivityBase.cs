@@ -1,8 +1,8 @@
 ﻿using System.Activities;
 using Indico.RPAActivities.Activities.Properties;
-using UiPath.Shared.Activities;
-using UiPath.Shared.Activities.RuntimeSimple;
-using UiPath.Shared.Activities.Utilities;
+using Indico.UiPath.Shared.Activities;
+using Indico.UiPath.Shared.Activities.RuntimeSimple;
+using Indico.UiPath.Shared.Activities.Utilities;
 
 namespace Indico.RPAActivities.Activities.Activities
 {

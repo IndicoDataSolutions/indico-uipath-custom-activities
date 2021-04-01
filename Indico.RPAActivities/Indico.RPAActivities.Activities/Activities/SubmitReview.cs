@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Indico.RPAActivities.Activities.Activities;
 using Newtonsoft.Json.Linq;
 using Indico.RPAActivities.Activities.Properties;
-using UiPath.Shared.Activities.Localization;
+using Indico.UiPath.Shared.Activities.Localization;
 
 namespace Indico.RPAActivities.Activities
 {

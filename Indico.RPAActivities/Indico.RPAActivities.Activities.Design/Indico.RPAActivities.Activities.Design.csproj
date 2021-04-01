@@ -158,5 +158,5 @@
             <DependentUpon>Resources.resx</DependentUpon>
         </EmbeddedResource>
     </ItemGroup>
-    <Import Project="..\..\Shared\UiPath.Shared.Activities.Design\UiPath.Shared.Activities.Design.projitems" Label="Shared" />
+    <Import Project="..\..\Shared\Indico.UiPath.Shared.Activities.Design\Indico.UiPath.Shared.Activities.Design.projitems" Label="Shared" />
 </Project>

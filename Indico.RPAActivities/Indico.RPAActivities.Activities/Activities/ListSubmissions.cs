@@ -3,8 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Indico.RPAActivities.Activities.Properties;
-using UiPath.Shared.Activities.Localization;
 using Indico.RPAActivities.Activities.Activities;
+using Indico.UiPath.Shared.Activities.Localization;
 using IndicoV2.Submissions.Models;
 using SubmissionFilterV2 = IndicoV2.Submissions.Models.SubmissionFilter;
 
