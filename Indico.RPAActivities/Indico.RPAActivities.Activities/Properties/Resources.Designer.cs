@@ -547,7 +547,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Input filename.
+        ///   Looks up a localized string similar to Submission name of input file.
         /// </summary>
         public static string ListSubmissions_InputFilename_Description {
             get {
@@ -556,7 +556,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to InputFilename.
+        ///   Looks up a localized string similar to Input filename.
         /// </summary>
         public static string ListSubmissions_InputFilename_DisplayName {
             get {
@@ -583,7 +583,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Retrieved.
+        ///   Looks up a localized string similar to Is submission retrieved.
         /// </summary>
         public static string ListSubmissions_Retrieved_Description {
             get {
@@ -601,7 +601,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Status.
+        ///   Looks up a localized string similar to Check the specific status of the submission.
         /// </summary>
         public static string ListSubmissions_Status_Description {
             get {

@@ -566,15 +566,15 @@
     <comment>category</comment>
   </data>
   <data name="ListSubmissions_InputFilename_Description" xml:space="preserve">
-    <value>Input filename</value>
+    <value>Submission name of input file</value>
     <comment>property description</comment>
   </data>
   <data name="ListSubmissions_InputFilename_DisplayName" xml:space="preserve">
-    <value>InputFilename</value>
+    <value>Input filename</value>
     <comment>property name</comment>
   </data>
   <data name="ListSubmissions_Retrieved_Description" xml:space="preserve">
-    <value>Retrieved</value>
+    <value>Is submission retrieved</value>
     <comment>property description</comment>
   </data>
   <data name="ListSubmissions_Retrieved_DisplayName" xml:space="preserve">
@@ -582,7 +582,7 @@
     <comment>property name</comment>
   </data>
   <data name="ListSubmissions_Status_Description" xml:space="preserve">
-    <value>Status</value>
+    <value>Check the specific status of the submission</value>
     <comment>property description</comment>
   </data>
   <data name="ListSubmissions_Status_DisplayName" xml:space="preserve">
