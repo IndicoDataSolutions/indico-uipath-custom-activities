@@ -222,7 +222,7 @@
     <comment>property name</comment>
   </data>
   <data name="IndicoScope_Host_Description" xml:space="preserve">
-    <value>indico host url</value>
+    <value>Indico host url (e.g. https://app.indico.io )</value>
     <comment>property description</comment>
   </data>
   <data name="IndicoScope_Token_DisplayName" xml:space="preserve">

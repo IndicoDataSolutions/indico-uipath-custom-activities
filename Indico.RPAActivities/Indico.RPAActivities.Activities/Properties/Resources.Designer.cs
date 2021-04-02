@@ -448,7 +448,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to indico host url.
+        ///   Looks up a localized string similar to Indico host url (e.g. https://app.indico.io ).
         /// </summary>
         public static string IndicoScope_Host_Description {
             get {
