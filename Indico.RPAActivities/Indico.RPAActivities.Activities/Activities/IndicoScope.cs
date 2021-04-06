@@ -20,7 +20,7 @@ namespace Indico.RPAActivities.Activities
         [LocalizedDescription(nameof(Resources.IndicoScope_Host_Description))]
         [LocalizedCategory(nameof(Resources.Input_Category))]
         [RequiredArgument]
-        public InArgument<string> Host { get; set; }
+        public InArgument<string> Host { get; set; } = "https://app.indico.io";
 
         [LocalizedDisplayName(nameof(Resources.IndicoScope_Token_DisplayName))]
         [LocalizedDescription(nameof(Resources.IndicoScope_Token_Description))]
