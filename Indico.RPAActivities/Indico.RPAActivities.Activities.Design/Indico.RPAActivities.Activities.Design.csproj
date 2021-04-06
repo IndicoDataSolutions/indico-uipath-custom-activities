@@ -31,10 +31,8 @@
         <PackageVersion>2.3.0</PackageVersion>
     </PropertyGroup>
     <ItemGroup>
-        <None Remove="Designers\ClassifyDesigner.xaml" />
         <None Remove="Designers\DocumentExtractionDesigner.xaml" />
         <None Remove="Designers\ExtractValuesDesigner.xaml" />
-        <None Remove="Designers\GetModelGroupDesigner.xaml" />
         <None Remove="Designers\IndicoIPADesigner.xaml" />
         <None Remove="Designers\IndicoScopeDesigner.xaml" />
         <None Remove="Designers\ListDatasetsDesigner.xaml" />
@@ -87,18 +85,11 @@
             <SubType>Designer</SubType>
             <CopyToOutputDirectory>Never</CopyToOutputDirectory>
         </Page>
-        <Page Include="Designers\ClassifyDesigner.xaml">
-            <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-        </Page>
         <Page Include="Designers\DocumentExtractionDesigner.xaml">
             <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
         </Page>
         <Page Include="Designers\ExtractValuesDesigner.xaml">
             <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-        </Page>
-        <Page Include="Designers\GetModelGroupDesigner.xaml">
-            <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-            <CopyToOutputDirectory>Never</CopyToOutputDirectory>
         </Page>
         <Page Include="Designers\IndicoIPADesigner.xaml">
             <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

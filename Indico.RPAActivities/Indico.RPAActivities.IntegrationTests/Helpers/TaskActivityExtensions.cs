@@ -35,16 +35,9 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
         public static JObject Invoke(this SubmitReview submitReviewActivity) =>
             submitReviewActivity.Invoke<SubmitReview, JObject>((a, outArg) => a.Result = outArg);
 
-        public static IModelGroup Invoke(this GetModelGroup getModelGroupActivity) =>
-            getModelGroupActivity.Invoke<GetModelGroup, IModelGroup>((a, outArg) => a.ModelGroupData = outArg);
-
         public static string Invoke(this DocumentExtraction documentExtractionActivity) =>
             documentExtractionActivity.Invoke<DocumentExtraction, string>((a, outArg) => a.Results = outArg);
-       
-        public static IPredictionJobResult Invoke(this Classify classifyActivity) =>
-            classifyActivity.Invoke<Classify, IPredictionJobResult>(
-                (a, outArg) => a.Results = outArg);
-        
+
         public static TOutput Invoke<TActivity, TOutput>(this TActivity activity, Action<TActivity, OutArgument<TOutput>> setOutput)
             where TActivity : Activity
         {

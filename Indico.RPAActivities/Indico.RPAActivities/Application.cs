@@ -36,9 +36,6 @@ namespace Indico.RPAActivities
             return jobResult;
         }
 
-        public async Task<IModelGroup> GetModelGroup(int modelGroupId, CancellationToken cancellationToken) =>
-            await _client.Models().GetGroup(modelGroupId, cancellationToken);
-
         public async Task<string> ExtractDocument(string filePath, DocumentExtractionPreset preset, CancellationToken cancellationToken = default)
         {
             if (preset == DocumentExtractionPreset.OnDocument)
@@ -95,19 +92,6 @@ namespace Indico.RPAActivities
             };
 
             return (await _client.Submissions().ListAsync(submissionIds, workflowIds, submissionFilter, limit, cancellationToken)).ToList();
-        }
-
-        public async Task<IPredictionJobResult> Classify(List<string> values, int modelGroupId, CancellationToken cancellationToken = default)
-        {
-            var models = _client.Models();
-            var modelGroup = await models.GetGroup(modelGroupId, cancellationToken);
-
-            var selectedModelId = modelGroup.SelectedModel.Id;
-            _ = await models.LoadModel(selectedModelId, cancellationToken);
-            var jobId = await models.Predict(selectedModelId, values, cancellationToken);
-            var jobResult = await _client.JobAwaiter().WaitPredictionReadyAsync(jobId, _checkInterval, cancellationToken);
-
-            return jobResult;
         }
     }
 }

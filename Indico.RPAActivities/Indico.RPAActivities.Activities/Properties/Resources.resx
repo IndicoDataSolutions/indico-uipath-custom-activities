@@ -233,30 +233,6 @@
     <value>indico token</value>
     <comment>property description</comment>
   </data>
-  <data name="GetModelGroup_DisplayName" xml:space="preserve">
-    <value>Get Model Group</value>
-    <comment>activity name</comment>
-  </data>
-  <data name="GetModelGroup_Description" xml:space="preserve">
-    <value>GetsModelGroupData</value>
-    <comment>activity description</comment>
-  </data>
-  <data name="GetModelGroup_ModelGroupID_DisplayName" xml:space="preserve">
-    <value>ModelGroupID</value>
-    <comment>property name</comment>
-  </data>
-  <data name="GetModelGroup_ModelGroupID_Description" xml:space="preserve">
-    <value />
-    <comment>property description</comment>
-  </data>
-  <data name="GetModelGroup_ModelGroupData_DisplayName" xml:space="preserve">
-    <value>ModelGroupData</value>
-    <comment>property name</comment>
-  </data>
-  <data name="GetModelGroup_ModelGroupData_Description" xml:space="preserve">
-    <value />
-    <comment>property description</comment>
-  </data>
   <data name="DocumentExtraction_DisplayName" xml:space="preserve">
     <value>Document Extraction</value>
     <comment>activity name</comment>
@@ -287,38 +263,6 @@
   </data>
   <data name="DocumentExtraction_Results_Description" xml:space="preserve">
     <value>Extracted Contents</value>
-    <comment>property description</comment>
-  </data>
-  <data name="Classify_DisplayName" xml:space="preserve">
-    <value>Classify</value>
-    <comment>activity name</comment>
-  </data>
-  <data name="Classify_Description" xml:space="preserve">
-    <value>Classify text using a model</value>
-    <comment>activity description</comment>
-  </data>
-  <data name="Classify_Text_DisplayName" xml:space="preserve">
-    <value>Text</value>
-    <comment>property name</comment>
-  </data>
-  <data name="Classify_Text_Description" xml:space="preserve">
-    <value>text to be classified</value>
-    <comment>property description</comment>
-  </data>
-  <data name="Classify_ModelGroup_DisplayName" xml:space="preserve">
-    <value>ModelGroup</value>
-    <comment>property name</comment>
-  </data>
-  <data name="Classify_ModelGroup_Description" xml:space="preserve">
-    <value>id of model group</value>
-    <comment>property description</comment>
-  </data>
-  <data name="Classify_Results_DisplayName" xml:space="preserve">
-    <value>Results</value>
-    <comment>property name</comment>
-  </data>
-  <data name="Classify_Results_Description" xml:space="preserve">
-    <value>classifications</value>
     <comment>property description</comment>
   </data>
   <data name="ExtractValues_DisplayName" xml:space="preserve">
@@ -352,14 +296,6 @@
   <data name="ExtractValues_Results_Description" xml:space="preserve">
     <value>extraction results</value>
     <comment>property description</comment>
-  </data>
-  <data name="Classify_TopResults_Description" xml:space="preserve">
-    <value>Top class for each prediction</value>
-    <comment>property description</comment>
-  </data>
-  <data name="Classify_TopResults_DisplayName" xml:space="preserve">
-    <value>TopResults</value>
-    <comment>property name</comment>
   </data>
   <data name="ListWorkflows_DisplayName" xml:space="preserve">
     <value>List Workflows</value>

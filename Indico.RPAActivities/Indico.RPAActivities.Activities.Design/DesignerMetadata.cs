@@ -19,14 +19,8 @@ namespace Indico.RPAActivities.Activities.Design
             builder.AddCustomAttributes(typeof(ListDatasets), new DesignerAttribute(typeof(ListDatasetsDesigner)));
             builder.AddCustomAttributes(typeof(ListDatasets), new HelpKeywordAttribute(""));
 
-            builder.AddCustomAttributes(typeof(GetModelGroup), new DesignerAttribute(typeof(GetModelGroupDesigner)));
-            builder.AddCustomAttributes(typeof(GetModelGroup), new HelpKeywordAttribute(""));
-
             builder.AddCustomAttributes(typeof(DocumentExtraction), new DesignerAttribute(typeof(DocumentExtractionDesigner)));
             builder.AddCustomAttributes(typeof(DocumentExtraction), new HelpKeywordAttribute(""));
-
-            builder.AddCustomAttributes(typeof(Classify), new DesignerAttribute(typeof(ClassifyDesigner)));
-            builder.AddCustomAttributes(typeof(Classify), new HelpKeywordAttribute(""));
 
             builder.AddCustomAttributes(typeof(ListWorkflows), new DesignerAttribute(typeof(ListWorkflowsDesigner)));
             builder.AddCustomAttributes(typeof(ListWorkflows), new HelpKeywordAttribute(""));
