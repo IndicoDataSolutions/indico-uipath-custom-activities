@@ -141,7 +141,7 @@
 	<ItemGroup>
         <!--workaround: required so nuget packages have all required dependencies-->
 		<ProjectReference Include="..\Indico.RPAActivities\Indico.RPAActivities.csproj" PrivateAssets="All" />
-        <PackageReference Include="IndicoClient" Version="2.0.0.4010905" />
+        <PackageReference Include="IndicoClient" Version="2.0.0-preview.1" />
         <!--workaround: required so nuget packages have all required dependencies-->
 	</ItemGroup>
 
