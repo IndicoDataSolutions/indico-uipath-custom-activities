@@ -11,7 +11,7 @@
     <PropertyGroup>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-        <Description>This package was generated using the UiPath VS Extension.</Description>
+        <Description>Custom activities for Indico's Intelligent Process Automation (IPA) Platform</Description>
         <Authors>Indico Data Solutions</Authors>
         <Company>Indico Data Solutions Inc.</Company>
         <Copyright>© 2020 Indico Data Solutions Inc.</Copyright>
