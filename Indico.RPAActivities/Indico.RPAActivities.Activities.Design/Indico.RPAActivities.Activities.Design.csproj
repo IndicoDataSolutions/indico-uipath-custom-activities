@@ -11,7 +11,7 @@
     <PropertyGroup>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-        <Description>This package was generated using the UiPath VS Extension.</Description>
+        <Description>Custom activities for Indico's Intelligent Process Automation (IPA) Platform</Description>
         <Authors>Indico Data Solutions</Authors>
         <Company>Indico Data Solutions Inc.</Company>
         <Copyright>© 2020 Indico Data Solutions Inc.</Copyright>
@@ -25,10 +25,10 @@
     </PropertyGroup>
     <!-- Package Versions -->
     <PropertyGroup Condition="'$(Configuration)' == 'Debug' AND '$(DesignTimeBuild)' != 'true'">
-        <PackageVersion>2.3.2.$([System.DateTime]::UtcNow.ToString(MMddHHmm))</PackageVersion>
+        <PackageVersion>2.3.3.$([System.DateTime]::UtcNow.ToString(MMddHHmm))</PackageVersion>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-        <PackageVersion>2.3.2</PackageVersion>
+        <PackageVersion>2.3.3</PackageVersion>
     </PropertyGroup>
     <ItemGroup>
         <None Remove="Designers\DocumentExtractionDesigner.xaml" />
