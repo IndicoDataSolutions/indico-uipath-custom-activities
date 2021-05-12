@@ -1,7 +1,9 @@
-# indico-uipath-custom-activities
+# Indico UiPath Custom Activities
 
-For development, make sure to have UiPath's Activity Creator extension installed. You can find more details at https://docs.uipath.com/integrations/docs/how-to-create-activities
+To install the Blue Prism connector download the latest release available on the GitHub releases page.
 
-To create a nuget build, right click on the Indico.RPAActivities.Activities.Design package in the solution explorer, and choose the Publish option.
+Release contains:
+* NuGet file (UiPath connector)
+* Detailed installation guide
 
-Remember that all activities should have a child relationship to the IndicoScope activity. Make sure to set the constraint correctly in the child activity constructor.
+Install according to the instructions in the manual
