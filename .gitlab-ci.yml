@@ -2,6 +2,10 @@
 
 variables:
   MSBUILD: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\bin\msbuild.exe'
+  MSTEST: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Common7\IDE\MsTest.exe'
+  VSTEST: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\Extensions\TestPlatform\vstest.console.exe'
+  # VSTEST:  'C:\Program Files (x86)\Microsoft Visual Studio\2019\Common7\IDE\Extensions\TestPlatform\VSTest.Console.exe'
+  # VSTEST:  'C:\Program Files (x86)\Microsoft Visual Studio\2019\Common7\IDE\CommonExtensions\Microsoft\TestWindow\VSTest.Console.exe'
   BUILD_CONF: Release
   NUGET_FOLDER: nuget
   BuildType: V2
@@ -21,53 +25,62 @@ build:
   except: [tags]
   stage: build
   script:
-    - nuget restore #-PackagesDirectory $NUGET_FOLDER
-    - "& $MSBUILD /m /p:Configuration=Release"
+    - nuget restore -PackagesDirectory $NUGET_FOLDER
+    - "& $MSBUILD /m /p:Configuration=Release /p:RestorePackages=false /p:PackageOutputPath=.\\artifacts\\nuget\\"
   artifacts:
     paths:
       - "**\\bin\\"
       - "**\\obj\\"
-      # - "./artifacts/nuget/"
-      - .\\Indico.RPAActivities\\Indico.RPAActivities.Activities.Design\\bin\\Release\\*.nuget
+      - ".\\artifacts\\nuget\\"
     expire_in: 5 days
 
-# test:
-#   except: [tags]
-#   stage: test
-#   needs: [build]
-#   dependencies: [build]
-#   cache:
-#     <<: *global_cache
-#     policy: pull
-#   script:
-#     - dotnet test --no-build --no-restore -c $BUILD_CONF --results-directory:'./artifacts/test/' --logger:"junit;LogFileName=./results/{assembly}-test-result.xml" --collect:'XPlat Code Coverage' --filter FullyQualifiedName\!~IntegrationTests -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
-#     - dotnet tool restore
-#     - dotnet reportgenerator -reports:./artifacts/test/*/coverage.cobertura.xml -targetdir:./artifacts/test/coverage/ -assemblyFilters:-Indicore -sourcedirs:$PWD -reporttypes:cobertura\;TextSummary
-#     # fix filename (absolute -> relative path)
-#     - cat ./artifacts/test/coverage/Cobertura.xml | sed "s/filename=\"$(pwd -P | sed -e 's/\//\\\//g')\//filename=\"/g" > ./artifacts/test/coverage/Cobertura-fixed.xml
-#     - cat ./artifacts/test/coverage/Summary.txt
-#   artifacts:
-#     reports:
-#       junit: ./artifacts/test/results/*
-#       cobertura: ./artifacts/test/coverage/Cobertura-fixed.xml
+test:
+  tags: [windows]
+  except: [tags]
+  stage: test
+  needs: [build]
+  dependencies: [build]
+  cache:
+    <<: *global_cache
+    policy: pull
+  script:
+    - "& $VSTEST **\\bin\\**\\*.Tests.dll"
+    # - Get-ChildItem -Recurse -Filter *.Tests.dll | Resolve-Path -Relative > testcontainers.txt
+    # - foreach ($p in Get-Content -Path testcontainers.txt) { & $VSTEST $p }
+      # '& "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\Extensions\TestPlatform\vstest.console.exe" *.Tests.dll'
+    # - Get-ChildItem -Recurse -Filter *.Tests.dll | Resolve-Path -Relative > testcontainers.txt
+    # - foreach ($p in Get-Content -Path testcontainers.txt) { & $MSTEST -testcontainer:$p }
+    # - dir /s /b *.Tests.dll | findstr /r Tests\\*\\bin\\ > testcontainers.txt
+    # - 'for /f %%f in (testcontainers.txt) do mstest.exe /testcontainer:"%%f"'
+    # - '& $VSTEST **/*.Tests.dll --logger:"junit;LogFileName=./results/{assembly}-test-result.xml" --ResultsDirectory:.\\artifacts\\test'
+    # - dotnet test --no-build --no-restore -c $BUILD_CONF --results-directory:'./artifacts/test/' --logger:"junit;LogFileName=./results/{assembly}-test-result.xml" --collect:'XPlat Code Coverage' --filter FullyQualifiedName\!~IntegrationTests -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
+    # - dotnet tool restore
+    # - dotnet reportgenerator -reports:./artifacts/test/*/coverage.cobertura.xml -targetdir:./artifacts/test/coverage/ -assemblyFilters:-Indicore -sourcedirs:$PWD -reporttypes:cobertura\;TextSummary
+    # fix filename (absolute -> relative path)
+    # - cat ./artifacts/test/coverage/Cobertura.xml | sed "s/filename=\"$(pwd -P | sed -e 's/\//\\\//g')\//filename=\"/g" > ./artifacts/test/coverage/Cobertura-fixed.xml
+    # - cat ./artifacts/test/coverage/Summary.txt
+  artifacts:
+    reports:
+      junit: ./artifacts/test/results/*
+      cobertura: ./artifacts/test/coverage/Cobertura-fixed.xml
 
-# release:
-#   only: [master, develop]
-#   stage: deploy
-#   image: registry.gitlab.com/gitlab-org/release-cli:latest
-#   dependencies: [build]
-#   needs: [build]
-#   cache: {}
-#   script:
-#     - VERSION=$(ls ./artifacts/nuget/IndicoClient.*.nupkg | grep -o -E '[[:digit:]]+(.[[:digit:]]+){2}(-[[:alpha:]]+)?.[[:digit:]]+' )
-#     - "echo Creating GitLab realease for version $VERSION"
-#     - >
-#       release-cli create 
-#       --tag-name "v$VERSION"
-#       --name "IndicoClient v$VERSION"
-#       --description "IndicoClient v$VERSION"
-#       --assets-link "{ \"name\": \"Nuget file\", \"url\": \"https://www.nuget.org/packages/IndicoClient/$VERSION\" }"
-#       --ref $CI_COMMIT_SHA
-#   artifacts:
-#     paths:
-#       - "./artifacts/nuget/"
+release:
+  only: [master, develop]
+  stage: deploy
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  dependencies: [build]
+  needs: [build]
+  cache: {}
+  script:
+    - VERSION=$(ls ./artifacts/nuget/*.nupkg | grep -o -E '[[:digit:]]+(.[[:digit:]]+){2}(-[[:alpha:]]+)?.[[:digit:]]+' )
+    - "echo Creating GitLab realease for version $VERSION"
+    - >
+      release-cli create 
+      --tag-name "v$VERSION"
+      --name "Indico.RPAActivities.Activities v$VERSION"
+      --description "Indico.RPAActivities.Activities v$VERSION"
+      --assets-link "{ \"name\": \"Nuget file\", \"url\": \"https://www.nuget.org/packages/IndicoClient/$VERSION\" }"
+      --ref $CI_COMMIT_SHA
+  artifacts:
+    paths:
+      - "./artifacts/nuget/"
