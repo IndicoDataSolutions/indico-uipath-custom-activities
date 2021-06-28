@@ -26,7 +26,7 @@ build:
   stage: build
   script:
     - nuget restore -PackagesDirectory $NUGET_FOLDER
-    - "& $MSBUILD /m /p:Configuration=Release /p:RestorePackages=false /p:PackageOutputPath=.\\artifacts\\nuget\\"
+    - "& $MSBUILD /m /p:Configuration=Release /p:RestorePackages=false /p:PackageOutputPath=..\\..\\artifacts\\nuget\\"
   artifacts:
     paths:
       - "**\\bin\\"
