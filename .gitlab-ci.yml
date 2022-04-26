@@ -1,0 +1,46 @@
+variables:
+  MSBUILD: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\bin\msbuild.exe'
+  VSTEST: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\Extensions\TestPlatform\vstest.console.exe'
+  BUILD_CONF: Release
+  NUGET_FOLDER: nuget
+  BuildType: V2
+
+stages:
+  - build
+  - test
+  - deploy
+
+cache: &global_cache
+  key: nuget
+  paths:
+    - $NUGET_FOLDER
+
+build:
+  tags: [windows]
+  except: [tags]
+  stage: build
+  script:
+    - nuget restore -PackagesDirectory $NUGET_FOLDER
+    - "& $MSBUILD /m /p:Configuration=Release /p:RestorePackages=false /p:PackageOutputPath=..\\..\\artifacts\\nuget\\"
+  artifacts:
+    paths:
+      - "**\\bin\\"
+      - "**\\obj\\"
+      - ".\\artifacts\\nuget\\"
+    expire_in: 5 days
+
+test:
+  tags: [windows]
+  except: [tags]
+  stage: test
+  needs: [build]
+  dependencies: [build]
+  cache:
+    <<: *global_cache
+    policy: pull
+  script:
+    - "& $VSTEST **\\bin\\**\\*.Tests.dll --ResultsDirectory:'./artifacts/test/' --Logger:'junit;LogFileName=./results/{assembly}-test-result.xml' --Collect:'XPlat Code Coverage' -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura"
+  artifacts:
+    reports:
+      junit: ./artifacts/test/results/*
+

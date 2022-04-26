@@ -47,7 +47,7 @@ namespace Indico.RPAActivities
             var ocrClient = _client.Ocr();
             var jobId = await ocrClient.ExtractDocumentAsync(filePath, preset, cancellationToken);
             var result = await _client.JobAwaiter().WaitReadyAsync<ExtractionJobResult>(jobId, _checkInterval, cancellationToken);
-            var doc = await ocrClient.GetExtractionResultAsync(result.Url);
+            var doc = await ocrClient.GetExtractionResultAsync(result.Url, cancellationToken);
 
             return doc;
         }
@@ -72,7 +72,14 @@ namespace Indico.RPAActivities
             => checkStatus.HasValue
                 ? await _client.GetSubmissionResultAwaiter().WaitReady(submissionId, checkStatus.Value, _checkInterval, cancellationToken)
                 : await _client.GetSubmissionResultAwaiter().WaitReady(submissionId, _checkInterval, cancellationToken);
-
+        /// <summary>
+        /// Invoke generate submissions call.
+        /// </summary>
+        /// <param name="submissionId"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<string> GenerateSubmissionResult(int submissionId, CancellationToken cancellationToken = default) =>
+            await _client.Submissions().GenerateSubmissionResultAsync(submissionId, cancellationToken);
         public string InputFilename { get; set; }
         public SubmissionStatus? Status { get; set; }
         public bool? Retrieved { get; set; }

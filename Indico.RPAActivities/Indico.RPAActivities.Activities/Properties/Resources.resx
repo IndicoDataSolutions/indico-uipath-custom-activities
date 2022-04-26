@@ -525,4 +525,28 @@
     <value>Status</value>
     <comment>property name</comment>
   </data>
+  <data name="GenerateSubmissionResult_DisplayName" xml:space="preserve">
+    <value>Generate Submission Result</value>
+    <comment>activity name</comment>
+  </data>
+  <data name="GenerateSubmissionResult_Result_Description" xml:space="preserve">
+    <value>URL of the generated file</value>
+    <comment>property description</comment>
+  </data>
+  <data name="GenerateSubmissionResult_Description" xml:space="preserve">
+    <value>Generates submission result file for a given submission.</value>
+    <comment>property description</comment>
+  </data>
+  <data name="GenerateSubmissionResult_Result_DisplayName" xml:space="preserve">
+    <value>Result</value>
+    <comment>property name</comment>
+  </data>
+  <data name="GenerateSubmissionResult_SubmissionID_Description" xml:space="preserve">
+    <value>Id of the submission to generate the file for.</value>
+    <comment>property description</comment>
+  </data>
+  <data name="GenerateSubmissionResult_SubmissionID_DisplayName" xml:space="preserve">
+    <value>SubmissionID</value>
+    <comment>property name</comment>
+  </data>
 </root>
