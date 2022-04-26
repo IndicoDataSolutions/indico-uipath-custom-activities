@@ -7,9 +7,11 @@
     <PropertyGroup>
         <OutputPath>bin\$(Configuration)\</OutputPath>
         <DocumentationFile>bin\$(Configuration)\Indico.RPAActivities.xml</DocumentationFile>
+        <Version>2.3.4</Version>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     </PropertyGroup>
     <ItemGroup>
-      <PackageReference Include="IndicoClient" Version="2.0.0-preview.4" />
+      <PackageReference Include="IndicoClient" Version="2.1.0" />
     </ItemGroup>
     <ItemGroup>
         <Reference Include="System" />

@@ -19,7 +19,7 @@ namespace Indico.RPAActivities.Activities.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -228,6 +228,60 @@ namespace Indico.RPAActivities.Activities.Properties {
         public static string ExtractValues_Text_DisplayName {
             get {
                 return ResourceManager.GetString("ExtractValues_Text_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generates submission result file for a given submission..
+        /// </summary>
+        public static string GenerateSubmissionResult_Description {
+            get {
+                return ResourceManager.GetString("GenerateSubmissionResult_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate Submission Result.
+        /// </summary>
+        public static string GenerateSubmissionResult_DisplayName {
+            get {
+                return ResourceManager.GetString("GenerateSubmissionResult_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to URL of the generated file.
+        /// </summary>
+        public static string GenerateSubmissionResult_Result_Description {
+            get {
+                return ResourceManager.GetString("GenerateSubmissionResult_Result_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Result.
+        /// </summary>
+        public static string GenerateSubmissionResult_Result_DisplayName {
+            get {
+                return ResourceManager.GetString("GenerateSubmissionResult_Result_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Id of the submission to generate the file for..
+        /// </summary>
+        public static string GenerateSubmissionResult_SubmissionID_Description {
+            get {
+                return ResourceManager.GetString("GenerateSubmissionResult_SubmissionID_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SubmissionID.
+        /// </summary>
+        public static string GenerateSubmissionResult_SubmissionID_DisplayName {
+            get {
+                return ResourceManager.GetString("GenerateSubmissionResult_SubmissionID_DisplayName", resourceCulture);
             }
         }
         
