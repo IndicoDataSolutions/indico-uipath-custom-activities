@@ -4,9 +4,10 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Indico.RPAActivities.Activities.Properties;
 using Indico.RPAActivities.Activities.Activities;
-using Indico.UiPath.Shared.Activities.Localization;
+using UiPath.Shared.Activities.Localization;
 using IndicoV2.Submissions.Models;
 using System;
+using System.Linq;
 
 namespace Indico.RPAActivities.Activities
 {
@@ -54,8 +55,16 @@ namespace Indico.RPAActivities.Activities
         protected override (List<int> WorkflowIds, List<int> SubmissionIds, string InputFilename, SubmissionStatus? Status, bool? Retrieved, int Limit) GetInputs(AsyncCodeActivityContext ctx) =>
             (WorkflowIDs.Get(ctx), SubmissionIDs.Get(ctx), InputFilename.Get(ctx), Status.Get(ctx), Retrieved.Get(ctx), Limit.Get(ctx));
 
-        protected override async Task<List<ISubmission>> ExecuteAsync((List<int> WorkflowIds, List<int> SubmissionIds, string InputFilename, SubmissionStatus? Status, bool? Retrieved, int Limit) p, CancellationToken cancellationToken) =>
-            await Application.ListSubmissions(p.SubmissionIds, p.WorkflowIds, p.InputFilename, p.Status, p.Retrieved, p.Limit, cancellationToken);
+        protected override async Task<List<ISubmission>> ExecuteAsync((List<int> WorkflowIds, List<int> SubmissionIds, string InputFilename, SubmissionStatus? Status, bool? Retrieved, int Limit) p, CancellationToken cancellationToken)
+        {
+            return Task.Factory.
+        }
+
+        protected async Task<List<ISubmission>> Execute((List<int> WorkflowIds, List<int> SubmissionIds, string InputFilename, SubmissionStatus? Status, bool? Retrieved, int Limit) p, CancellationToken cancellationToken)
+        {
+            return (await Application.ListSubmissions(p.SubmissionIds, p.WorkflowIds, p.InputFilename, p.Status, p.Retrieved, p.Limit, cancellationToken)).ToList();
+        }
+
 
         protected override void SetOutputs(AsyncCodeActivityContext ctx, List<ISubmission> submissions) => Submissions.Set(ctx, submissions);
     }

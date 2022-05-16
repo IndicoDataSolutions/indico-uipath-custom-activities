@@ -84,7 +84,7 @@ namespace Indico.RPAActivities
         public SubmissionStatus? Status { get; set; }
         public bool? Retrieved { get; set; }
 
-        public async Task<List<ISubmission>> ListSubmissions(List<int> submissionIds, List<int> workflowIds, string inputFilename, SubmissionStatus? status, bool? retrieved, int limit, CancellationToken cancellationToken = default)
+        public Task<IEnumerable<ISubmission>> ListSubmissions(List<int> submissionIds, List<int> workflowIds, string inputFilename, SubmissionStatus? status, bool? retrieved, int limit, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(inputFilename))
             {
@@ -98,7 +98,7 @@ namespace Indico.RPAActivities
                 Retrieved = retrieved
             };
 
-            return (await _client.Submissions().ListAsync(submissionIds, workflowIds, submissionFilter, limit, cancellationToken)).ToList();
+            return _client.Submissions().ListAsync(submissionIds, workflowIds, submissionFilter, limit, cancellationToken);
         }
     }
 }

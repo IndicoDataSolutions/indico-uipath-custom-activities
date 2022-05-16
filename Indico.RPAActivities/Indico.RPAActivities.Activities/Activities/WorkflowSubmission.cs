@@ -6,7 +6,7 @@ using Indico.RPAActivities.Activities.Activities;
 using Indico.RPAActivities.Activities.Properties;
 using System.Linq;
 using System;
-using Indico.UiPath.Shared.Activities.Localization;
+using UiPath.Shared.Activities.Localization;
 
 namespace Indico.RPAActivities.Activities
 {

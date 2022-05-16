@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Indico.RPAActivities.Activities.Activities;
 using Indico.RPAActivities.Activities.Properties;
-using Indico.UiPath.Shared.Activities.Localization;
+using UiPath.Shared.Activities.Localization;
 using IndicoV2.DataSets.Models;
 
 namespace Indico.RPAActivities.Activities

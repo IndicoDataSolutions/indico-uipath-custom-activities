@@ -25,7 +25,7 @@
     </PropertyGroup>
     <!-- Package Versions -->
     <PropertyGroup Condition="'$(Configuration)' == 'Debug' AND '$(DesignTimeBuild)' != 'true'">
-        <PackageVersion>2.3.3.$([System.DateTime]::UtcNow.ToString(MMddHHmm))</PackageVersion>
+        <PackageVersion>2.4.4.$([System.DateTime]::UtcNow.ToString(MMddHHmm))</PackageVersion>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
         <PackageVersion>2.3.4</PackageVersion>
@@ -152,5 +152,5 @@
             <DependentUpon>Resources.resx</DependentUpon>
         </EmbeddedResource>
     </ItemGroup>
-    <Import Project="..\..\Shared\Indico.UiPath.Shared.Activities.Design\Indico.UiPath.Shared.Activities.Design.projitems" Label="Shared" />
+    <Import Project="..\..\Shared\UiPath.Shared.Activities.Design\UiPath.Shared.Activities.Design.projitems" Label="Shared" />
 </Project>
