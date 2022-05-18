@@ -41,8 +41,39 @@ namespace Indico.RPAActivities.Activities.Activities
 
         }
 
-        protected abstract void Results(AsyncCodeActivityContext context, IEnumerable<TOutput> result);
+        protected override async Task<Action<AsyncCodeActivityContext>> ExecuteAsync(AsyncCodeActivityContext context, CancellationToken cancellationToken)
+        {
+            // Inputs
+            var timeout = TimeoutMS.Get(context);
+
+            var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+            cts.CancelAfter(timeout);
+
+            // Set a timeout on the execution
+            var task = ExecuteWithTimeout(context, cts.Token);
+            var timer = Task.Delay(timeout, cts.Token);
+            var completedTask = await Task.WhenAny(task, timer);
+            if (completedTask == task)
+            {
+                // Outputs
+                return (ctx) =>
+                {
+                    Results(ctx, task.Result);
+                };
+            }
+
+            else
+            {
+                throw new TimeoutException(Resources.Timeout_Error);
+            }
+
+
+        }
+
+        protected abstract void Results(AsyncCodeActivityContext context, TOutput result);
 
         protected abstract Task<TOutput> ExecuteWithTimeout(AsyncCodeActivityContext context, CancellationToken cancellationToken = default);
     }
 }
+
+
