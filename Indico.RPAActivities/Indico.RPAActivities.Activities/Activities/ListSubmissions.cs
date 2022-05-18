@@ -11,7 +11,6 @@ using System.Linq;
 
 namespace Indico.RPAActivities.Activities
 {
-    [LocalizedCategory(nameof(Resources.SubmissionCategory))]
     [LocalizedDisplayName(nameof(Resources.ListSubmissions_DisplayName))]
     [LocalizedDescription(nameof(Resources.ListSubmissions_Description))]
     public class ListSubmissions : IndicoActivityBase<(List<int> WorkflowIds, List<int> SubmissionIds, string InputFilename, SubmissionStatus? Status, bool? Retrieved, int Limit), List<ISubmission>>
@@ -51,22 +50,62 @@ namespace Indico.RPAActivities.Activities
         [LocalizedDescription(nameof(Resources.ListSubmissions_Submissions_Description))]
         [LocalizedCategory(nameof(Resources.Output_Category))]
         public OutArgument<List<ISubmission>> Submissions { get; set; }
-
-        protected override (List<int> WorkflowIds, List<int> SubmissionIds, string InputFilename, SubmissionStatus? Status, bool? Retrieved, int Limit) GetInputs(AsyncCodeActivityContext ctx) =>
-            (WorkflowIDs.Get(ctx), SubmissionIDs.Get(ctx), InputFilename.Get(ctx), Status.Get(ctx), Retrieved.Get(ctx), Limit.Get(ctx));
-
-        protected override async Task<List<ISubmission>> ExecuteAsync((List<int> WorkflowIds, List<int> SubmissionIds, string InputFilename, SubmissionStatus? Status, bool? Retrieved, int Limit) p, CancellationToken cancellationToken)
+        protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
-            return Task.Factory.
+
+            base.CacheMetadata(metadata);
         }
 
-        protected async Task<List<ISubmission>> Execute((List<int> WorkflowIds, List<int> SubmissionIds, string InputFilename, SubmissionStatus? Status, bool? Retrieved, int Limit) p, CancellationToken cancellationToken)
+        protected override async Task<Action<AsyncCodeActivityContext>> ExecuteAsync(AsyncCodeActivityContext context, CancellationToken cancellationToken)
         {
-            return (await Application.ListSubmissions(p.SubmissionIds, p.WorkflowIds, p.InputFilename, p.Status, p.Retrieved, p.Limit, cancellationToken)).ToList();
+            // Inputs
+            var timeout = TimeoutMS.Get(context);
+
+            var cts =  CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+            cts.CancelAfter(timeout);
+           
+            // Set a timeout on the execution
+            var task = ExecuteWithTimeout(context, cts.Token);
+            var timer = Task.Delay(timeout, cts.Token);
+            var completedTask = await Task.WhenAny(task, timer);
+            if (completedTask == task)
+            {
+                // Outputs
+                return (ctx) =>
+                {
+                    Results(ctx, task.Result);
+                };
+            }
+
+            else
+            {
+                throw new TimeoutException(Resources.Timeout_Error);
+            }
+
+         
         }
 
+        protected void Results(AsyncCodeActivityContext context, IEnumerable<ISubmission> result)
+        {
+            Submissions.Set(context,result?.ToList());
+        }
+        protected async Task<IEnumerable<ISubmission>> ExecuteWithTimeout(AsyncCodeActivityContext context, CancellationToken cancellationToken = default)
+        {
+            ///////////////////////////
+            // Add execution logic HERE
 
-        protected override void SetOutputs(AsyncCodeActivityContext ctx, List<ISubmission> submissions) => Submissions.Set(ctx, submissions);
+            ///////////////////////////
+            ///
+            var submissionIds = SubmissionIDs.Get(context);
+            var workflowIds = WorkflowIDs.Get(context);
+            var retrieved = Retrieved.Get(context);
+            var limit = Limit.Get(context);
+            var inputFilename = InputFilename.Get(context);
+            var submissionStatus = Status.Get(context);
+
+            return await Application.ListSubmissions(submissionIds, workflowIds, inputFilename, submissionStatus, retrieved, limit, cancellationToken);
+        }
+
     }
 }
 

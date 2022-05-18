@@ -549,4 +549,28 @@
     <value>SubmissionID</value>
     <comment>property name</comment>
   </data>
+  <data name="ListWithTimeout_DisplayName" xml:space="preserve">
+    <value>ListWithTimeout</value>
+    <comment>activity name</comment>
+  </data>
+  <data name="ListWithTimeout_Description" xml:space="preserve">
+    <value>test</value>
+    <comment>activity description</comment>
+  </data>
+  <data name="ListWithTimeout_One_DisplayName" xml:space="preserve">
+    <value>One</value>
+    <comment>property name</comment>
+  </data>
+  <data name="ListWithTimeout_One_Description" xml:space="preserve">
+    <value>One</value>
+    <comment>property description</comment>
+  </data>
+  <data name="ContinueOnError_Description" xml:space="preserve">
+    <value>Continue this flow on error</value>
+    <comment>property description</comment>
+  </data>
+  <data name="ContinueOnError_DisplayName" xml:space="preserve">
+    <value>Continue On Error</value>
+    <comment>property name</comment>
+  </data>
 </root>

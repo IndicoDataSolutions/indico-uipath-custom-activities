@@ -86,6 +86,7 @@ namespace Indico.RPAActivities
 
         public Task<IEnumerable<ISubmission>> ListSubmissions(List<int> submissionIds, List<int> workflowIds, string inputFilename, SubmissionStatus? status, bool? retrieved, int limit, CancellationToken cancellationToken = default)
         {
+
             if (string.IsNullOrWhiteSpace(inputFilename))
             {
                 inputFilename = null;

@@ -8,7 +8,7 @@ using UiPath.Shared.Activities.Localization;
 
 namespace Indico.RPAActivities.Activities
 {
-    [LocalizedCategory(nameof(Resources.RootCategory))]
+   
     [LocalizedDisplayName(nameof(Resources.IndicoScope_DisplayName))]
     [LocalizedDescription(nameof(Resources.IndicoScope_Description))]
     public class IndicoScope : NativeActivity
