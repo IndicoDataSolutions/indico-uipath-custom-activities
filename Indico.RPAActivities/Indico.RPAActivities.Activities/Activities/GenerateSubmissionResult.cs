@@ -28,8 +28,8 @@ namespace Indico.RPAActivities.Activities
         protected override int GetInputs(AsyncCodeActivityContext ctx) =>
             SubmissionID.Get(ctx);
 
-        protected override Task<string> ExecuteWithTimeout(int input, CancellationToken cancellationToken) =>
-            Application.GenerateSubmissionResult(input, cancellationToken);
+        protected async override Task<string> ExecuteWithTimeout(int input, CancellationToken cancellationToken) =>
+            await Application.GenerateSubmissionResult(input, cancellationToken);
 
         protected override void SetResults(AsyncCodeActivityContext ctx, string output) => Result.Set(ctx, output);
     }

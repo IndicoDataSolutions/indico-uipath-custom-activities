@@ -6,7 +6,7 @@
     <SharedGUID>4546856d-ea50-45c6-9419-eeeacb5a80aa</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>UiPath.Shared.Activities</Import_RootNamespace>
+    <Import_RootNamespace>Indico.UiPath.Shared.Activities</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ActivitiesConstraints.cs" />
@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Runtime\AsyncTaskCodeActivity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Runtime\AsyncTaskNativeActivity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Runtime\AsyncTaskNativeImplementation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Runtime\TaskActivity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\ChildActivityExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Runtime\BookmarkResumptionHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Runtime\ContinuableAsyncCodeActivity.cs" />

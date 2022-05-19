@@ -42,8 +42,8 @@ namespace Indico.RPAActivities.Activities
         protected override (int SubmissionId, JObject Changes, bool Rejected, bool? ForceComplete) GetInputs(AsyncCodeActivityContext ctx)
             => (SubmissionID.Get(ctx), Changes.Get(ctx), Rejected.Get(ctx), ForceComplete.Get(ctx));
 
-        protected override Task<JObject> ExecuteWithTimeout((int SubmissionId, JObject Changes, bool Rejected, bool? ForceComplete) input, CancellationToken cancellationToken)
-            => Application.SubmitReview(input.SubmissionId, input.Changes, input.Rejected, input.ForceComplete, cancellationToken);
+        protected async override Task<JObject> ExecuteWithTimeout((int SubmissionId, JObject Changes, bool Rejected, bool? ForceComplete) input, CancellationToken cancellationToken)
+            => await Application.SubmitReview(input.SubmissionId, input.Changes, input.Rejected, input.ForceComplete, cancellationToken);
 
         protected override void SetResults(AsyncCodeActivityContext ctx, JObject output) => Result.Set(ctx, output);
     }

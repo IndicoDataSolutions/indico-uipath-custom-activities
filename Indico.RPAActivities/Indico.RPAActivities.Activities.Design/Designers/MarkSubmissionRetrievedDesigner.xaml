@@ -1,4 +1,4 @@
-<sap:ActivityDesigner x:Class="Indico.RPAActivities.Activities.Design.Designers.ListWithTimeoutDesigner"
+<sap:ActivityDesigner x:Class="Indico.RPAActivities.Activities.Design.Designers.MarkSubmissionRetrievedDesigner"
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:activity="clr-namespace:Indico.RPAActivities.Activities.Properties;assembly=Indico.RPAActivities.Activities"

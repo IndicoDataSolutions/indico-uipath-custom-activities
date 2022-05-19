@@ -691,6 +691,60 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Marks a submission as retrieved.
+        /// </summary>
+        public static string MarkSubmissionRetrieved_Description {
+            get {
+                return ResourceManager.GetString("MarkSubmissionRetrieved_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MarkSubmissionRetrieved.
+        /// </summary>
+        public static string MarkSubmissionRetrieved_DisplayName {
+            get {
+                return ResourceManager.GetString("MarkSubmissionRetrieved_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Result after update.
+        /// </summary>
+        public static string MarkSubmissionRetrieved_Result_Description {
+            get {
+                return ResourceManager.GetString("MarkSubmissionRetrieved_Result_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Result.
+        /// </summary>
+        public static string MarkSubmissionRetrieved_Result_DisplayName {
+            get {
+                return ResourceManager.GetString("MarkSubmissionRetrieved_Result_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submission id to mark as retrieved.
+        /// </summary>
+        public static string MarkSubmissionRetrieved_SubmissionID_Description {
+            get {
+                return ResourceManager.GetString("MarkSubmissionRetrieved_SubmissionID_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submission Id.
+        /// </summary>
+        public static string MarkSubmissionRetrieved_SubmissionID_DisplayName {
+            get {
+                return ResourceManager.GetString("MarkSubmissionRetrieved_SubmissionID_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Indico.OCR.
         /// </summary>
         public static string OCRCategory {
