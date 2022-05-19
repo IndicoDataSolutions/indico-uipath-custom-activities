@@ -5,7 +5,7 @@ using System.Activities.Presentation.Model;
 using System.IO;
 using System.Windows;
 
-namespace UiPath.Shared.Activities.Design.Controls
+namespace Indico.UiPath.Shared.Activities.Design.Controls
 {
     /// <summary>
     /// Interaction logic for FilePathControl.xaml

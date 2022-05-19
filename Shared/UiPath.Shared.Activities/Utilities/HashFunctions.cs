@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace UiPath.Shared.Activities.Utilities
+namespace Indico.UiPath.Shared.Activities.Utilities
 {
     public static class HashFunctions
     {

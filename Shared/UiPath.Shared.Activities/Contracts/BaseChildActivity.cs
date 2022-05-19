@@ -1,6 +1,6 @@
 ﻿using System.Activities;
 
-namespace UiPath.Shared.Activities.Contracts
+namespace Indico.UiPath.Shared.Activities.Contracts
 {
     /// <summary>
     /// 

@@ -3,7 +3,7 @@ using System.Activities;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace UiPath.Shared.Activities
+namespace Indico.UiPath.Shared.Activities
 {
     internal struct AsyncTaskNativeImplementation
     {
@@ -85,7 +85,7 @@ namespace UiPath.Shared.Activities
 
         public void BookmarkResumptionCallback(NativeActivityContext context, object value)
         {
-            if (value is Exception ex)
+            if (value is System.Exception ex)
             {
                 throw ex;
             }

@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Media.Animation;
 
-namespace UiPath.Shared.Activities.Design.Controls
+namespace Indico.UiPath.Shared.Activities.Design.Controls
 {
     /// <summary>
     /// Interaction logic for RestrictiveBodyConnector.xaml

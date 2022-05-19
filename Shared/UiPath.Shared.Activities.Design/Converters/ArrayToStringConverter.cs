@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace UiPath.Shared.Activities.Design.Converters
+namespace Indico.UiPath.Shared.Activities.Design.Converters
 {
     public class ArrayToStringConverter : IMultiValueConverter
     {

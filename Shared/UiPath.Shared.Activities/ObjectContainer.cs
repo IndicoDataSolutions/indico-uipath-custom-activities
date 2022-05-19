@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace UiPath.Shared.Activities
+namespace Indico.UiPath.Shared.Activities
 {
     /// <summary>
     /// A simple container for objects meant to be shared accross the application space.

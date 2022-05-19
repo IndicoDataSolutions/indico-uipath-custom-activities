@@ -16,27 +16,27 @@ namespace Indico.RPAActivities.IntegrationTests.Helpers
         private static string BaseUrl => Environment.GetEnvironmentVariable("INDICO_HOST");
         private static string ApiToken => Environment.GetEnvironmentVariable("INDICO_TOKEN");
 
-        //public static List<IDataSetFull> Invoke(this ListDatasets listDataSetsActivity) =>
-        //    listDataSetsActivity.Invoke<ListDatasets, List<IDataSetFull>>((lds, output) => lds.Datasets = output);
+        public static List<IDataSetFull> Invoke(this ListDatasets listDataSetsActivity) =>
+            listDataSetsActivity.Invoke<ListDatasets, List<IDataSetFull>>((lds, output) => lds.Datasets = output);
 
-        //public static List<IWorkflow> Invoke(this ListWorkflows listWorkflowsActivity) =>
-        //    listWorkflowsActivity.Invoke<ListWorkflows, List<IWorkflow>>((a, output) => a.Workflows = output);
+        public static List<IWorkflow> Invoke(this ListWorkflows listWorkflowsActivity) =>
+            listWorkflowsActivity.Invoke<ListWorkflows, List<IWorkflow>>((a, output) => a.Workflows = output);
 
-        //public static List<int> Invoke(this WorkflowSubmission workflowSubmissionActivity) =>
-        //    workflowSubmissionActivity
-                //.Invoke<WorkflowSubmission, List<int>>((a, output) => a.SubmissionIDs = output);
+        public static List<int> Invoke(this WorkflowSubmission workflowSubmissionActivity) =>
+            workflowSubmissionActivity
+                .Invoke<WorkflowSubmission, List<int>>((a, output) => a.SubmissionIDs = output);
 
         public static List<ISubmission> Invoke(this ListSubmissions listSubmissions) =>
             listSubmissions.Invoke<ListSubmissions, List<ISubmission>>((a, outArg) => a.Submissions = outArg);
 
-        //public static JObject Invoke(this SubmissionResult submissionResultActivity) =>
-        //    submissionResultActivity.Invoke<SubmissionResult, JObject>((a, outArg) => a.Result = outArg);
+        public static JObject Invoke(this SubmissionResult submissionResultActivity) =>
+            submissionResultActivity.Invoke<SubmissionResult, JObject>((a, outArg) => a.Result = outArg);
 
-        //public static JObject Invoke(this SubmitReview submitReviewActivity) =>
-        //    submitReviewActivity.Invoke<SubmitReview, JObject>((a, outArg) => a.Result = outArg);
+        public static JObject Invoke(this SubmitReview submitReviewActivity) =>
+            submitReviewActivity.Invoke<SubmitReview, JObject>((a, outArg) => a.Result = outArg);
 
-        //public static string Invoke(this DocumentExtraction documentExtractionActivity) =>
-        //    documentExtractionActivity.Invoke<DocumentExtraction, string>((a, outArg) => a.Results = outArg);
+        public static string Invoke(this DocumentExtraction documentExtractionActivity) =>
+            documentExtractionActivity.Invoke<DocumentExtraction, string>((a, outArg) => a.Results = outArg);
 
         public static TOutput Invoke<TActivity, TOutput>(this TActivity activity, Action<TActivity, OutArgument<TOutput>> setOutput)
             where TActivity : Activity

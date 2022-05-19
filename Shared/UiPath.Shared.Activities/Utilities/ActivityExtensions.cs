@@ -1,6 +1,6 @@
 ﻿using System.Activities;
 
-namespace UiPath.Shared.Activities.Utilities
+namespace Indico.UiPath.Shared.Activities.Utilities
 {
     static class ActivityExtensions
     {

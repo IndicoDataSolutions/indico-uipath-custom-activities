@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace UiPath.Shared.Activities.Design.Controls
+namespace Indico.UiPath.Shared.Activities.Design.Controls
 {
     /// <summary>
     /// Interaction logic for ComboboxControl.xaml

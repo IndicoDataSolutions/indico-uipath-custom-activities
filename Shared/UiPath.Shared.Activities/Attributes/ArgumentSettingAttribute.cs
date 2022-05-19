@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UiPath.Shared.Activities
+namespace Indico.UiPath.Shared.Activities
 {
     [AttributeUsage(AttributeTargets.Property)]
     public sealed class ArgumentSettingAttribute : Attribute

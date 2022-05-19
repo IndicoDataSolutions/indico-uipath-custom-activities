@@ -3,7 +3,7 @@ using System.Activities;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace UiPath.Shared.Activities
+namespace Indico.UiPath.Shared.Activities
 {
     public abstract class ContinuableAsyncCodeActivity : AsyncTaskCodeActivity
     {
@@ -15,7 +15,7 @@ namespace UiPath.Shared.Activities
             {
                 return base.BeginExecute(context, callback, state);
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 if (ContinueOnError.Get(context))
                 {
@@ -38,7 +38,7 @@ namespace UiPath.Shared.Activities
             {
                 base.EndExecute(context, result);
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 if (ContinueOnError.Get(context))
                 {

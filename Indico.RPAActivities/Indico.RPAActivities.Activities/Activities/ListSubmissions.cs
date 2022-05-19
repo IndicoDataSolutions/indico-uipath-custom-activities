@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Indico.RPAActivities.Activities.Properties;
 using Indico.RPAActivities.Activities.Activities;
-using UiPath.Shared.Activities.Localization;
+using Indico.UiPath.Shared.Activities.Localization;
 using IndicoV2.Submissions.Models;
 using System;
 using System.Linq;
@@ -13,7 +13,7 @@ namespace Indico.RPAActivities.Activities
 {
     [LocalizedDisplayName(nameof(Resources.ListSubmissions_DisplayName))]
     [LocalizedDescription(nameof(Resources.ListSubmissions_Description))]
-    public class ListSubmissions : IndicoActivityBase<(List<int> WorkflowIds, List<int> SubmissionIds, string InputFilename, SubmissionStatus? Status, bool? Retrieved, int Limit), List<ISubmission>>
+    public class ListSubmissions : IndicoActivityBase<(List<int> WorkflowIds, List<int> SubmissionIds, string InputFilename, SubmissionStatus? Status, bool? Retrieved, int Limit), IEnumerable<ISubmission>>
     {
         [LocalizedDisplayName(nameof(Resources.ListSubmissions_SubmissionIDs_DisplayName))]
         [LocalizedDescription(nameof(Resources.ListSubmissions_SubmissionIDs_Description))]
@@ -56,56 +56,22 @@ namespace Indico.RPAActivities.Activities
             base.CacheMetadata(metadata);
         }
 
-        protected override async Task<Action<AsyncCodeActivityContext>> ExecuteAsync(AsyncCodeActivityContext context, CancellationToken cancellationToken)
-        {
-            // Inputs
-            var timeout = TimeoutMS.Get(context);
 
-            var cts =  CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-            cts.CancelAfter(timeout);
-           
-            // Set a timeout on the execution
-            var task = ExecuteWithTimeout(context, cts.Token);
-            var timer = Task.Delay(timeout, cts.Token);
-            var completedTask = await Task.WhenAny(task, timer);
-            if (completedTask == task)
-            {
-                // Outputs
-                return (ctx) =>
-                {
-                    Results(ctx, task.Result);
-                };
-            }
-
-            else
-            {
-                throw new TimeoutException(Resources.Timeout_Error);
-            }
-
-         
-        }
-
-        protected void Results(AsyncCodeActivityContext context, IEnumerable<ISubmission> result)
+        protected override void SetResults(AsyncCodeActivityContext context, IEnumerable<ISubmission> result)
         {
             Submissions.Set(context,result?.ToList());
         }
-        protected async Task<IEnumerable<ISubmission>> ExecuteWithTimeout(AsyncCodeActivityContext context, CancellationToken cancellationToken = default)
+
+        protected override async Task<IEnumerable<ISubmission>> ExecuteWithTimeout((List<int> WorkflowIds, List<int> SubmissionIds, string InputFilename, SubmissionStatus? Status, bool? Retrieved, int Limit) p, CancellationToken cancellationToken = default)
         {
-            ///////////////////////////
-            // Add execution logic HERE
 
-            ///////////////////////////
-            ///
-            var submissionIds = SubmissionIDs.Get(context);
-            var workflowIds = WorkflowIDs.Get(context);
-            var retrieved = Retrieved.Get(context);
-            var limit = Limit.Get(context);
-            var inputFilename = InputFilename.Get(context);
-            var submissionStatus = Status.Get(context);
-
-            return await Application.ListSubmissions(submissionIds, workflowIds, inputFilename, submissionStatus, retrieved, limit, cancellationToken);
+            return await Application.ListSubmissions(p.SubmissionIds, p.WorkflowIds, p.InputFilename, p.Status, p.Retrieved, p.Limit, cancellationToken);
         }
 
+        protected override (List<int> WorkflowIds, List<int> SubmissionIds, string InputFilename, SubmissionStatus? Status, bool? Retrieved, int Limit) GetInputs(AsyncCodeActivityContext ctx)
+        {
+            return (WorkflowIDs.Get(ctx), SubmissionIDs.Get(ctx), InputFilename.Get(ctx), Status.Get(ctx), Retrieved.Get(ctx), Limit.Get(ctx));
+        }
     }
 }
 

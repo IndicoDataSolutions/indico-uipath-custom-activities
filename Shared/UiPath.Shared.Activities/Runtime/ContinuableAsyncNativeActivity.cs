@@ -2,7 +2,7 @@
 using System.Activities;
 using System.Diagnostics;
 
-namespace UiPath.Shared.Activities
+namespace Indico.UiPath.Shared.Activities
 {
     public abstract class ContinuableAsyncNativeActivity : AsyncTaskNativeActivity
     {
@@ -14,7 +14,7 @@ namespace UiPath.Shared.Activities
             {
                 base.Execute(context);
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 if (ContinueOnError.Get(context))
                 {
@@ -33,7 +33,7 @@ namespace UiPath.Shared.Activities
             {
                 base.BookmarkResumptionCallback(context, bookmark, value);
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 if (ContinueOnError.Get(context))
                 {
@@ -57,7 +57,7 @@ namespace UiPath.Shared.Activities
             {
                 base.Execute(context);
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 if (ContinueOnError.Get(context))
                 {
@@ -76,7 +76,7 @@ namespace UiPath.Shared.Activities
             {
                 base.BookmarkResumptionCallback(context, bookmark, value);
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 if (ContinueOnError.Get(context))
                 {

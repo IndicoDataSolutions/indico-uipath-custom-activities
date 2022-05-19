@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
-using UiPath.Shared.Localization;
+using Indico.UiPath.Shared.Localization;
 
-namespace UiPath.Shared.Activities.Localization
+namespace Indico.UiPath.Shared.Activities.Localization
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class LocalizedCategoryAttribute : CategoryAttribute

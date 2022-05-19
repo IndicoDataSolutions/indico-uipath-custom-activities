@@ -4,7 +4,7 @@ using System.Runtime.ExceptionServices;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace UiPath.Shared.Activities
+namespace Indico.UiPath.Shared.Activities
 {
     internal struct AsyncTaskCodeActivityImplementation : IDisposable
     {

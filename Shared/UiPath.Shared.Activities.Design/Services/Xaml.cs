@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Xaml;
 
-namespace UiPath.Shared.Activities.Design.Services
+namespace Indico.UiPath.Shared.Activities.Design.Services
 {
     public static class Xaml
     {
