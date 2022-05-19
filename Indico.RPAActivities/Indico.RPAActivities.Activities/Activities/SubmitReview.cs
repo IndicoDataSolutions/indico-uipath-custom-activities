@@ -8,7 +8,7 @@ using Indico.UiPath.Shared.Activities.Localization;
 
 namespace Indico.RPAActivities.Activities
 {
-    [LocalizedCategory(nameof(Resources.SubmissionCategory))]
+    
     [LocalizedDisplayName(nameof(Resources.SubmitReview_DisplayName))]
     [LocalizedDescription(nameof(Resources.SubmitReview_Description))]
     public class SubmitReview : IndicoActivityBase<(int SubmissionId, JObject Changes, bool Rejected, bool? ForceComplete), JObject>
@@ -38,14 +38,14 @@ namespace Indico.RPAActivities.Activities
         [LocalizedDescription(nameof(Resources.SubmitReview_Result_Description))]
         [LocalizedCategory(nameof(Resources.Output_Category))]
         public OutArgument<JObject> Result { get; set; }
-        
+
         protected override (int SubmissionId, JObject Changes, bool Rejected, bool? ForceComplete) GetInputs(AsyncCodeActivityContext ctx)
             => (SubmissionID.Get(ctx), Changes.Get(ctx), Rejected.Get(ctx), ForceComplete.Get(ctx));
 
-        protected override Task<JObject> ExecuteAsync((int SubmissionId, JObject Changes, bool Rejected, bool? ForceComplete) input, CancellationToken cancellationToken)
-            => Application.SubmitReview(input.SubmissionId, input.Changes, input.Rejected, input.ForceComplete, cancellationToken);
+        protected async override Task<JObject> ExecuteWithTimeout((int SubmissionId, JObject Changes, bool Rejected, bool? ForceComplete) input, CancellationToken cancellationToken)
+            => await Application.SubmitReview(input.SubmissionId, input.Changes, input.Rejected, input.ForceComplete, cancellationToken);
 
-        protected override void SetOutputs(AsyncCodeActivityContext ctx, JObject output) => Result.Set(ctx, output);
+        protected override void SetResults(AsyncCodeActivityContext ctx, JObject output) => Result.Set(ctx, output);
     }
 }
 

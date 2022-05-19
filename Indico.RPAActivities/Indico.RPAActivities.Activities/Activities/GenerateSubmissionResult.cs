@@ -10,7 +10,6 @@ using System;
 
 namespace Indico.RPAActivities.Activities
 {
-    [LocalizedCategory(nameof(Resources.SubmissionCategory))]
     [LocalizedDisplayName(nameof(Resources.GenerateSubmissionResult_DisplayName))]
     [LocalizedDescription(nameof(Resources.GenerateSubmissionResult_Description))]
     public class GenerateSubmissionResult : IndicoActivityBase<int, string>
@@ -29,10 +28,10 @@ namespace Indico.RPAActivities.Activities
         protected override int GetInputs(AsyncCodeActivityContext ctx) =>
             SubmissionID.Get(ctx);
 
-        protected override Task<string> ExecuteAsync(int input, CancellationToken cancellationToken) =>
-            Application.GenerateSubmissionResult(input, cancellationToken);
+        protected async override Task<string> ExecuteWithTimeout(int input, CancellationToken cancellationToken) =>
+            await Application.GenerateSubmissionResult(input, cancellationToken);
 
-        protected override void SetOutputs(AsyncCodeActivityContext ctx, string output) => Result.Set(ctx, output);
+        protected override void SetResults(AsyncCodeActivityContext ctx, string output) => Result.Set(ctx, output);
     }
 }
 

@@ -10,10 +10,9 @@ using IndicoV2.Workflows.Models;
 
 namespace Indico.RPAActivities.Activities
 {
-    [LocalizedCategory(nameof(Resources.WorkflowCategory))]
     [LocalizedDisplayName(nameof(Resources.ListWorkflows_DisplayName))]
     [LocalizedDescription(nameof(Resources.ListWorkflows_Description))]
-    public class ListWorkflows : IndicoActivityBase<int, List<IWorkflow>>
+    public class ListWorkflows : IndicoActivityBase<int, IEnumerable<IWorkflow>>
     {
         [LocalizedDisplayName(nameof(Resources.ListWorkflows_DatasetID_DisplayName))]
         [LocalizedDescription(nameof(Resources.ListWorkflows_DatasetID_Description))]
@@ -28,9 +27,9 @@ namespace Indico.RPAActivities.Activities
 
         protected override int GetInputs(AsyncCodeActivityContext ctx) => DatasetID.Get(ctx);
 
-        protected override async Task<List<IWorkflow>> ExecuteAsync(int dataSetId, CancellationToken cancellationToken) =>
-            (await Application.ListWorkflows(dataSetId, cancellationToken)).ToList();
+        protected override async Task<IEnumerable<IWorkflow>> ExecuteWithTimeout(int dataSetId, CancellationToken cancellationToken) =>
+            await Application.ListWorkflows(dataSetId, cancellationToken);
 
-        protected override void SetOutputs(AsyncCodeActivityContext ctx, List<IWorkflow> output) => Workflows.Set(ctx, output);
+        protected override void SetResults(AsyncCodeActivityContext ctx, IEnumerable<IWorkflow> output) => Workflows.Set(ctx, output.ToList());
     }
 }

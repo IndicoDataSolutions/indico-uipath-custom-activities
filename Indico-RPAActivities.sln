@@ -11,22 +11,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Indico.RPAActivities.Activi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Indico.RPAActivities.Activities.Design", "Indico.RPAActivities\Indico.RPAActivities.Activities.Design\Indico.RPAActivities.Activities.Design.csproj", "{86F25D09-FAC6-4472-B6C9-11511CFB6D4F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{B1C368CB-01F3-4BC4-B81D-9B382D2567EA}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Indico.RPAActivities.IntegrationTests", "Indico.RPAActivities\Indico.RPAActivities.IntegrationTests\Indico.RPAActivities.IntegrationTests.csproj", "{BA50C5C3-35C0-4988-9437-D3200C5CEA49}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Indico.UiPath.Shared.Activities.Tests", "Shared\Indico.UiPath.Shared.Activities.Tests\Indico.UiPath.Shared.Activities.Tests.csproj", "{0264EE69-D015-4AAC-908E-AED8E4EF71FD}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{6CE429F6-E855-49B9-BF24-0449E5FE1FC8}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Indico.UiPath.Shared.Activities", "Shared\Indico.UiPath.Shared.Activities\Indico.UiPath.Shared.Activities.shproj", "{4546856D-EA50-45C6-9419-EEEACB5A80AA}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UiPath.Shared.Activities", "Shared\UiPath.Shared.Activities\UiPath.Shared.Activities.shproj", "{4546856D-EA50-45C6-9419-EEEACB5A80AA}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Indico.UiPath.Shared.Activities.Design", "Shared\Indico.UiPath.Shared.Activities.Design\Indico.UiPath.Shared.Activities.Design.shproj", "{DF9C43F0-ADD3-4FBF-995E-84B92F9CBF25}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UiPath.Shared.Activities.Design", "Shared\UiPath.Shared.Activities.Design\UiPath.Shared.Activities.Design.shproj", "{DF9C43F0-ADD3-4FBF-995E-84B92F9CBF25}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Shared\Indico.UiPath.Shared.Activities\Indico.UiPath.Shared.Activities.projitems*{4546856d-ea50-45c6-9419-eeeacb5a80aa}*SharedItemsImports = 13
-		Shared\Indico.UiPath.Shared.Activities\Indico.UiPath.Shared.Activities.projitems*{51f8b27e-a131-47d6-a8dc-2e57f29172b8}*SharedItemsImports = 5
-		Shared\Indico.UiPath.Shared.Activities.Design\Indico.UiPath.Shared.Activities.Design.projitems*{86f25d09-fac6-4472-b6c9-11511cfb6d4f}*SharedItemsImports = 5
-		Shared\Indico.UiPath.Shared.Activities.Design\Indico.UiPath.Shared.Activities.Design.projitems*{df9c43f0-add3-4fbf-995e-84b92f9cbf25}*SharedItemsImports = 13
+		Shared\UiPath.Shared.Activities\UiPath.Shared.Activities.projitems*{4546856d-ea50-45c6-9419-eeeacb5a80aa}*SharedItemsImports = 13
+		Shared\UiPath.Shared.Activities\UiPath.Shared.Activities.projitems*{51f8b27e-a131-47d6-a8dc-2e57f29172b8}*SharedItemsImports = 5
+		Shared\UiPath.Shared.Activities.Design\UiPath.Shared.Activities.Design.projitems*{86f25d09-fac6-4472-b6c9-11511cfb6d4f}*SharedItemsImports = 5
+		Shared\UiPath.Shared.Activities.Design\UiPath.Shared.Activities.Design.projitems*{df9c43f0-add3-4fbf-995e-84b92f9cbf25}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,10 +47,6 @@ Global
 		{BA50C5C3-35C0-4988-9437-D3200C5CEA49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA50C5C3-35C0-4988-9437-D3200C5CEA49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA50C5C3-35C0-4988-9437-D3200C5CEA49}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0264EE69-D015-4AAC-908E-AED8E4EF71FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0264EE69-D015-4AAC-908E-AED8E4EF71FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0264EE69-D015-4AAC-908E-AED8E4EF71FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0264EE69-D015-4AAC-908E-AED8E4EF71FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,9 +56,8 @@ Global
 		{51F8B27E-A131-47D6-A8DC-2E57F29172B8} = {48DE06B4-1D5A-4D7B-837C-56EBDB9FDC80}
 		{86F25D09-FAC6-4472-B6C9-11511CFB6D4F} = {48DE06B4-1D5A-4D7B-837C-56EBDB9FDC80}
 		{BA50C5C3-35C0-4988-9437-D3200C5CEA49} = {48DE06B4-1D5A-4D7B-837C-56EBDB9FDC80}
-		{0264EE69-D015-4AAC-908E-AED8E4EF71FD} = {B1C368CB-01F3-4BC4-B81D-9B382D2567EA}
-		{4546856D-EA50-45C6-9419-EEEACB5A80AA} = {B1C368CB-01F3-4BC4-B81D-9B382D2567EA}
-		{DF9C43F0-ADD3-4FBF-995E-84B92F9CBF25} = {B1C368CB-01F3-4BC4-B81D-9B382D2567EA}
+		{4546856D-EA50-45C6-9419-EEEACB5A80AA} = {6CE429F6-E855-49B9-BF24-0449E5FE1FC8}
+		{DF9C43F0-ADD3-4FBF-995E-84B92F9CBF25} = {6CE429F6-E855-49B9-BF24-0449E5FE1FC8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AB6B0D92-AB63-4156-A537-B946B44D2A53}

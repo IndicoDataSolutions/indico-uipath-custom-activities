@@ -25,10 +25,10 @@
     </PropertyGroup>
     <!-- Package Versions -->
     <PropertyGroup Condition="'$(Configuration)' == 'Debug' AND '$(DesignTimeBuild)' != 'true'">
-        <PackageVersion>2.3.3.$([System.DateTime]::UtcNow.ToString(MMddHHmm))</PackageVersion>
+        <PackageVersion>2.5.0.$([System.DateTime]::UtcNow.ToString(MMddHHmm))</PackageVersion>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-        <PackageVersion>2.3.4</PackageVersion>
+        <PackageVersion>2.5.0</PackageVersion>
     </PropertyGroup>
     <ItemGroup>
         <None Remove="Designers\DocumentExtractionDesigner.xaml" />
@@ -38,6 +38,7 @@
         <None Remove="Designers\ListDatasetsDesigner.xaml" />
         <None Remove="Designers\ListSubmissionsDesigner.xaml" />
         <None Remove="Designers\ListWorkflowsDesigner.xaml" />
+        <None Remove="Designers\MarkSubmissionRetrievedDesigner.xaml" />
         <None Remove="Designers\SubmissionResultDesigner.xaml" />
         <None Remove="Designers\SubmitReviewDesigner.xaml" />
         <None Remove="Designers\WorkflowSubmissionDesigner.xaml" />
@@ -109,6 +110,9 @@
         <Page Include="Designers\ListWorkflowsDesigner.xaml">
             <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
         </Page>
+        <Page Include="Designers\MarkSubmissionRetrievedDesigner.xaml">
+          <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+        </Page>
         <Page Include="Designers\SubmissionResultDesigner.xaml">
           <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
         </Page>
@@ -132,7 +136,7 @@
 	<ItemGroup>
         <!--workaround: required so nuget packages have all required dependencies-->
 		<ProjectReference Include="..\Indico.RPAActivities\Indico.RPAActivities.csproj" PrivateAssets="All" />
-        <PackageReference Include="IndicoClient" Version="2.1.0" />
+        <PackageReference Include="IndicoClient" Version="2.4.0-alpha1" />
         <!--workaround: required so nuget packages have all required dependencies-->
 	</ItemGroup>
 
@@ -152,5 +156,5 @@
             <DependentUpon>Resources.resx</DependentUpon>
         </EmbeddedResource>
     </ItemGroup>
-    <Import Project="..\..\Shared\Indico.UiPath.Shared.Activities.Design\Indico.UiPath.Shared.Activities.Design.projitems" Label="Shared" />
+    <Import Project="..\..\Shared\UiPath.Shared.Activities.Design\UiPath.Shared.Activities.Design.projitems" Label="Shared" />
 </Project>

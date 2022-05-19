@@ -19,11 +19,11 @@ namespace Indico.RPAActivities.IntegrationTests.Activities
         [Theory]
         public void DocumentExtraction_ShouldReturnResult(DocumentExtractionPreset preset) =>
             new DocumentExtraction
-                {
-                    Document = _testData.GetFilePath(),
-                    TimeoutMS = (int)TimeSpan.FromMinutes(10).TotalMilliseconds,
-                    Preset = preset,
-                }
+            {
+                Document = _testData.GetFilePath(),
+                TimeoutMS = (int)TimeSpan.FromMinutes(10).TotalMilliseconds,
+                Preset = preset,
+            }
                 .Invoke()
                 .Should()
                 .StartWith("Our Google properties revenues");

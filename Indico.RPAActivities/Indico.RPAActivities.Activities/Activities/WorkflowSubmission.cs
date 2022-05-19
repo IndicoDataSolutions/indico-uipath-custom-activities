@@ -10,10 +10,10 @@ using Indico.UiPath.Shared.Activities.Localization;
 
 namespace Indico.RPAActivities.Activities
 {
-    [LocalizedCategory(nameof(Resources.WorkflowCategory))]
+    
     [LocalizedDisplayName(nameof(Resources.WorkflowSubmission_DisplayName))]
     [LocalizedDescription(nameof(Resources.WorkflowSubmission_Description))]
-    public class WorkflowSubmission : IndicoActivityBase<(int WorkflowId, List<string> FilePaths, List<string> Urls), List<int>>
+    public class WorkflowSubmission : IndicoActivityBase<(int WorkflowId, List<string> FilePaths, List<string> Urls), IEnumerable<int>>
     {
         [LocalizedDisplayName(nameof(Resources.WorkflowSubmission_WorkflowID_DisplayName))]
         [LocalizedDescription(nameof(Resources.WorkflowSubmission_WorkflowID_Description))]
@@ -39,7 +39,7 @@ namespace Indico.RPAActivities.Activities
         protected override (int WorkflowId, List<string> FilePaths, List<string> Urls) GetInputs(AsyncCodeActivityContext ctx)
             => (WorkflowID.Get(ctx), FilePaths.Get(ctx), Urls.Get(ctx));
 
-        protected override async Task<List<int>> ExecuteAsync((int WorkflowId, List<string> FilePaths, List<string> Urls) input, CancellationToken cancellationToken)
+        protected override async Task<IEnumerable<int>> ExecuteWithTimeout((int WorkflowId, List<string> FilePaths, List<string> Urls) input, CancellationToken cancellationToken)
         {
             var filePathsProvided = ValuesProvided(input.FilePaths);
             var urisProvided = ValuesProvided(input.Urls);
@@ -49,7 +49,7 @@ namespace Indico.RPAActivities.Activities
                 throw new ArgumentException(string.Format(Resources.ValidationExclusiveProperties_Error, nameof(FilePaths), nameof(Urls)));
             }
 
-            return (await Application.WorkflowSubmission(input.WorkflowId, input.FilePaths, input.Urls, cancellationToken)).ToList();
+            return await Application.WorkflowSubmission(input.WorkflowId, input.FilePaths, input.Urls, cancellationToken);
         }
 
         private bool ValuesProvided<T>(IEnumerable<T> enumerable)
@@ -62,7 +62,7 @@ namespace Indico.RPAActivities.Activities
             return false;
         }
 
-        protected override void SetOutputs(AsyncCodeActivityContext ctx, List<int> output) => SubmissionIDs.Set(ctx, output);
+        protected override void SetResults(AsyncCodeActivityContext ctx, IEnumerable<int> output) => SubmissionIDs.Set(ctx, output.ToList());
     }
 }
 

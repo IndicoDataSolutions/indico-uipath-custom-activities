@@ -7,13 +7,13 @@ using Indico.RPAActivities.Activities.Activities;
 using Indico.UiPath.Shared.Activities.Localization;
 using IndicoV2.Submissions.Models;
 using System;
+using System.Linq;
 
 namespace Indico.RPAActivities.Activities
 {
-    [LocalizedCategory(nameof(Resources.SubmissionCategory))]
     [LocalizedDisplayName(nameof(Resources.ListSubmissions_DisplayName))]
     [LocalizedDescription(nameof(Resources.ListSubmissions_Description))]
-    public class ListSubmissions : IndicoActivityBase<(List<int> WorkflowIds, List<int> SubmissionIds, string InputFilename, SubmissionStatus? Status, bool? Retrieved, int Limit), List<ISubmission>>
+    public class ListSubmissions : IndicoActivityBase<(List<int> WorkflowIds, List<int> SubmissionIds, string InputFilename, SubmissionStatus? Status, bool? Retrieved, int Limit), IEnumerable<ISubmission>>
     {
         [LocalizedDisplayName(nameof(Resources.ListSubmissions_SubmissionIDs_DisplayName))]
         [LocalizedDescription(nameof(Resources.ListSubmissions_SubmissionIDs_Description))]
@@ -50,14 +50,28 @@ namespace Indico.RPAActivities.Activities
         [LocalizedDescription(nameof(Resources.ListSubmissions_Submissions_Description))]
         [LocalizedCategory(nameof(Resources.Output_Category))]
         public OutArgument<List<ISubmission>> Submissions { get; set; }
+        protected override void CacheMetadata(CodeActivityMetadata metadata)
+        {
 
-        protected override (List<int> WorkflowIds, List<int> SubmissionIds, string InputFilename, SubmissionStatus? Status, bool? Retrieved, int Limit) GetInputs(AsyncCodeActivityContext ctx) =>
-            (WorkflowIDs.Get(ctx), SubmissionIDs.Get(ctx), InputFilename.Get(ctx), Status.Get(ctx), Retrieved.Get(ctx), Limit.Get(ctx));
+            base.CacheMetadata(metadata);
+        }
 
-        protected override async Task<List<ISubmission>> ExecuteAsync((List<int> WorkflowIds, List<int> SubmissionIds, string InputFilename, SubmissionStatus? Status, bool? Retrieved, int Limit) p, CancellationToken cancellationToken) =>
-            await Application.ListSubmissions(p.SubmissionIds, p.WorkflowIds, p.InputFilename, p.Status, p.Retrieved, p.Limit, cancellationToken);
 
-        protected override void SetOutputs(AsyncCodeActivityContext ctx, List<ISubmission> submissions) => Submissions.Set(ctx, submissions);
+        protected override void SetResults(AsyncCodeActivityContext context, IEnumerable<ISubmission> result)
+        {
+            Submissions.Set(context,result?.ToList());
+        }
+
+        protected override async Task<IEnumerable<ISubmission>> ExecuteWithTimeout((List<int> WorkflowIds, List<int> SubmissionIds, string InputFilename, SubmissionStatus? Status, bool? Retrieved, int Limit) p, CancellationToken cancellationToken = default)
+        {
+
+            return await Application.ListSubmissions(p.SubmissionIds, p.WorkflowIds, p.InputFilename, p.Status, p.Retrieved, p.Limit, cancellationToken);
+        }
+
+        protected override (List<int> WorkflowIds, List<int> SubmissionIds, string InputFilename, SubmissionStatus? Status, bool? Retrieved, int Limit) GetInputs(AsyncCodeActivityContext ctx)
+        {
+            return (WorkflowIDs.Get(ctx), SubmissionIDs.Get(ctx), InputFilename.Get(ctx), Status.Get(ctx), Retrieved.Get(ctx), Limit.Get(ctx));
+        }
     }
 }
 

@@ -549,4 +549,52 @@
     <value>SubmissionID</value>
     <comment>property name</comment>
   </data>
+  <data name="ListWithTimeout_DisplayName" xml:space="preserve">
+    <value>ListWithTimeout</value>
+    <comment>activity name</comment>
+  </data>
+  <data name="ListWithTimeout_Description" xml:space="preserve">
+    <value>test</value>
+    <comment>activity description</comment>
+  </data>
+  <data name="ListWithTimeout_One_DisplayName" xml:space="preserve">
+    <value>One</value>
+    <comment>property name</comment>
+  </data>
+  <data name="ListWithTimeout_One_Description" xml:space="preserve">
+    <value>One</value>
+    <comment>property description</comment>
+  </data>
+  <data name="ContinueOnError_Description" xml:space="preserve">
+    <value>Continue this flow on error</value>
+    <comment>property description</comment>
+  </data>
+  <data name="ContinueOnError_DisplayName" xml:space="preserve">
+    <value>Continue On Error</value>
+    <comment>property name</comment>
+  </data>
+  <data name="MarkSubmissionRetrieved_DisplayName" xml:space="preserve">
+    <value>MarkSubmissionRetrieved</value>
+    <comment>activity name</comment>
+  </data>
+  <data name="MarkSubmissionRetrieved_Description" xml:space="preserve">
+    <value>Marks a submission as retrieved</value>
+    <comment>activity description</comment>
+  </data>
+  <data name="MarkSubmissionRetrieved_Result_Description" xml:space="preserve">
+    <value>Result after update</value>
+    <comment>property description</comment>
+  </data>
+  <data name="MarkSubmissionRetrieved_Result_DisplayName" xml:space="preserve">
+    <value>Result</value>
+    <comment>property name</comment>
+  </data>
+  <data name="MarkSubmissionRetrieved_SubmissionID_Description" xml:space="preserve">
+    <value>Submission id to mark as retrieved</value>
+    <comment>property description</comment>
+  </data>
+  <data name="MarkSubmissionRetrieved_SubmissionID_DisplayName" xml:space="preserve">
+    <value>Submission Id</value>
+    <comment>property name</comment>
+  </data>
 </root>

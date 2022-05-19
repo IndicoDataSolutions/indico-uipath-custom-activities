@@ -19,7 +19,7 @@ namespace Indico.RPAActivities.Activities.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -75,6 +75,24 @@ namespace Indico.RPAActivities.Activities.Properties {
         public static string Common_Category {
             get {
                 return ResourceManager.GetString("Common_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Continue this flow on error.
+        /// </summary>
+        public static string ContinueOnError_Description {
+            get {
+                return ResourceManager.GetString("ContinueOnError_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Continue On Error.
+        /// </summary>
+        public static string ContinueOnError_DisplayName {
+            get {
+                return ResourceManager.GetString("ContinueOnError_DisplayName", resourceCulture);
             }
         }
         
@@ -583,6 +601,42 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to test.
+        /// </summary>
+        public static string ListWithTimeout_Description {
+            get {
+                return ResourceManager.GetString("ListWithTimeout_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ListWithTimeout.
+        /// </summary>
+        public static string ListWithTimeout_DisplayName {
+            get {
+                return ResourceManager.GetString("ListWithTimeout_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One.
+        /// </summary>
+        public static string ListWithTimeout_One_Description {
+            get {
+                return ResourceManager.GetString("ListWithTimeout_One_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One.
+        /// </summary>
+        public static string ListWithTimeout_One_DisplayName {
+            get {
+                return ResourceManager.GetString("ListWithTimeout_One_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ID of dataset to query.
         /// </summary>
         public static string ListWorkflows_DatasetID_Description {
@@ -633,6 +687,60 @@ namespace Indico.RPAActivities.Activities.Properties {
         public static string ListWorkflows_Workflows_DisplayName {
             get {
                 return ResourceManager.GetString("ListWorkflows_Workflows_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Marks a submission as retrieved.
+        /// </summary>
+        public static string MarkSubmissionRetrieved_Description {
+            get {
+                return ResourceManager.GetString("MarkSubmissionRetrieved_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MarkSubmissionRetrieved.
+        /// </summary>
+        public static string MarkSubmissionRetrieved_DisplayName {
+            get {
+                return ResourceManager.GetString("MarkSubmissionRetrieved_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Result after update.
+        /// </summary>
+        public static string MarkSubmissionRetrieved_Result_Description {
+            get {
+                return ResourceManager.GetString("MarkSubmissionRetrieved_Result_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Result.
+        /// </summary>
+        public static string MarkSubmissionRetrieved_Result_DisplayName {
+            get {
+                return ResourceManager.GetString("MarkSubmissionRetrieved_Result_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submission id to mark as retrieved.
+        /// </summary>
+        public static string MarkSubmissionRetrieved_SubmissionID_Description {
+            get {
+                return ResourceManager.GetString("MarkSubmissionRetrieved_SubmissionID_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submission Id.
+        /// </summary>
+        public static string MarkSubmissionRetrieved_SubmissionID_DisplayName {
+            get {
+                return ResourceManager.GetString("MarkSubmissionRetrieved_SubmissionID_DisplayName", resourceCulture);
             }
         }
         
