@@ -62,6 +62,7 @@
         <DocumentationFile>bin\$(Configuration)\Indico.RPAActivities.Activities.Design.xml</DocumentationFile>
     </PropertyGroup>
     <ItemGroup>
+      <PackageReference Include="IndicoClient" Version="2.4.1" />
       <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     </ItemGroup>
     <ItemGroup>
@@ -136,7 +137,6 @@
 	<ItemGroup>
         <!--workaround: required so nuget packages have all required dependencies-->
 		<ProjectReference Include="..\Indico.RPAActivities\Indico.RPAActivities.csproj" PrivateAssets="All" />
-        <PackageReference Include="IndicoClient" Version="2.4.0-alpha1" />
         <!--workaround: required so nuget packages have all required dependencies-->
 	</ItemGroup>
 

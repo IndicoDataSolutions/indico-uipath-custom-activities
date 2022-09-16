@@ -10,6 +10,7 @@
         <DocumentationFile>bin\$(Configuration)\Indico.RPAActivities.Activities.xml</DocumentationFile>
     </PropertyGroup>
     <ItemGroup>
+      <PackageReference Include="IndicoClient" Version="2.4.1" />
       <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     </ItemGroup>
     <ItemGroup>
