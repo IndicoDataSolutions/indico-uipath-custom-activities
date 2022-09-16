@@ -25,10 +25,10 @@
     </PropertyGroup>
     <!-- Package Versions -->
     <PropertyGroup Condition="'$(Configuration)' == 'Debug' AND '$(DesignTimeBuild)' != 'true'">
-        <PackageVersion>2.5.0.$([System.DateTime]::UtcNow.ToString(MMddHHmm))</PackageVersion>
+        <PackageVersion>2.5.1.$([System.DateTime]::UtcNow.ToString(MMddHHmm))</PackageVersion>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-        <PackageVersion>2.5.0</PackageVersion>
+        <PackageVersion>2.5.1</PackageVersion>
     </PropertyGroup>
     <ItemGroup>
         <None Remove="Designers\DocumentExtractionDesigner.xaml" />
