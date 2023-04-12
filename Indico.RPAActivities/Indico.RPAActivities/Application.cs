@@ -5,12 +5,10 @@ using System.Threading.Tasks;
 using System.Threading;
 using IndicoV2;
 using IndicoV2.DataSets.Models;
-using IndicoV2.Models.Models;
 using IndicoV2.Ocr.Models;
 using IndicoV2.Submissions.Models;
 using IndicoV2.Workflows.Models;
 using Newtonsoft.Json.Linq;
-using IndicoV2.V1Adapters.Submissions;
 using System.IO;
 
 namespace Indico.RPAActivities
