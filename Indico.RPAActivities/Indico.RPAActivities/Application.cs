@@ -11,6 +11,7 @@ using IndicoV2.Submissions.Models;
 using IndicoV2.Workflows.Models;
 using Newtonsoft.Json.Linq;
 using IndicoV2.V1Adapters.Submissions;
+using System.IO;
 
 namespace Indico.RPAActivities
 {
@@ -73,9 +74,26 @@ namespace Indico.RPAActivities
         public async Task<ISubmission> MarkSubmissionAsRetrieved(int submissionId, bool retrieved, CancellationToken cancellationToken = default) => await _client.Submissions().MarkSubmissionAsRetrieved(submissionId, retrieved, cancellationToken);
 
         public async Task<JObject> SubmissionResult(int submissionId, SubmissionStatus? checkStatus, CancellationToken cancellationToken = default)
-            => checkStatus.HasValue
-                ? await _client.GetSubmissionResultAwaiter().WaitReady(submissionId, checkStatus.Value, _checkInterval, cancellationToken)
-                : await _client.GetSubmissionResultAwaiter().WaitReady(submissionId, _checkInterval, cancellationToken);
+        {  
+            if (checkStatus.HasValue)
+            {
+                //wait for the submission to enter a particular state.
+                await _client.GetSubmissionResultAwaiter().WaitReady(submissionId, checkStatus.Value, _checkInterval, cancellationToken);
+            }
+            //fetch generate submission job result
+            string jobId = await _client.Submissions().GenerateSubmissionResultAsync(submissionId, cancellationToken);
+            JToken jobResult = await _client.Jobs().GetResultAsync<JToken>(jobId);
+            string jobResultUrl = jobResult.Value<string>("url");
+            //fetch the storage result
+            var storageResult = await _client.Storage().GetAsync(new Uri(jobResultUrl), default);
+            using (var reader = new StreamReader(storageResult))
+            {
+                //return a jobject of the results.
+               string resultAsString = reader.ReadToEnd();
+               return JObject.Parse(resultAsString);
+                
+            }
+        }
         /// <summary>
         /// Invoke generate submissions call.
         /// </summary>

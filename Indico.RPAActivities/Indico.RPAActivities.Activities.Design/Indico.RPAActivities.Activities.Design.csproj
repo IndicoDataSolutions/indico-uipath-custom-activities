@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>net461</TargetFramework>
+        <TargetFramework>net462</TargetFramework>
         <RootNamespace>Indico.RPAActivities.Activities.Design</RootNamespace>
         <AssemblyName>Indico.RPAActivities.Activities.Design</AssemblyName>
         <PackageId>Indico.RPAActivities.Activities</PackageId>
