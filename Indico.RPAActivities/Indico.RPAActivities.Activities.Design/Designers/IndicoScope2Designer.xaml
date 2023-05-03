@@ -1,12 +1,12 @@
-<sap:ActivityDesigner x:Class="Indico.RPAActivities.Activities.Design.Designers.IndicoIPADesigner"
+<sap:ActivityDesigner x:Class="Indico.RPAActivities.Activities.Design.Designers.IndicoScope2Designer"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sa="http://schemas.microsoft.com/netfx/2009/xaml/activities"
     xmlns:p="clr-namespace:Indico.RPAActivities.Activities.Design.Properties"
-    xmlns:sharedres="clr-namespace:Indico.UiPath.Shared.Localization"
+    xmlns:sharedres="clr-namespace:UiPath.Shared.Localization"
     xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
-    xmlns:converters="clr-namespace:Indico.UiPath.Shared.Activities.Design.Converters"
-    xmlns:uip="clr-namespace:Indico.UiPath.Shared.Activities.Design.Controls">
+    xmlns:converters="clr-namespace:UiPath.Shared.Activities.Design.Converters"
+    xmlns:uip="clr-namespace:UiPath.Shared.Activities.Design.Controls" >
 
  
     <sap:ActivityDesigner.Resources>

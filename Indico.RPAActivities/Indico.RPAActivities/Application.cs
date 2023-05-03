@@ -82,7 +82,7 @@ namespace Indico.RPAActivities
             }
             //fetch generate submission job result
             string jobId = await _client.Submissions().GenerateSubmissionResultAsync(submissionId, cancellationToken);
-            JToken jobResult = await _client.Jobs().GetResultAsync<JToken>(jobId);
+            JToken jobResult = await _client.Jobs().GetResultAsync<JToken>(jobId, cancellationToken);
             string jobResultUrl = jobResult.Value<string>("url");
             //fetch the storage result
             var storageResult = await _client.Storage().GetAsync(new Uri(jobResultUrl), default);

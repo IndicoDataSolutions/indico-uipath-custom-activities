@@ -1,5 +1,7 @@
 using System;
 using System.Activities;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Activities.Statements;
 using System.ComponentModel;
 using Indico.RPAActivities.Activities.Properties;
@@ -10,21 +12,29 @@ namespace Indico.RPAActivities.Activities
 {
     [LocalizedDisplayName(nameof(Resources.IndicoScope_DisplayName))]
     [LocalizedDescription(nameof(Resources.IndicoScope_Description))]
-    public class IndicoScope : NativeActivity
+    public class IndicoScope : ContinuableAsyncNativeActivity
     {
+        #region Properties
+
         [Browsable(false)]
-        public ActivityAction<IObjectContainer> Body { get; set; }
+        public ActivityAction<IObjectContainer​> Body { get; set; }
+
+        /// <summary>
+        /// If set, continue executing the remaining activities even if the current activity has failed.
+        /// </summary>
+        [LocalizedCategory(nameof(Resources.Common_Category))]
+        [LocalizedDisplayName(nameof(Resources.ContinueOnError_DisplayName))]
+        [LocalizedDescription(nameof(Resources.ContinueOnError_Description))]
+        public override InArgument<bool> ContinueOnError { get; set; }
 
         [LocalizedDisplayName(nameof(Resources.IndicoScope_Host_DisplayName))]
         [LocalizedDescription(nameof(Resources.IndicoScope_Host_Description))]
         [LocalizedCategory(nameof(Resources.Input_Category))]
-        [RequiredArgument]
-        public InArgument<string> Host { get; set; } = "https://app.indico.io";
+        public InArgument<string> Host { get; set; }
 
         [LocalizedDisplayName(nameof(Resources.IndicoScope_Token_DisplayName))]
         [LocalizedDescription(nameof(Resources.IndicoScope_Token_Description))]
         [LocalizedCategory(nameof(Resources.Input_Category))]
-        [RequiredArgument]
         public InArgument<string> Token { get; set; }
 
         // A tag used to identify the scope in the activity context
@@ -33,10 +43,14 @@ namespace Indico.RPAActivities.Activities
         // Object Container: Add strongly-typed objects here and they will be available in the scope's child activities.
         private readonly IObjectContainer _objectContainer;
 
+        #endregion
 
-        public IndicoScope()
+
+        #region Constructors
+
+        public IndicoScope(IObjectContainer objectContainer)
         {
-            _objectContainer = new ObjectContainer();
+            _objectContainer = objectContainer;
 
             Body = new ActivityAction<IObjectContainer>
             {
@@ -45,19 +59,46 @@ namespace Indico.RPAActivities.Activities
             };
         }
 
-        protected override void Execute(NativeActivityContext context)
+        public IndicoScope() : this(new ObjectContainer())
+        {
+
+        }
+
+        #endregion
+
+
+        #region Protected Methods
+
+        protected override void CacheMetadata(NativeActivityMetadata metadata)
+        {
+            if (Host == null) metadata.AddValidationError(string.Format(Resources.ValidationValue_Error, nameof(Host)));
+            if (Token == null) metadata.AddValidationError(string.Format(Resources.ValidationValue_Error, nameof(Token)));
+
+            base.CacheMetadata(metadata);
+        }
+
+        protected override async Task<Action<NativeActivityContext>> ExecuteAsync(NativeActivityContext context, CancellationToken cancellationToken)
         {
             // Inputs
-            string host = Host.Get(context);
-            string token = Token.Get(context);
-            Application application = new Application(token, host);
-            _objectContainer.Add(application);
-
-            if (Body != null)
+            var host = Host.Get(context);
+            var token = Token.Get(context);
+            if (!_objectContainer.Contains<Application>())
             {
-                context.ScheduleAction<IObjectContainer>(Body, _objectContainer, OnCompleted, OnFaulted);
+                _objectContainer.Add(new Application(token, host));
             }
+            return (ctx) => {
+                // Schedule child activities
+                if (Body != null)
+                    ctx.ScheduleAction<IObjectContainer>(Body, _objectContainer, OnCompleted, OnFaulted);
+
+                // Outputs
+            };
         }
+
+        #endregion
+
+
+        #region Events
 
         private void OnFaulted(NativeActivityFaultContext faultContext, System.Exception propagatedException, ActivityInstance propagatedFrom)
         {
@@ -70,6 +111,11 @@ namespace Indico.RPAActivities.Activities
             Cleanup();
         }
 
+        #endregion
+
+
+        #region Helpers
+        
         private void Cleanup()
         {
             var disposableObjects = _objectContainer.Where(o => o is IDisposable);
@@ -80,6 +126,7 @@ namespace Indico.RPAActivities.Activities
             }
             _objectContainer.Clear();
         }
+
+        #endregion
     }
 }
-
