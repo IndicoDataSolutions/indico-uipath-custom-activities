@@ -2,7 +2,7 @@
 
 namespace Indico.UiPath.Shared.Activities.Utilities
 {
-    static class ActivityExtensions
+    internal static class ActivityExtensions
     {
         public static T GetValueOrDefault<T>(this AsyncCodeActivityContext context, InArgument<T> arg, T defaultValue = default(T))
         {

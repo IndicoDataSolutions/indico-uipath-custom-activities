@@ -210,11 +210,11 @@
     <comment>property description</comment>
   </data>
   <data name="IndicoScope_DisplayName" xml:space="preserve">
-    <value>Indico Scope</value>
+    <value>IndicoScope</value>
     <comment>activity name</comment>
   </data>
   <data name="IndicoScope_Description" xml:space="preserve">
-    <value>Indico Application Scope</value>
+    <value>Indico Scope</value>
     <comment>activity description</comment>
   </data>
   <data name="IndicoScope_Host_DisplayName" xml:space="preserve">
@@ -222,7 +222,7 @@
     <comment>property name</comment>
   </data>
   <data name="IndicoScope_Host_Description" xml:space="preserve">
-    <value>Indico host url (e.g. https://app.indico.io )</value>
+    <value>Indico Host DOmain</value>
     <comment>property description</comment>
   </data>
   <data name="IndicoScope_Token_DisplayName" xml:space="preserve">
@@ -230,7 +230,7 @@
     <comment>property name</comment>
   </data>
   <data name="IndicoScope_Token_Description" xml:space="preserve">
-    <value>indico token</value>
+    <value>Indico Token</value>
     <comment>property description</comment>
   </data>
   <data name="DocumentExtraction_DisplayName" xml:space="preserve">
@@ -596,5 +596,81 @@
   <data name="MarkSubmissionRetrieved_SubmissionID_DisplayName" xml:space="preserve">
     <value>Submission Id</value>
     <comment>property name</comment>
+  </data>
+  <data name="IndicoScope2_DisplayName" xml:space="preserve">
+    <value>IndicoScope2</value>
+    <comment>activity name</comment>
+  </data>
+  <data name="IndicoScope2_Description" xml:space="preserve">
+    <value />
+    <comment>activity description</comment>
+  </data>
+  <data name="Authentication_Category" xml:space="preserve">
+    <value>Authentication</value>
+    <comment>category</comment>
+  </data>
+  <data name="Common_Category" xml:space="preserve">
+    <value>Common</value>
+    <comment>category</comment>
+  </data>
+  <data name="Input_Category" xml:space="preserve">
+    <value>Input</value>
+    <comment>category</comment>
+  </data>
+  <data name="Output_Category" xml:space="preserve">
+    <value>Output</value>
+    <comment>category</comment>
+  </data>
+  <data name="Options_Category" xml:space="preserve">
+    <value>Options</value>
+    <comment>category</comment>
+  </data>
+  <data name="ValidationScope_Error" xml:space="preserve">
+    <value>Cannot be used outside of a {0}.</value>
+    <comment>error message; {0} is a container activity (e.g. a scope)</comment>
+  </data>
+  <data name="ValidationValue_Error" xml:space="preserve">
+    <value>Please provide a value for {0}.</value>
+    <comment>error message; {0} is the name of a missing property</comment>
+  </data>
+  <data name="ValidationExclusiveProperties_Error" xml:space="preserve">
+    <value>Please provide a value either for {0} or {1}, but not both.</value>
+    <comment>error message; {0} &amp; {1} are mutually exclusive activities</comment>
+  </data>
+  <data name="ValidationOverloadGroup_Error" xml:space="preserve">
+    <value>Please provide values for both {0} and {1}.</value>
+    <comment>error message; {0} &amp; {1} are complementary properties</comment>
+  </data>
+  <data name="IndicoTestScope_DisplayName" xml:space="preserve">
+    <value>IndicoTestScope</value>
+    <comment>activity name</comment>
+  </data>
+  <data name="IndicoTestScope_Description" xml:space="preserve">
+    <value>TestScope</value>
+    <comment>activity description</comment>
+  </data>
+  <data name="IndicoTestScope_Host_DisplayName" xml:space="preserve">
+    <value>Host</value>
+    <comment>property name</comment>
+  </data>
+  <data name="IndicoTestScope_Host_Description" xml:space="preserve">
+    <value />
+    <comment>property description</comment>
+  </data>
+  <data name="Input_Category" xml:space="preserve">
+    <value>Input</value>
+    <comment>category</comment>
+  </data>
+  <data name="IndicoTestScope_Token_DisplayName" xml:space="preserve">
+    <value>Token</value>
+    <comment>property name</comment>
+  </data>
+  <data name="IndicoTestScope_Token_Description" xml:space="preserve">
+    <value />
+    <comment>property description</comment>
+  </data>
+  <data name="Input_Category" xml:space="preserve">
+    <value>Input</value>
+    <comment>category</comment>
   </data>
 </root>

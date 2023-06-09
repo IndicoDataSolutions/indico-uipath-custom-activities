@@ -4,7 +4,7 @@ using System.Activities.Presentation.Model;
 using System.Activities.Presentation.PropertyEditing;
 using System.Windows;
 using Indico.UiPath.Shared.Activities.Design.Editors;
-using Indico.UiPath.Shared.Localization;
+using UiPath.Shared.Localization;
 
 namespace Indico.UiPath.Shared.Activities.Design.Editors
 {

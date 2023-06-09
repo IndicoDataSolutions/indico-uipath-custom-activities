@@ -6,7 +6,7 @@
     <SharedGUID>df9c43f0-add3-4fbf-995e-84b92f9cbf25</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>UiPath.Shared.Activities.Design</Import_RootNamespace>
+    <Import_RootNamespace>Indico.UiPath.Shared.Activities.Design</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ActivityDecoratorControl.cs" />
