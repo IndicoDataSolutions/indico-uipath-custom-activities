@@ -40,6 +40,9 @@ namespace Indico.RPAActivities.Activities.Design
             builder.AddCustomAttributes(typeof(MarkSubmissionRetrieved), new DesignerAttribute(typeof(MarkSubmissionRetrievedDesigner)));
             builder.AddCustomAttributes(typeof(MarkSubmissionRetrieved), new HelpKeywordAttribute(""));
 
+            builder.AddCustomAttributes(typeof(RetrieveStorageUrl), new DesignerAttribute(typeof(RetrieveStorageUrlDesigner)));
+            builder.AddCustomAttributes(typeof(RetrieveStorageUrl), new HelpKeywordAttribute(""));
+
 
             MetadataStore.AddAttributeTable(builder.CreateTable());
         }
