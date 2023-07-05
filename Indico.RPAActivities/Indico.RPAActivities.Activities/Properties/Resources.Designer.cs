@@ -19,7 +19,7 @@ namespace Indico.RPAActivities.Activities.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -777,6 +777,60 @@ namespace Indico.RPAActivities.Activities.Properties {
         public static string PreparationCategory {
             get {
                 return ResourceManager.GetString("PreparationCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download Indico Storage Object.
+        /// </summary>
+        public static string RetrieveStorageUrl_Description {
+            get {
+                return ResourceManager.GetString("RetrieveStorageUrl_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RetrieveStorageUrl.
+        /// </summary>
+        public static string RetrieveStorageUrl_DisplayName {
+            get {
+                return ResourceManager.GetString("RetrieveStorageUrl_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stream of the Indico Storage Object.
+        /// </summary>
+        public static string RetrieveStorageUrl_Result_Description {
+            get {
+                return ResourceManager.GetString("RetrieveStorageUrl_Result_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Result.
+        /// </summary>
+        public static string RetrieveStorageUrl_Result_DisplayName {
+            get {
+                return ResourceManager.GetString("RetrieveStorageUrl_Result_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Url to the Indico Storage Object.
+        /// </summary>
+        public static string RetrieveStorageUrl_StorageUrl_Description {
+            get {
+                return ResourceManager.GetString("RetrieveStorageUrl_StorageUrl_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to StorageUrl.
+        /// </summary>
+        public static string RetrieveStorageUrl_StorageUrl_DisplayName {
+            get {
+                return ResourceManager.GetString("RetrieveStorageUrl_StorageUrl_DisplayName", resourceCulture);
             }
         }
         

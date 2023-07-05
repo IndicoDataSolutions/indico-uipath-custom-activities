@@ -11,6 +11,7 @@ using IndicoV2.Submissions.Models;
 using IndicoV2.Workflows.Models;
 using Newtonsoft.Json.Linq;
 using IndicoV2.V1Adapters.Submissions;
+using System.IO;
 
 namespace Indico.RPAActivities
 {
@@ -71,6 +72,8 @@ namespace Indico.RPAActivities
         }
 
         public async Task<ISubmission> MarkSubmissionAsRetrieved(int submissionId, bool retrieved, CancellationToken cancellationToken = default) => await _client.Submissions().MarkSubmissionAsRetrieved(submissionId, retrieved, cancellationToken);
+
+        public async Task<Stream> RetrieveStorageUrl(string storageUrl, CancellationToken cancellationToken = default) => await _client.Storage().GetAsync(new Uri(storageUrl), cancellationToken);
 
         public async Task<JObject> SubmissionResult(int submissionId, SubmissionStatus? checkStatus, CancellationToken cancellationToken = default)
             => checkStatus.HasValue

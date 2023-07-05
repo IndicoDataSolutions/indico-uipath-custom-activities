@@ -39,6 +39,7 @@
         <None Remove="Designers\ListSubmissionsDesigner.xaml" />
         <None Remove="Designers\ListWorkflowsDesigner.xaml" />
         <None Remove="Designers\MarkSubmissionRetrievedDesigner.xaml" />
+        <None Remove="Designers\RetrieveStorageUrlDesigner.xaml" />
         <None Remove="Designers\SubmissionResultDesigner.xaml" />
         <None Remove="Designers\SubmitReviewDesigner.xaml" />
         <None Remove="Designers\WorkflowSubmissionDesigner.xaml" />
@@ -112,6 +113,9 @@
             <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
         </Page>
         <Page Include="Designers\MarkSubmissionRetrievedDesigner.xaml">
+          <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+        </Page>
+        <Page Include="Designers\RetrieveStorageUrlDesigner.xaml">
           <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
         </Page>
         <Page Include="Designers\SubmissionResultDesigner.xaml">
