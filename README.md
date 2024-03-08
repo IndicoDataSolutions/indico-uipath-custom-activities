@@ -1,6 +1,6 @@
 # Indico UiPath Custom Activities
 
-To install the Blue Prism connector download the latest release available on the GitHub releases page.
+To install the UI Path connector download the latest release available on the GitHub releases page.
 
 Release contains:
 * NuGet file (UiPath connector)
