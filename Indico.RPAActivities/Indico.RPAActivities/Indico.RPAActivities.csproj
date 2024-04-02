@@ -9,6 +9,14 @@
     <DocumentationFile>bin\$(Configuration)\Indico.RPAActivities.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Enums\**" />
+    <Compile Remove="Models\**" />
+    <EmbeddedResource Remove="Enums\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Enums\**" />
+    <None Remove="Models\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -26,8 +34,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Contracts\" />
-    <Folder Include="Enums\" />
-    <Folder Include="Models\" />
   </ItemGroup>
 	<ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
 		<Reference Include="PresentationCore" />
