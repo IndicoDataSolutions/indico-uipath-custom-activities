@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
-using Indico.UiPath.Shared.Localization;
+using UiPath.Shared.Localization;
 
 namespace Indico.UiPath.Shared.Activities.Localization
 {

@@ -358,7 +358,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Indico Application Scope.
+        ///   Looks up a localized string similar to Indico Scope.
         /// </summary>
         public static string IndicoScope_Description {
             get {
@@ -367,7 +367,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Indico Scope.
+        ///   Looks up a localized string similar to IndicoScope.
         /// </summary>
         public static string IndicoScope_DisplayName {
             get {
@@ -376,7 +376,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Indico host url (e.g. https://app.indico.io ).
+        ///   Looks up a localized string similar to Indico Host DOmain.
         /// </summary>
         public static string IndicoScope_Host_Description {
             get {
@@ -394,7 +394,7 @@ namespace Indico.RPAActivities.Activities.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to indico token.
+        ///   Looks up a localized string similar to Indico Token.
         /// </summary>
         public static string IndicoScope_Token_Description {
             get {
@@ -408,6 +408,78 @@ namespace Indico.RPAActivities.Activities.Properties {
         public static string IndicoScope_Token_DisplayName {
             get {
                 return ResourceManager.GetString("IndicoScope_Token_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string IndicoScope2_Description {
+            get {
+                return ResourceManager.GetString("IndicoScope2_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IndicoScope2.
+        /// </summary>
+        public static string IndicoScope2_DisplayName {
+            get {
+                return ResourceManager.GetString("IndicoScope2_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TestScope.
+        /// </summary>
+        public static string IndicoTestScope_Description {
+            get {
+                return ResourceManager.GetString("IndicoTestScope_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IndicoTestScope.
+        /// </summary>
+        public static string IndicoTestScope_DisplayName {
+            get {
+                return ResourceManager.GetString("IndicoTestScope_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string IndicoTestScope_Host_Description {
+            get {
+                return ResourceManager.GetString("IndicoTestScope_Host_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Host.
+        /// </summary>
+        public static string IndicoTestScope_Host_DisplayName {
+            get {
+                return ResourceManager.GetString("IndicoTestScope_Host_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string IndicoTestScope_Token_Description {
+            get {
+                return ResourceManager.GetString("IndicoTestScope_Token_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Token.
+        /// </summary>
+        public static string IndicoTestScope_Token_DisplayName {
+            get {
+                return ResourceManager.GetString("IndicoTestScope_Token_DisplayName", resourceCulture);
             }
         }
         

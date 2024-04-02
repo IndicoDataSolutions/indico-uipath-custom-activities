@@ -1,164 +1,122 @@
-<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFramework>net461</TargetFramework>
-        <RootNamespace>Indico.RPAActivities.Activities.Design</RootNamespace>
-        <AssemblyName>Indico.RPAActivities.Activities.Design</AssemblyName>
-        <PackageId>Indico.RPAActivities.Activities</PackageId>
-		<DependsOnNETStandard>true</DependsOnNETStandard>
-		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    </PropertyGroup>
-    <!-- Package Metadata -->
-    <PropertyGroup>
-        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-        <Description>Custom activities for Indico's Intelligent Process Automation (IPA) Platform</Description>
-        <Authors>Indico Data Solutions</Authors>
-        <Company>Indico Data Solutions Inc.</Company>
-        <Copyright>© 2020 Indico Data Solutions Inc.</Copyright>
-        <PackageTags>UiPath Activit𝗒 Indico MachineLearning AI IntelligentLearning ProcessAutomation IPA</PackageTags>
-        <PackageProjectUrl>https://github.com/IndicoDataSolutions/Indico-UiPath-Activities</PackageProjectUrl>
-        <PackageIconUrl>https://raw.githubusercontent.com/NuGet/Samples/master/PackageIconNuspecExample/icon.png</PackageIconUrl>
-        <!--<PackageIcon>packageIcon.png</PackageIcon>--> <!--PackageIcon not yet supported in UiPath Studio-->
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-        <FileVersion>1.0.0.0</FileVersion>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    </PropertyGroup>
-    <!-- Package Versions -->
-    <PropertyGroup Condition="'$(Configuration)' == 'Debug' AND '$(DesignTimeBuild)' != 'true'">
-        <PackageVersion>2.5.1.$([System.DateTime]::UtcNow.ToString(MMddHHmm))</PackageVersion>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-        <PackageVersion>5.1.0</PackageVersion>
-    </PropertyGroup>
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <TargetFrameworks>net461;net6.0-windows</TargetFrameworks>
+    <UseWPF>true</UseWPF>
+		<RootNamespace>Indico.RPAActivities.Activities.Design</RootNamespace>
+		<AssemblyName>Indico.RPAActivities.Activities.Design</AssemblyName>
+	  <PackageId>Indico.RPAActivities.Activities</PackageId>
+    <EnableDefaultPageItems>false</EnableDefaultPageItems>
+  </PropertyGroup>
+  <!-- Package Metadata -->
+  <PropertyGroup>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+	  <Description>Custom activities for Indico's Intelligent Process Automation (IPA) Platform</Description>
+	  <Authors>Indico Data Solutions</Authors>
+	  <Company>Indico Data Solutions Inc.</Company>
+	  <Copyright>© 2020 Indico Data Solutions Inc.</Copyright>
+	  <PackageTags>UiPath Activit𝗒 Indico MachineLearning AI IntelligentLearning ProcessAutomation IPA</PackageTags>
+	  <PackageProjectUrl>https://github.com/IndicoDataSolutions/Indico-UiPath-Activities</PackageProjectUrl>
+	  <PackageIconUrl>https://raw.githubusercontent.com/NuGet/Samples/master/PackageIconNuspecExample/icon.png</PackageIconUrl>
+    <!--<PackageIcon>packageIcon.png</PackageIcon>--> <!--PackageIcon not yet supported in UiPath Studio-->
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+  </PropertyGroup>
+  <!-- Package Versions -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug' AND '$(DesignTimeBuild)' != 'true'">
+    <PackageVersion>5.0.0.$([System.DateTime]::UtcNow.ToString(MMddHHmmss))</PackageVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <PackageVersion>5.0.0</PackageVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Designers\IndicoScope2Designer.xaml" />
+  </ItemGroup>
+  <!-- Package Icon -->
+  <ItemGroup>
+    <None Include="packageIcon.png" Pack="true" Visible="false" PackagePath="" />
+  </ItemGroup>
+  <Target Name="CopyProjectReferencesToPackage" DependsOnTargets="BuildOnlySettings;ResolveReferences">
     <ItemGroup>
-        <None Remove="Designers\DocumentExtractionDesigner.xaml" />
-        <None Remove="Designers\ExtractValuesDesigner.xaml" />
-        <None Remove="Designers\IndicoIPADesigner.xaml" />
-        <None Remove="Designers\IndicoScopeDesigner.xaml" />
-        <None Remove="Designers\ListDatasetsDesigner.xaml" />
-        <None Remove="Designers\ListSubmissionsDesigner.xaml" />
-        <None Remove="Designers\ListWorkflowsDesigner.xaml" />
-        <None Remove="Designers\MarkSubmissionRetrievedDesigner.xaml" />
-        <None Remove="Designers\RetrieveStorageUrlDesigner.xaml" />
-        <None Remove="Designers\SubmissionResultDesigner.xaml" />
-        <None Remove="Designers\SubmitReviewDesigner.xaml" />
-        <None Remove="Designers\WorkflowSubmissionDesigner.xaml" />
-    </ItemGroup>
-    <!-- Package Icon -->
-    <ItemGroup>
-        <None Include="packageIcon.png" Visible="false" />
+      <!--Filter out unnecessary files-->
+      <_ReferenceCopyLocalPaths Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference')-&gt;WithMetadataValue('PrivateAssets', 'All'))" />
     </ItemGroup>
 
-	<PropertyGroup>
-	    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);IncludeP2POutput</TargetsForTfmSpecificBuildOutput>
-    </PropertyGroup>
-    <Target Name="IncludeP2POutput">
-	    <ItemGroup>
-		    <BuildOutputInPackage Include="$(OutputPath)Indico.RPAActivities*.dll" />
-	    </ItemGroup>
-    </Target>
+    <!--Print batches for debug purposes-->
+    <Message Text="Batch for .nupkg: ReferenceCopyLocalPaths = @(_ReferenceCopyLocalPaths), ReferenceCopyLocalPaths.DestinationSubDirectory = %(_ReferenceCopyLocalPaths.DestinationSubDirectory) Filename = %(_ReferenceCopyLocalPaths.Filename) Extension = %(_ReferenceCopyLocalPaths.Extension)" Importance="High" Condition="'@(_ReferenceCopyLocalPaths)' != ''" />
 
-	<PropertyGroup>
-        <OutputPath>bin\$(Configuration)\</OutputPath>
-        <DocumentationFile>bin\$(Configuration)\Indico.RPAActivities.Activities.Design.xml</DocumentationFile>
-    </PropertyGroup>
     <ItemGroup>
-      <PackageReference Include="IndicoClient" Version="2.4.1" />
-      <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+      <!--Add file to package with consideration of sub folder. If empty, the root folder is chosen.-->
+      <BuildOutputInPackage Include="@(_ReferenceCopyLocalPaths)" TargetPath="%(_ReferenceCopyLocalPaths.DestinationSubDirectory)" />
     </ItemGroup>
-    <ItemGroup>
-        <Reference Include="System" />
-        <Reference Include="System.Core" />
-        <Reference Include="System.Xml.Linq" />
-        <Reference Include="Microsoft.CSharp" />
-        <Reference Include="PresentationCore" />
-        <Reference Include="PresentationFramework" />
-        <Reference Include="System.Data" />
-        <Reference Include="System.Xml" />
-        <Reference Include="System.Activities" />
-        <Reference Include="System.Activities.Presentation" />
-        <Reference Include="System.Xaml" />
-        <Reference Include="WindowsBase" />
-        <Reference Include="System.Activities.Core.Presentation" />
-    </ItemGroup>
-    <ItemGroup>
-        <Page Include="..\..\Shared\Themes\Generic.xaml">
-            <Link>Themes\Generic.xaml</Link>
-            <Generator>XamlIntelliSenseFileGenerator</Generator>
-            <SubType>Designer</SubType>
-            <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-        </Page>
-        <Page Include="Designers\DocumentExtractionDesigner.xaml">
-            <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-        </Page>
-        <Page Include="Designers\ExtractValuesDesigner.xaml">
-            <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-        </Page>
-        <Page Include="Designers\IndicoIPADesigner.xaml">
-            <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-        </Page>
-        <Page Include="Designers\IndicoScopeDesigner.xaml">
-            <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-            <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-        </Page>
-        <Page Include="Designers\ListDatasetsDesigner.xaml">
-            <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-            <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-        </Page>
-        <Page Include="Designers\ListSubmissionsDesigner.xaml">
-          <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-          <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-        </Page>
-        <Page Include="Designers\ListWorkflowsDesigner.xaml">
-            <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-        </Page>
-        <Page Include="Designers\MarkSubmissionRetrievedDesigner.xaml">
-          <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-        </Page>
-        <Page Include="Designers\RetrieveStorageUrlDesigner.xaml">
-          <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-        </Page>
-        <Page Include="Designers\SubmissionResultDesigner.xaml">
-          <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-        </Page>
-        <Page Include="Designers\SubmitReviewDesigner.xaml">
-          <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-          <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-        </Page>
-        <Page Include="Designers\WorkflowSubmissionDesigner.xaml">
-          <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-        </Page>
-        <Page Include="Themes\Icons.xaml">
-            <Generator>XamlIntelliSenseFileGenerator</Generator>
-            <SubType>Designer</SubType>
-            <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-        </Page>
-    </ItemGroup>
-    <ItemGroup>
-        <ProjectReference Include="..\Indico.RPAActivities.Activities\Indico.RPAActivities.Activities.csproj" PrivateAssets="All" />
-    </ItemGroup>
+  </Target>
+  <PropertyGroup>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <DocumentationFile>bin\$(Configuration)\Indico.RPAActivities.Activities.Design.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="IndicoClient" Version="2.6.1" />
+ </ItemGroup>
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net6.0-windows' ">
+		<PackageReference Include="UiPath.Workflow" Version="6.0.0-20220909-01" PrivateAssets="All" />
+		<PackageReference Include="System.Activities.Core.Presentation" Version="6.0.0-*" PrivateAssets="All" />
 
-	<ItemGroup>
-        <!--workaround: required so nuget packages have all required dependencies-->
-		<ProjectReference Include="..\Indico.RPAActivities\Indico.RPAActivities.csproj" PrivateAssets="All" />
-        <!--workaround: required so nuget packages have all required dependencies-->
 	</ItemGroup>
-
-    <ItemGroup>
-        <Compile Update="Properties\Resources.Designer.cs">
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-            <DependentUpon>Resources.resx</DependentUpon>
-        </Compile>
-    </ItemGroup>
-    <ItemGroup>
-        <EmbeddedResource Update="Properties\Resources.resx">
-            <Generator>PublicResXFileCodeGenerator</Generator>
-            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Properties\Resources.*.resx">
-            <DependentUpon>Resources.resx</DependentUpon>
-        </EmbeddedResource>
-    </ItemGroup>
-    <Import Project="..\..\Shared\UiPath.Shared.Activities.Design\UiPath.Shared.Activities.Design.projitems" Label="Shared" />
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
+		<Reference Include="PresentationCore" />
+		<Reference Include="PresentationFramework" />
+		<Reference Include="System" />
+		<Reference Include="System.Activities" />
+		<Reference Include="System.Activities.Core.Presentation" />
+		<Reference Include="System.Activities.Presentation" />
+		<Reference Include="System.ComponentModel.Composition" />
+		<Reference Include="System.Core" />
+		<Reference Include="System.Xaml" />
+		<Reference Include="System.Xml.Linq" />
+		<Reference Include="System.Data.DataSetExtensions" />
+		<Reference Include="Microsoft.CSharp" />
+		<Reference Include="System.Data" />
+		<Reference Include="System.Net.Http" />
+		<Reference Include="System.Xml" />
+		<Reference Include="WindowsBase" />
+		
+	</ItemGroup>
+  <ItemGroup>
+    <Page Include="..\..\Shared\Themes\Generic.xaml">
+      <Link>Themes\Generic.xaml</Link>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\Icons.xaml">
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Indico.RPAActivities.Activities\Indico.RPAActivities.Activities.csproj" PrivateAssets="All" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.*.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Designers\" />
+  </ItemGroup>
+  <Import Project="..\..\Shared\UiPath.Shared.Activities.Design\Indico.UiPath.Shared.Activities.Design.projitems" Label="Shared" />
 </Project>
